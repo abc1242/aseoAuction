@@ -1,7 +1,8 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
+import { propTypes } from "react-bootstrap/esm/Image";
 
-const Login = () => {
+const Login = (props) => {
   return (
     <div>
       <h3>This is Login</h3>
@@ -24,6 +25,7 @@ const Login = () => {
         <Button variant="primary" type="submit">
           Submit
         </Button>
+        <Button onClick={props.signupButtonClicked}>회원가입</Button>
       </Form>
     </div>
   );
