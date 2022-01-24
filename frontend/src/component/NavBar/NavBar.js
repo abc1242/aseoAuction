@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import ModalAuth from "./ModalAuth";
-import {
-  Nav,
-  Navbar,
-  Container,
-  NavDropdown,
-  Modal,
-  Button,
-} from "react-bootstrap";
+import { Nav, Navbar, Container, Button } from "react-bootstrap";
 
 const NavBar = () => {
   const [modalDisplayed, setModalDisplayed] = useState(false);
@@ -51,6 +44,7 @@ const NavBar = () => {
         wantLogin={wantLogin}
         hideModal={hideModal}
         modalDisplayed={modalDisplayed}
+        signupButtonClicked={signupButtonClicked}
       />
     </div>
   );
