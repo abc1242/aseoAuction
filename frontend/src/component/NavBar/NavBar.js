@@ -11,13 +11,21 @@ import {
 
 const NavBar = () => {
   const [modalDisplayed, setModalDisplayed] = useState(false);
+  const [wantLogin, setWantLogin] = useState(true);
 
-  const displayModal = () =>
-    setModalDisplayed((prevState) => {
-      return !modalDisplayed;
-    });
+  const hideModal = () => setModalDisplayed(false);
 
-  console.log(modalDisplayed);
+  const loginButtonClicked = () => {
+    setModalDisplayed(true);
+    setWantLogin(true);
+  };
+
+  const signupButtonClicked = () => {
+    setModalDisplayed(true);
+    setWantLogin(false);
+  };
+
+  console.log(wantLogin);
 
   return (
     <div>
@@ -28,7 +36,7 @@ const NavBar = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               {/* 이 버튼 클릭하면 로그인 */}
-              <Button variant="primary" onClick={displayModal}>
+              <Button variant="primary" onClick={loginButtonClicked}>
                 login
               </Button>
             </Nav>
@@ -36,11 +44,12 @@ const NavBar = () => {
         </Container>
       </Navbar>
       {/* 이 버튼 클릭하면 사인업 */}
-      <Button variant="primary" onClick={displayModal}>
+      <Button variant="primary" onClick={signupButtonClicked}>
         Signup
       </Button>
       <ModalAuth
-        modalDisplayHandler={displayModal}
+        wantLogin={wantLogin}
+        hideModal={hideModal}
         modalDisplayed={modalDisplayed}
       />
     </div>
