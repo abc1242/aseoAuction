@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
 
-const Signup = () => {
+const Signup = (props) => {
   return (
     <div>
       <h3>This is Signup</h3>
@@ -24,6 +24,7 @@ const Signup = () => {
         <Button variant="primary" type="submit">
           Submit
         </Button>
+        <Button onClick={props.loginButtonClicked}>LOGIN</Button>
       </Form>
     </div>
   );
