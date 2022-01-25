@@ -1,33 +1,21 @@
-import React from "react";
-import { Form, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import SignupForm from "./SignupForm";
+import SignupSuccess from "./SignupSuccess";
 
-const Signup = (props) => {
+const Signup = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  function submitForm() {
+
+    setIsSubmitting(true);
+    console.log('여기서 axios를 통해 back과 db를 연결해서 로그인 정보를 입력후 로그인 시킬 예정');
+    alert('회원가입이 완료되었습니다.');
+  }
   return (
     <div>
-      <h3>This is Signup</h3>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-        <Button onClick={props.loginButtonClicked}>LOGIN</Button>
-      </Form>
+      {!isSubmitting ? <SignupForm submitForm={submitForm} /> : <SignupSuccess />}
     </div>
-  );
+  )
 };
 
 export default Signup;
