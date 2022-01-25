@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import Login from "./Login";
 import Signup from "./Signup";
@@ -13,7 +12,7 @@ const ModalAuth = (props) => {
         onHide={props.hideModal}
       >
         <Modal.Header closeButton onClick={props.hideModal}>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>{props.wantLogin ? "로그인" : "회원가입"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {props.wantLogin ? (

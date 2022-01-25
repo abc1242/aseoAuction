@@ -1,7 +1,6 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import LandingPage from "./component/LandingPage";
+import LandingPage from "./components/LandingPage/LandingPage.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
