@@ -17,7 +17,7 @@ const ModalAuth = (props) => {
         </Modal.Header>
         <Modal.Body>
           {props.wantLogin ? (
-            <Login />
+            <Login signupButtonClicked={props.signupButtonClicked} />
           ) : (
             <Signup loginButtonClicked={props.loginButtonClicked} />
           )}
