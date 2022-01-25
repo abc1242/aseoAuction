@@ -45,6 +45,7 @@ const NavBar = () => {
         hideModal={hideModal}
         modalDisplayed={modalDisplayed}
         loginButtonClicked={loginButtonClicked}
+        signupButtonClicked={signupButtonClicked}
       />
     </div>
   );
