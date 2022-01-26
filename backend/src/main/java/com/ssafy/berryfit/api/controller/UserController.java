@@ -56,5 +56,7 @@ public class UserController {
 
 		return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
 	}
+	
+
 
 }

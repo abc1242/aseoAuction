@@ -7,16 +7,18 @@ import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.berryfit.api.request.SignUpReq;
 import com.ssafy.berryfit.db.entity.User;
 import com.ssafy.berryfit.db.repository.UserRepository;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Service
 public class UserService {
 	private final UserRepository userRepository;
 	private final MailService mailService;
+	
 	
 	
 	@Autowired
@@ -25,22 +27,26 @@ public class UserService {
         this.mailService = mailService;
     }
 	
+
+	
 	@Transactional
     public User signup(final SignUpReq signUpReq) throws MessagingException, UnknownHostException {
      
-
+		PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		
       
         String authKey = mailService.sendAuthMail(signUpReq.getEmail(), signUpReq.getNickname());
 //        int imgNum = (int) (Math.random()*25 + 1);
-
+        
         User user = User.builder()
                 .email(signUpReq.getEmail())
-                .password(signUpReq.getPassword())
+//                .password(signUpReq.getPassword())
+                .password(bCryptPasswordEncoder.encode(signUpReq.getPassword()))
+                
                 .nickname(signUpReq.getNickname())
                 .authKey(authKey)
                 .authStatus(false)
                 .build();
-
         return userRepository.save(user);
     }
 	
@@ -58,4 +64,11 @@ public class UserService {
         System.out.println(updateUser.getEmail()+ " : 이메일 인증중인 아이디");
         return userRepository.save(updateUser);
     }
+	
+	@Transactional
+	public User getUserByEmail(String email) {
+		// 디비에 유저 정보 조회 (userId 를 통한 조회).
+		User user = userRepository.findUserByEmail(email).orElse(null);
+		return user;
+	}
 }
