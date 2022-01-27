@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Col, Row, Form, Button } from "react-bootstrap";
 import "./Signup.css";
-import AuthIcon from "../../images/blacklogo.png";
+import AuthIcon from "../../../images/blacklogo.png";
 import { useReducer, useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
@@ -48,7 +48,7 @@ const nicknameReducer = (state, action) => {
   }
 };
 
-const Signup = (props) => {
+const SignupForm = (props) => {
   const [formIsValid, setFormIsValid] = useState(true);
 
   // 이메일, 패스워드, 패스워드 재입력, 닉네임의 useReducer
@@ -142,20 +142,22 @@ const Signup = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const userInfo = {
-      email: emailState.value,
-      password: passwordState.value,
-      nickname: nicknameState.value,
-    };
+    props.onSignup();
 
-    axios
-      .post("http://localhost:8080/user/signup", userInfo)
-      .then((res) => {
-        window.alert(res.data.result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // const userInfo = {
+    //   email: emailState.value,
+    //   password: passwordState.value,
+    //   nickname: nicknameState.value,
+    // };
+
+    // axios
+    //   .post("http://localhost:8080/user/signup", userInfo)
+    //   .then((res) => {
+    //     window.alert(res.data.result);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   return (
@@ -252,4 +254,4 @@ const Signup = (props) => {
   );
 };
 
-export default Signup;
+export default SignupForm;

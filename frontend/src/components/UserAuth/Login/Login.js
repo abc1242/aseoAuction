@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import AuthIcon from "../../images/blacklogo.png";
+import AuthIcon from "../../../images/blacklogo.png";
 import "./Login.css";
 import styled from "styled-components";
 import { useReducer, useState, useEffect } from "react";
@@ -80,7 +80,7 @@ const Login = (props) => {
     };
 
     axios
-      .post("http://localhost:8080/user/signup", userInfo)
+      .post("http://localhost:8080/user/login", userInfo)
       .then((res) => {
         window.alert(res.data.result);
       })
