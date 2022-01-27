@@ -46,8 +46,7 @@ const Login = (props) => {
   useEffect(() => {
     const identifier = setTimeout(() => {
       setFormIsValid(emailState.isValid && passwordState.isValid);
-    }, 500);
-    console.log("useEffect Fired", formIsValid);
+    });
     return () => {
       clearTimeout(identifier);
     };
@@ -56,12 +55,10 @@ const Login = (props) => {
   // 입력이 있을때 이메일과 패스워드의 reducer 함수를 호출
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
-    setFormIsValid(emailState.isValid && passwordState.isValid);
   };
 
   const passwordChangeHandler = (event) => {
     dispatchPassword({ type: "USER_INPUT", val: event.target.value });
-    setFormIsValid(emailState.isValid && passwordState.isValid);
   };
 
   // Blur가 발생할때 reducer 함수 호출.
