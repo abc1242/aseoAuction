@@ -4,6 +4,7 @@ import AuthIcon from "../../images/blacklogo.png";
 import "./Login.css";
 import styled from "styled-components";
 import { useReducer, useState, useEffect } from "react";
+import axios from "axios";
 
 const AlertMessage = styled.div`
   text-align: left;
@@ -70,13 +71,31 @@ const Login = (props) => {
     dispatchPassword({ type: "INPUT_BLUR" });
   };
 
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    const userInfo = {
+      email: emailState.value,
+      password: passwordState.value,
+    };
+
+    axios
+      .post("http://localhost:8080/user/signup", userInfo)
+      .then((res) => {
+        window.alert(res.data.result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <Container>
         <Row>
           <Col>
             <img className="icon-img" src={AuthIcon} alt="icon" />
-            <Form className="mt-3">
+            <Form onSubmit={submitHandler} className="mt-3">
               <Form.Group className="mb-2" controlId="formBasicEmail">
                 <Form.Control
                   className={emailState.isValid === false ? "invalid" : ""} // 유효성 클래스 추가

@@ -148,7 +148,14 @@ const Signup = (props) => {
       nickname: nicknameState.value,
     };
 
-    axios.post("http://localhost:8080/user/signup", userInfo).then(console.log);
+    axios
+      .post("http://localhost:8080/user/signup", userInfo)
+      .then((res) => {
+        window.alert(res.data.result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
