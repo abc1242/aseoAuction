@@ -4,6 +4,7 @@ import "./Signup.css";
 import AuthIcon from "../../images/blacklogo.png";
 import { useReducer, useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const AlertMessage = styled.div`
   text-align: left;
@@ -51,7 +52,7 @@ const Signup = (props) => {
   const [formIsValid, setFormIsValid] = useState(true);
 
   // 이메일, 패스워드, 패스워드 재입력, 닉네임의 useReducer
-
+  // 이메일, 패스워드
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
     value: "",
     isValid: undefined,
@@ -137,19 +138,28 @@ const Signup = (props) => {
     });
   };
 
+  // 서버에 회원가입 request
+  const submitHandler = (event) => {
+    event.preventDefault();
+    console.log({
+      email: emailState.value,
+      password: passwordState.value,
+      nickname: nicknameState.value,
+    });
+  };
+
   console.log(passwordCheckState.isValid);
   return (
     <Container>
       <Row>
         <Col>
           <img className="icon-img" src={AuthIcon} alt="icon" />
-          <Form className="mt-3">
+          <Form onSubmit={submitHandler} className="mt-3">
             <Form.Group controlId="formBasicEmail">
               <Form.Control
                 className={emailState.isValid === false ? "invalid" : ""}
                 onChange={emailChangeHandler}
                 onBlur={validateEmailHandler}
-                type="email"
                 placeholder="이메일"
               />
               <AlertMessage
