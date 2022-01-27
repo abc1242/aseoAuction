@@ -1,16 +1,15 @@
 import React from 'react';
 import { Button, ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 
-export const RecipePageCategory = () => {
+const RecipePageCategory = () => {
   return (
     <div>
       <ButtonGroup vertical>
-        # 카테고리
         <Button>추천 레시피</Button>
         <hr />
         <Button>고단백</Button>
         <Button>키토</Button>
-        
+
         <DropdownButton as={ButtonGroup} title="닭 고기" id="bg-vertical-dropdown-3">
           <Dropdown.Item eventKey="1">닭 가슴살</Dropdown.Item>
           <Dropdown.Item eventKey="2">닭 다리살</Dropdown.Item>
@@ -35,3 +34,5 @@ export const RecipePageCategory = () => {
     </div>
   );
 };
+
+export default RecipePageCategory;

@@ -1,30 +1,30 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { RecipePageCategory } from './RecipePageCategory';
-import { RecipePageChart } from './RecipePageChart';
-import { RecipePageNavBar } from './RecipePageNavBar';
+import RecipePageCategory from './RecipePageCategory';
+import RecipePageChart from './RecipePageChart';
+import RecipePageNavBar from './RecipePageNavBar';
 import SearchBar from './SearchBar';
 
-
-
-
-export default function RecipePage() {    
-
+const RecipePage = () => {
   return (
-    <Container>
-      <RecipePageNavBar />
-      <SearchBar />
+    <div>
+      <Container>
+        <RecipePageNavBar />
+        <SearchBar />
 
-      <Row>
-        <Col xs={2}>
-          <RecipePageCategory />
-        </Col>
+        <Row>
+          <Col xs={2}>
+            <RecipePageCategory />
+          </Col>
 
-        <Col>
-          <RecipePageChart />
-        </Col>        
-      </Row>
-    </Container>
-    
+          <Col>
+            <RecipePageChart />
+          </Col>
+        </Row>        
+        
+      </Container>
+    </div>
   );
-}
+};
+
+export default RecipePage;
