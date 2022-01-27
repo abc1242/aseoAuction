@@ -11,5 +11,6 @@ import com.ssafy.berryfit.db.entity.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	Optional<User> findUserByEmailAndAuthKey(String email, String authKey);
+	Optional<User> findUserByEmail(String email);
 	
 }
