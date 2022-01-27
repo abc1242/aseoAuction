@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.berryfit.api.request.SignUpReq;
+import com.ssafy.berryfit.common.error.EmailDuplicateException;
 import com.ssafy.berryfit.db.entity.User;
 import com.ssafy.berryfit.db.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,7 +32,9 @@ public class UserService {
 	
 	@Transactional
     public User signup(final SignUpReq signUpReq) throws MessagingException, UnknownHostException {
-     
+	    if (userRepository.findUserByEmail(signUpReq.getEmail()).orElse(null) != null) {
+            throw new EmailDuplicateException(signUpReq);
+        }
 		PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		
       

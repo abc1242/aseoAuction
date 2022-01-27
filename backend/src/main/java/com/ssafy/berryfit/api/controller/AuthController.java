@@ -3,6 +3,7 @@ package com.ssafy.berryfit.api.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ import io.swagger.annotations.ApiResponse;
  * 인증 관련 API 요청 처리를 위한 컨트롤러 정의.
  */
 @Api(value = "인증 API", tags = {"Auth."})
+@CrossOrigin(origins = "http://localhost:3000") //해당 리액트 포트 번호
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {

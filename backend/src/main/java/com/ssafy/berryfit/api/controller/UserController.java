@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import com.ssafy.berryfit.api.request.SignUpReq;
 import com.ssafy.berryfit.api.service.UserService;
 
+@CrossOrigin(origins = "http://localhost:3000") //해당 리액트 포트 번호
 @RestController
 @RequestMapping("/user")
 public class UserController {
