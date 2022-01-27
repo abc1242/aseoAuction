@@ -141,14 +141,16 @@ const Signup = (props) => {
   // 서버에 회원가입 request
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log({
+
+    const userInfo = {
       email: emailState.value,
       password: passwordState.value,
       nickname: nicknameState.value,
-    });
+    };
+
+    axios.post("http://", userInfo).then(console.log);
   };
 
-  console.log(passwordCheckState.isValid);
   return (
     <Container>
       <Row>
