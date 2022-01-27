@@ -1,16 +1,15 @@
 import React from 'react';
 import { Card, Col, Image, Row } from 'react-bootstrap';
 import samplechart from "../../images/samplechart.png";
-import { Link } from "react-router-dom";
 
-export const RecipePageChart = () => {
-  return( 
+const RecipePageChart = () => {
+  return (
     <div>
-      <h1>닭 고기</h1>      
+      <h1>닭 고기</h1>
       <hr />
+
       <Row>
         <Col xs={3}>
-          {/* <Link to="/" className='link'>상세 이동</Link> */}
           <Image src={samplechart}></Image>
         </Col>
         <Col>
@@ -24,7 +23,7 @@ export const RecipePageChart = () => {
               <small className='text-muted'>3분전</small>
             </Card.Footer>
           </Card>
-        </Col>        
+        </Col>
       </Row>
       <hr />
 
@@ -87,3 +86,5 @@ export const RecipePageChart = () => {
     </div>
   );
 };
+
+export default RecipePageChart;
