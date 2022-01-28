@@ -1,56 +1,26 @@
-# 웹/모바일(웹 기술) 스켈레톤 프로젝트
+# BERRYFIT!!!
 
-<!-- 필수 항목 -->
+​	BERRYFIT은 식단관리 웹 프로젝트입니다. 핵심 기능은 다음과 같습니다.
+
+* 사용자는 여러가지 레시피를 참고하고, 자신의 식단으로 가져올 수 있습니다.
+* 레시피는 입맛에 맞게 커스텀할 수 있으며, 영양성분또한 조절할 수 있습니다.
+* 사용자가 구성한 식단을 사용자의 체중, 키, 나이, 활동지수를 고려하여 목표에 부합하는지 알려줍니다
+* 다른 사용자에게 조언을 구하고 코칭을 받을 수 있는 화상회의를 제공합니다.
+* 우리는 'BERRY'라는 화폐를 사용합니다.
+* 레시피를 기여하여 높은 조회수를 기록하거나 식단에 추가하는 사람이 많을때, 혹은 코칭을 했을 때 BERRY 수익이 발생합니다.
+* 코칭을 받으려면 BERRY를 소모해야합니다.
+
+
 
 ## 카테고리
 
 | Application | Domain | Language | Framework |
 | ---- | ---- | ---- | ---- |
-| :white_check_mark: Desktop Web | :black_square_button: AI | :white_check_mark: JavaScript | :white_check_mark: Vue.js |
-| :white_check_mark: Mobile Web | :black_square_button: Big Data | :black_square_button: TypeScript | :black_square_button: React |
+| :white_check_mark: Desktop Web | :white_check_mark: WebRTC | :white_check_mark: JavaScript | :black_square_button: Vue.js |
+| :white_check_mark: Mobile Web | :black_square_button: Big Data | :black_square_button: TypeScript | :white_check_mark: React |
 | :white_check_mark: Responsive Web | :black_square_button: Blockchain | :black_square_button: C/C++ | :black_square_button: Angular |
 | :black_square_button: Android App | :black_square_button: IoT | :black_square_button: C# | :black_square_button: Node.js |
-| :black_square_button: iOS App | :black_square_button: AR/VR/Metaverse | :white_check_mark: Python | :white_check_mark: Flask/Django |
+| :black_square_button: iOS App | :black_square_button: AR/VR/Metaverse | :black_square_button: Python | :black_square_button: Flask/Django |
 | :black_square_button: Desktop App | :black_square_button: Game | :white_check_mark: Java | :white_check_mark: Spring/Springboot |
-| | | :black_square_button: Kotlin | |
+| | :black_square_button: AI | :black_square_button: Kotlin | |
 
-<!-- 필수 항목 -->
-
-## 프로젝트 소개
-
-* 프로젝트명: 그룹 비디오 컨퍼런스 서비스
-* 서비스 특징: 웹/모바일(웹 기술) 프로젝트를 위한 스켈레톤 프로젝트
-* 주요 기능
-  - 회원 관리
-  - 화상 미팅룸
-  - 그룹 채팅
-* 주요 기술
-  - WebRTC
-  - WebSocket
-  - JWT Authentication
-  - REST API
-* 참조 리소스
-  * Vuetify: 디자인 전반 적용
-  * Vue Argon Design System: 디자인 전반 적용
-  * Vue Black Dashboard Pro(유료): 캘린더 컴포넌트 사용
-  * AR Core: 구글에서 제공하는 AR 지원 라이브러리. 이미지 인식 및 오버레이 영상에 활용
-  * Color Thief: 이미지 색상 추출 라이브러리. 커버 사진 색상 추출 및 배경 변경에 활용
-  * Animation.css: CSS 애니메이션 지원 라이브러리. 메인 페이지 진입 애니메이션에 활용
-* 배포 환경
-  - URL: // 웹 서비스, 랜딩 페이지, 프로젝트 소개 등의 배포 URL 기입
-  - 테스트 계정: // 로그인이 필요한 경우, 사용 가능한 테스트 계정(ID/PW) 기입
-
-<!-- 자유 양식 -->
-
-## 팀 소개
-* 김ㅇㅇ: 팀장, 프론트엔드 개발
-* 이ㅇㅇ: 부팀장, 기획 및 와이어프레임 작성, 프론트엔드 개발
-* 박ㅇㅇ: 백엔드 개발 및 QA 담당
-* 홍ㅇㅇ: 백엔드 개발, Swagger API 문서 관리
-* 전ㅇㅇ: 코드 리뷰 및 인프라 담당, CI/CD, HTTPS, Docker 구성
-
-<!-- 자유 양식 -->
-
-## 프로젝트 상세 설명
-
-// 개발 환경, 기술 스택, 시스템 구성도, ERD, 기능 상세 설명 등
