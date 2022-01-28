@@ -82,10 +82,10 @@ const Login = (props) => {
     axios
       .post("http://localhost:8080/user/login", userInfo)
       .then((res) => {
-        window.alert(res.data.result);
+        window.alert("로그인 되었습니다");
       })
       .catch((error) => {
-        console.log(error);
+        console.log("이메일과 비밀번호를 확인해주세요");
       });
   };
 

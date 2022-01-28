@@ -149,17 +149,24 @@ const SignupForm = (props) => {
       nickname: nicknameState.value,
     };
 
+    // axios
+    //   .post("http://localhost:8080/user/signup", userInfo)
+    //   .then((res) => {
+    //     window.alert(res.data.result);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
     axios
       .post("http://localhost:8080/user/signup", userInfo)
       .then((res) => {
         props.onSignup();
       })
       .catch((error) => {
-        // 1. 아이디 중복오류 처리
-        // 중복되는 이메일을 저장 -> 사용자가 해당 이메일을 입력하면 경고
-        setSignedEmail((prev) => {
-          prev.push(userInfo.email);
-        });
+        alert("이메일 중복");
+
+        console.log(error);
       });
   };
 
@@ -176,21 +183,19 @@ const SignupForm = (props) => {
                 onBlur={validateEmailHandler}
                 placeholder="이메일"
               />
-              {/* 서버에서 확인된 이메일을 입력하는 경우 중복된 이메일이라고 출력 */}
-              {/* 그 외에는 기존 유효성 검사 */}
-              {signedEmail.includes(emailState.value) ? (
+              {/* {signedEmail.includes(emailState.value) ? (
                 <AlertMessage className="show-alert">
                   <small>중복된 이메일 입니다.</small>
                 </AlertMessage>
-              ) : (
-                <AlertMessage
-                  className={
-                    emailState.isValid === false ? "show-alert" : "hide-alert"
-                  }
-                >
-                  <small>정확한 이메일을 입력해주세요</small>
-                </AlertMessage>
-              )}
+              ) : ( */}
+              <AlertMessage
+                className={
+                  emailState.isValid === false ? "show-alert" : "hide-alert"
+                }
+              >
+                <small>정확한 이메일을 입력해주세요</small>
+              </AlertMessage>
+              {/* )} */}
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
