@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Col, Image, Row } from 'react-bootstrap';
-import samplechart from "../../images/samplechart.png";
+// import samplechart from "../../images/samplechart.png";
+import samplechart from "../../../images/samplechart.png";
 
 const RecipePageChart = () => {
   return (
