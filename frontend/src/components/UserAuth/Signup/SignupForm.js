@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Col, Row, Form, Button } from "react-bootstrap";
 import "./Signup.css";
-import AuthIcon from "../../images/blacklogo.png";
+import AuthIcon from "../../../images/blacklogo.png";
 import { useReducer, useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
@@ -48,9 +48,10 @@ const nicknameReducer = (state, action) => {
   }
 };
 
-const Signup = (props) => {
+const SignupForm = (props) => {
   const [formIsValid, setFormIsValid] = useState(true);
 
+  const [signedEmail, setSignedEmail] = useState([]);
   // 이메일, 패스워드, 패스워드 재입력, 닉네임의 useReducer
   // 이메일, 패스워드
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
@@ -148,12 +149,14 @@ const Signup = (props) => {
       nickname: nicknameState.value,
     };
 
-    axios.post("http://localhost:8080/user/signup", userInfo).then((res) => {
-      window.alert(res.data.result);
-    })
-    .catch((error) => {
-      console.log(error);
-    });;
+    axios
+      .post("http://localhost:8080/user/signup", userInfo)
+      .then((res) => {
+        props.onSignup();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -169,6 +172,11 @@ const Signup = (props) => {
                 onBlur={validateEmailHandler}
                 placeholder="이메일"
               />
+              {/* {signedEmail.includes(emailState.value) ? (
+                <AlertMessage className="show-alert">
+                  <small>중복된 이메일 입니다.</small>
+                </AlertMessage>
+              ) : ( */}
               <AlertMessage
                 className={
                   emailState.isValid === false ? "show-alert" : "hide-alert"
@@ -176,6 +184,7 @@ const Signup = (props) => {
               >
                 <small>정확한 이메일을 입력해주세요</small>
               </AlertMessage>
+              {/* )} */}
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
@@ -250,4 +259,4 @@ const Signup = (props) => {
   );
 };
 
-export default Signup;
+export default SignupForm;

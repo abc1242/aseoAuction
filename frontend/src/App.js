@@ -8,42 +8,36 @@ import HomeDiet from "./components/HomePage/HomeDiet";
 import HomeRecipe from "./components/HomePage/HomeRecipe";
 import HomeGroupMeeting from "./components/HomePage/HomeGroupMeeting";
 // routes로 넘길거
-import { 
+import {
   BrowserRouter as Router,
   // Switch, react-router-dom이 버전6로되믄서 더이상 지원안함 Routes로 써야함
   Routes,
   Route,
-  Link 
-} from 'react-router-dom';
+  Link,
+} from "react-router-dom";
 import routes from "./routes";
 
 function App() {
-  const [isLogined, setIsLogined] = useState(false);
-  
+  const [isLogined, setIsLogined] = useState(true);
+
   return (
     <Router>
       <div className="App">
-        {isLogined
-          ? <div><LandingPage /></div>
-          : <div>
+        {isLogined ? (
+          <div>
+            <LandingPage />
+          </div>
+        ) : (
+          <div>
             <HomeNavbar />
             <Routes>
-              {/* {routes.map(route => {
-                return (
-                  <Route key={route.path} path={route.path} >
-                    <route.element />
-                  </Route>
-                )
-              })}  
-               */}
-              
-              <Route path="/" element={<HomePage/>}  /> 
-              <Route path="/recipe" element={<HomeRecipe/>} />
-              <Route path="/diet" element={<HomeDiet/>} />
-              <Route path="/groupmeeting" element={<HomeGroupMeeting />}/>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/recipe" element={<HomeRecipe />} />
+              <Route path="/diet" element={<HomeDiet />} />
+              <Route path="/groupmeeting" element={<HomeGroupMeeting />} />
             </Routes>
           </div>
-        };
+        )}
       </div>
     </Router>
   );
