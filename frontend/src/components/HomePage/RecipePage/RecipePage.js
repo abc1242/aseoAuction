@@ -9,7 +9,7 @@ const RecipePage = () => {
   return (
     <div>
       <Container>
-        <RecipePageNavBar />
+        {/* <RecipePageNavBar /> */}
         <SearchBar />
 
         <Row>
