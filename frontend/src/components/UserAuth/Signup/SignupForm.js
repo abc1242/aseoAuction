@@ -149,23 +149,12 @@ const SignupForm = (props) => {
       nickname: nicknameState.value,
     };
 
-    // axios
-    //   .post("http://localhost:8080/user/signup", userInfo)
-    //   .then((res) => {
-    //     window.alert(res.data.result);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
     axios
       .post("http://localhost:8080/user/signup", userInfo)
       .then((res) => {
         props.onSignup();
       })
       .catch((error) => {
-        alert("이메일 중복");
-
         console.log(error);
       });
   };
