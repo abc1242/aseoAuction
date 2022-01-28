@@ -1,8 +1,7 @@
 import React from "react";
-import { Button, Modal } from "react-bootstrap";
-import Login from "../UserAuth/Login";
-import Signup from "../UserAuth/Signup";
-import BlackLogo from "../../images/blacklogo.png";
+import { Modal } from "react-bootstrap";
+import Login from "../UserAuth/Login/Login";
+import Signup from "../UserAuth/Signup/Signup";
 
 const ModalAuth = (props) => {
   return (
@@ -11,13 +10,15 @@ const ModalAuth = (props) => {
         backdrop={true}
         show={props.modalDisplayed}
         onHide={props.hideModal}
-        className="text-center"
       >
-        <Modal.Body>
+        <Modal.Body className="text-center">
           {props.wantLogin ? (
             <Login signupButtonClicked={props.signupButtonClicked} />
           ) : (
-            <Signup loginButtonClicked={props.loginButtonClicked} />
+            <Signup
+              hideModal={props.hideModal}
+              loginButtonClicked={props.loginButtonClicked}
+            />
           )}
         </Modal.Body>
       </Modal>
