@@ -44,7 +44,7 @@ public class UserController {
         
 		return new ResponseEntity(HttpStatus.OK);
 	}
-
+//
 	@GetMapping("/signup/confirm")
 	public ResponseEntity confirmEmail(@RequestParam Map<String, String> map) throws URISyntaxException {
 		// email, authKey가 일치할 경우 authStatus 업데이트

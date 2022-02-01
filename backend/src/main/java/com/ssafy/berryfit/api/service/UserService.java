@@ -89,7 +89,7 @@ public class UserService {
 		PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		String email = signUpReq.getEmail();
 		User updateUser = userRepository.findUserByEmail(email).orElse(null);
-		
+		//
 		updateUser.setEmail(signUpReq.getEmail());
 		updateUser.setNickname(signUpReq.getNickname());
 		updateUser.setPassword(bCryptPasswordEncoder.encode(signUpReq.getPassword()));
