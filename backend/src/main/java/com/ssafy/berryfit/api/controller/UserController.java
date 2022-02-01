@@ -67,7 +67,8 @@ public class UserController {
 	}
 	
 	@GetMapping("/mypage")
-	public ResponseEntity getmypage(@RequestBody EmailReq email) {
+	public ResponseEntity getmypage(@RequestBody EmailReq emailreq) {
+			String email = emailreq.getEmail();
 		 return ResponseEntity.ok(userService.getUserByEmail(email));
 	}
 	
