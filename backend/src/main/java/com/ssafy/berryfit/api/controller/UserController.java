@@ -38,7 +38,7 @@ public class UserController {
 	//유저 컨트롤러 
     @PostMapping("/signup")
 	public ResponseEntity signup(@Valid @RequestBody SignUpReq signUpReq) throws UnknownHostException, MessagingException {
-     	System.out.println("회원가입 페이지 로딩");
+     	System.out.println("회원가입 ");
    
         userService.signup(signUpReq);
         
@@ -63,6 +63,18 @@ public class UserController {
 		System.out.println("회원탈퇴: ");
 		userService.deleteUser(email);
 
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@GetMapping("/mypage")
+	public ResponseEntity getmypage(@RequestBody EmailReq email) {
+		 return ResponseEntity.ok(userService.getUserByEmail(email));
+	}
+	
+	@PutMapping("mypage")
+	public ResponseEntity getmypage(@RequestBody SignUpReq signUpReq) {
+		userService.updateUser(signUpReq);
+		
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
