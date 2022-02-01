@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.berryfit.api.request.EmailReq;
 import com.ssafy.berryfit.api.request.SignUpReq;
 import com.ssafy.berryfit.common.error.EmailDuplicateException;
 import com.ssafy.berryfit.db.entity.User;
@@ -67,6 +68,16 @@ public class UserService {
         System.out.println(updateUser.getEmail()+ " : 이메일 인증중인 아이디");
         return userRepository.save(updateUser);
     }
+	
+	@Transactional
+	public void deleteUser(EmailReq emailreq) {
+		String email = emailreq.getEmail();
+		User deleteUser = userRepository.findUserByEmail(email).orElse(null);
+		
+		userRepository.delete(deleteUser);
+	}
+	
+	
 	
 	@Transactional
 	public User getUserByEmail(String email) {
