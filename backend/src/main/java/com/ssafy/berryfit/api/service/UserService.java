@@ -77,12 +77,15 @@ public class UserService {
 		userRepository.delete(deleteUser);
 	}
 	
+	
+	
 	@Transactional
 	public User getUserByEmail(String email) {
 		// 디비에 유저 정보 조회 (userId 를 통한 조회).
 		User user = userRepository.findUserByEmail(email).orElse(null);
 		return user;
 	}
+
 	
 	@Transactional
 	public void updateUser(SignUpReq signUpReq) {
@@ -96,4 +99,5 @@ public class UserService {
 		
 		userRepository.save(updateUser);
 	}
+
 }
