@@ -77,23 +77,12 @@ public class UserService {
 		userRepository.delete(deleteUser);
 	}
 	
-	@Transactional
-	public User getUserByEmail(EmailReq emailreq) {
-		// 디비에 유저 정보 조회 (userId 를 통한 조회).
-		User user = userRepository.findUserByEmail(emailreq.getEmail()).orElse(null);
-		return user;
-	}
+	
 	
 	@Transactional
-	public void updateUser(SignUpReq signUpReq) {
-		PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		String email = signUpReq.getEmail();
-		User updateUser = userRepository.findUserByEmail(email).orElse(null);
-		
-		updateUser.setEmail(signUpReq.getEmail());
-		updateUser.setNickname(signUpReq.getNickname());
-		updateUser.setPassword(bCryptPasswordEncoder.encode(signUpReq.getPassword()));
-		
-		userRepository.save(updateUser);
+	public User getUserByEmail(String email) {
+		// 디비에 유저 정보 조회 (userId 를 통한 조회).
+		User user = userRepository.findUserByEmail(email).orElse(null);
+		return user;
 	}
 }
