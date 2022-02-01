@@ -14,6 +14,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.ssafy.berryfit.api.request.EmailReq;
 import com.ssafy.berryfit.api.request.SignUpReq;
 import com.ssafy.berryfit.api.service.UserService;
 
@@ -37,9 +39,7 @@ public class UserController {
     @PostMapping("/signup")
 	public ResponseEntity signup(@Valid @RequestBody SignUpReq signUpReq) throws UnknownHostException, MessagingException {
      	System.out.println("회원가입 페이지 로딩");
-//    	SignUpReq test = new SignUpReq("a@a.a","pw","nick");
    
-//        userService.signup(test);
         userService.signup(signUpReq);
         
 		return new ResponseEntity(HttpStatus.OK);
@@ -58,6 +58,13 @@ public class UserController {
 		return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
 	}
 	
+	@DeleteMapping
+	public  ResponseEntity delete(@RequestBody EmailReq email) {
+		System.out.println("회원탈퇴: ");
+		userService.deleteUser(email);
+
+		return new ResponseEntity(HttpStatus.OK);
+	}
 
 
 }
