@@ -66,5 +66,20 @@ public class UserController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
+	
+	@GetMapping("/mypage")
+	public ResponseEntity getmypage(@RequestBody EmailReq emailreq) {
+			String email = emailreq.getEmail();
+		 return ResponseEntity.ok(userService.getUserByEmail(email));
+	}
+	
+	@PutMapping("mypage")
+	public ResponseEntity getmypage(@RequestBody SignUpReq signUpReq) {
+		userService.updateUser(signUpReq);
+		
+		return new ResponseEntity(HttpStatus.OK);
+	}
+
+
 
 }
