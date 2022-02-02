@@ -73,7 +73,7 @@ public class UserController {
 		 return ResponseEntity.ok(userService.getUserByEmail(email));
 	}
 	
-	@PutMapping("mypage")
+	@PutMapping("/mypage")
 	public ResponseEntity getmypage(@RequestBody SignUpReq signUpReq) {
 		userService.updateUser(signUpReq);
 		
