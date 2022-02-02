@@ -86,7 +86,7 @@ public class UserService {
 		return user;
 	}
 
-	
+	//updateUser추가
 	@Transactional
 	public void updateUser(SignUpReq signUpReq) {
 		PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
