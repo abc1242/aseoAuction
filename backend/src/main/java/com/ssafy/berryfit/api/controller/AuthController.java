@@ -1,11 +1,18 @@
 package com.ssafy.berryfit.api.controller;
 
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,6 +42,9 @@ public class AuthController {
 	UserService userService;
 	
 	@Autowired
+    private RedisTemplate<String, String> redisTemplate;
+	
+	@Autowired
 	PasswordEncoder passwordEncoder;
 	
 	@PostMapping("/login")
@@ -53,10 +63,28 @@ public class AuthController {
 		// 로그인 요청한 유저로부터 입력된 패스워드 와 디비에 저장된 유저의 암호화된 패스워드가 같은지 확인.(유효한 패스워드인지 여부 확인)
 		if(passwordEncoder.matches(password, user.getPassword())) {
 			// 유효한 패스워드가 맞는 경우, 로그인 성공으로 응답.(액세스 토큰을 포함하여 응답값 전달)
-			return ResponseEntity.ok(UserLoginPostRes.of(200, "Success", JwtTokenUtil.getToken(email)));
+			return ResponseEntity.ok(UserLoginPostRes.of(200, "Success", "Bearer "+JwtTokenUtil.getToken(email)));
 		}
 	
 		// 유효하지 않는 패스워드인 경우, 로그인 실패로 응답.
 		return ResponseEntity.status(401).body(UserLoginPostRes.of(401, "Invalid Password", null));
 	}
+	
+	@PostMapping("/logout")
+    @Transactional
+    public ResponseEntity logout(@RequestHeader String Authorization) {
+		
+		 String token = Authorization.split(" ")[1];	//앞에 bearer 없애기
+//		 System.out.println("로그아웃"+token);	//잘 받아왔는지 출력 테스트
+		//redis에 추가
+		ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
+		String key = "accessToken";
+		
+		//key : accessToken, value: "logout" ,1 일동안 redis에 저장
+		valueOperations.set(token, "logout", 1, TimeUnit.DAYS);
+//		System.out.println("로그아웃, redis에 추가완료");
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	
 }
