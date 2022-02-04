@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,9 +40,13 @@ import com.ssafy.berryfit.db.entity.User;
 public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 	private UserService userService;
 	
-	public JwtAuthenticationFilter(AuthenticationManager authenticationManager, UserService userService) {
+	@Autowired
+    private RedisTemplate<String, String> redisTemplate;
+	
+	public JwtAuthenticationFilter(AuthenticationManager authenticationManager, UserService userService, RedisTemplate<String, String> redisTemplate) {
 		super(authenticationManager);
 		this.userService = userService;
+		this.redisTemplate = redisTemplate;
 	}
 
 	@Override
@@ -48,18 +54,33 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 			throws ServletException, IOException {
 		// Read the Authorization header, where the JWT Token should be
         String header = request.getHeader(JwtTokenUtil.HEADER_STRING);
-
+      
+      
         // If header does not contain BEARER or is null delegate to Spring impl and exit
         if (header == null || !header.startsWith(JwtTokenUtil.TOKEN_PREFIX)) {
             filterChain.doFilter(request, response);
             return;
         }
         
+        String token = header.split(" ")[1];	//앞에 bearer 없애기
+        System.out.println("토큰인증시작  "+ token);
+        
+        //redis 검사
+        	if (redisTemplate.opsForValue().get(token) != null) {
+        		System.out.println("로그아웃된 이메일 입니다.");
+        		filterChain.doFilter(request, response);
+                return;
+			}
+    
         try {
             // If header is present, try grab user principal from database and perform authorization
             Authentication authentication = getAuthentication(request);
             // jwt 토큰으로 부터 획득한 인증 정보(authentication) 설정.
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            
+           
+           
+            System.out.println("jwt필터인증완료");
         } catch (Exception ex) {
             ResponseBodyWriteUtil.sendError(request, response, ex);
             return;
@@ -95,6 +116,7 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
             }
             return null;
         }
+       
         return null;
     }
 }
