@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import LandingPage from "./components/LandingPage/LandingPage.js";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css"; // 부트스트랩 App.js에서 삭제함
 import HomeNavbar from "./components/HomePage/HomeNavbar.js";
 import HomePage from "./components/HomePage/HomePage";
 import HomeDiet from "./components/HomePage/HomeDiet";
@@ -23,7 +23,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {isLogined ? (
+        {/* {isLogined ? (
           <div>
             <LandingPage />
           </div>
@@ -37,7 +37,8 @@ function App() {
               <Route path="/groupmeeting" element={<HomeGroupMeeting />} />
             </Routes>
           </div>
-        )}
+        )} */}
+        폰트 적용 확인
       </div>
     </Router>
   );
