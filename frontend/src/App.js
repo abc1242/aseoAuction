@@ -1,45 +1,26 @@
-import React, { useState } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import LandingPage from "./components/LandingPage/LandingPage.js";
-// import "bootstrap/dist/css/bootstrap.min.css"; // 부트스트랩 App.js에서 삭제함
-import HomeNavbar from "./components/HomePage/HomeNavbar.js";
-import HomePage from "./components/HomePage/HomePage";
-import HomeDiet from "./components/HomePage/HomeDiet";
-import HomeRecipe from "./components/HomePage/HomeRecipe";
-import HomeGroupMeeting from "./components/HomePage/HomeGroupMeeting";
-// routes로 넘길거
-import {
-  BrowserRouter as Router,
-  // Switch, react-router-dom이 버전6로되믄서 더이상 지원안함 Routes로 써야함
-  Routes,
-  Route,
-  Link,
-} from "react-router-dom";
-import routes from "./routes";
+// Login2는 임시
+import Login2 from "./components/UserAuth/Login/Login2";
+import Signup2 from "./components/UserAuth/Signup/Signup2";
 
 function App() {
-  const [isLogined, setIsLogined] = useState(true);
-
   return (
-    <Router>
-      <div className="App">
-        {isLogined ? (
-          <div>
-            <LandingPage />
-          </div>
-        ) : (
-          <div>
-            <HomeNavbar />
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/recipe" element={<HomeRecipe />} />
-              <Route path="/diet" element={<HomeDiet />} />
-              <Route path="/groupmeeting" element={<HomeGroupMeeting />} />
-            </Routes>
-          </div>
-        )}
-      </div>
-    </Router>
+    <Switch>
+      <Route path="/" exact>
+        <Redirect to="/landingpage" />
+      </Route>
+      <Route path="/landingpage">
+        <LandingPage />
+      </Route>
+      <Route path="/login">
+        <Login2 />
+      </Route>
+      <Route path="/signup">
+        <Signup2 />
+      </Route>
+    </Switch>
   );
 }
 

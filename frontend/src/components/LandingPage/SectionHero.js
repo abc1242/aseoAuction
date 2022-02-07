@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./SectionHero.module.css";
 import bidImg from "../../images/bid.png";
+import { Link } from "react-router-dom";
 
 const SectionHero = () => {
   return (
@@ -14,9 +15,9 @@ const SectionHero = () => {
             몇시간, 몇일 동안 거래 상대방과 가격 흥정하는 데 지치셨나요? 이젠
             10분간의 경매를 통해 중고거래를 신속하게 끝내보세요!
           </p>
-          <a href="#" className="btn">
+          <Link to="/signup" className="btn">
             회원가입
-          </a>
+          </Link>
         </div>
 
         <div className={styles.heroImgBox}>
