@@ -1,3 +1,53 @@
+/* 
+
+--01 Typography--
+
+  a. Size(px)
+  10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+  b. Weight
+  Default: 400
+  Medium: 500
+  Semi-bold: 600
+  Bold: 700
+
+  c. Line Heights(줄간)
+  Default: 1
+  Small: 1.05
+  Medium: 1.2
+  Paragraph Default: 1.6
+  
+  d. spacing btw letters(자간)
+
+
+--02 COLORS--
+
+a. primary
+primary: #eb2f64
+primary Light: #ff3366
+primary dark1: #e62e5c
+primary dark2: #ba265d
+primary shade: #ffebf0
+
+b. grey
+grey light 1: #faf9f9
+grey light 2: #f4f2f2
+grey light 3: #f0eeee
+grey light 4: #ccc
+grey dark 1: #333
+grey dark 2: #777
+grey dark 3: #999
+
+
+--03 SPACING(padding, margin)(px)--
+
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+
+
+
+
+*/
+
 * {
   padding: 0;
   margin: 0;

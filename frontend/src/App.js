@@ -23,7 +23,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* {isLogined ? (
+        {isLogined ? (
           <div>
             <LandingPage />
           </div>
@@ -37,8 +37,7 @@ function App() {
               <Route path="/groupmeeting" element={<HomeGroupMeeting />} />
             </Routes>
           </div>
-        )} */}
-        폰트 적용 확인
+        )}
       </div>
     </Router>
   );

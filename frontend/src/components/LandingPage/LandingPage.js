@@ -1,5 +1,5 @@
 import React from "react";
-import LandingPageNavBar from "./LandingPageNavBar";
+import Header from "./Header";
 import AboutSection from "./AboutSection";
 import styled from "styled-components";
 import FunctionSection from "./FunctionSection";
@@ -7,9 +7,6 @@ import { useState } from "react";
 import ModalAuth from "./ModalAuth";
 
 // 랜딩페이지 배경색 지정
-const Wrapper = styled.section`
-  background: black;
-`;
 
 const LandingPage = () => {
   const [modalDisplayed, setModalDisplayed] = useState(false);
@@ -28,8 +25,8 @@ const LandingPage = () => {
   };
 
   return (
-    <Wrapper>
-      <LandingPageNavBar loginButtonClicked={loginButtonClicked} />
+    <>
+      <Header loginButtonClicked={loginButtonClicked} />
       <AboutSection signupButtonClicked={signupButtonClicked} />
       <FunctionSection />
       <ModalAuth
@@ -39,7 +36,7 @@ const LandingPage = () => {
         loginButtonClicked={loginButtonClicked}
         signupButtonClicked={signupButtonClicked}
       />
-    </Wrapper>
+    </>
   );
 };
 
