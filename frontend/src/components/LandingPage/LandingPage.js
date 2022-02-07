@@ -1,7 +1,8 @@
 import React from "react";
 import Header from "./Header";
+import SectionHero from "./SectionHero";
+import SectionHow from "./SectionHow";
 import AboutSection from "./AboutSection";
-import styled from "styled-components";
 import FunctionSection from "./FunctionSection";
 import { useState } from "react";
 import ModalAuth from "./ModalAuth";
@@ -26,8 +27,13 @@ const LandingPage = () => {
 
   return (
     <>
-      <Header loginButtonClicked={loginButtonClicked} />
-      <AboutSection signupButtonClicked={signupButtonClicked} />
+      <Header />
+      <main>
+        <SectionHero />
+        <SectionHow />
+      </main>
+      {/* <AboutSection signupButtonClicked={signupButtonClicked} />
+
       <FunctionSection />
       <ModalAuth
         modalDisplayed={modalDisplayed}
@@ -35,7 +41,7 @@ const LandingPage = () => {
         wantLogin={wantLogin}
         loginButtonClicked={loginButtonClicked}
         signupButtonClicked={signupButtonClicked}
-      />
+      /> */}
     </>
   );
 };

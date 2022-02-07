@@ -1,15 +1,15 @@
 import React from "react";
-import "./Header.css";
+import styles from "./Header.module.css";
 import logo from "../../images/logo.png";
 
 const Header = (props) => {
   return (
     <>
-      <header className="header">
+      <header className={styles.header}>
         <a href="#">
-          <img className="logo" src={logo}></img>
+          <img className={styles.logo} src={logo}></img>
         </a>
-        <a className="login-button" href="#">
+        <a className="btn" href="#">
           로그인
         </a>
       </header>
