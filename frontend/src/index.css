@@ -1,6 +1,6 @@
 /* 
 
---01 Typography--
+--01 글꼴--
 
   a. Size(px)
   10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
@@ -11,16 +11,16 @@
   Semi-bold: 600
   Bold: 700
 
-  c. Line Heights(줄간)
+  c. Line Heights
   Default: 1
   Small: 1.05
   Medium: 1.2
   Paragraph Default: 1.6
   
-  d. spacing btw letters(자간)
+  d. letter-spacing
 
 
---02 COLORS--
+--02 색상--
 
 a. primary
 primary: #eb2f64
@@ -41,14 +41,14 @@ grey dark 3: #777
 grey dark 4: #999
 
 
---03 SPACING(padding, margin)(px)--
+--03 Margin, Padding--
 
 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
 
 */
 
 /*****************************/
-/* PRE-SETTING */
+/* 글로벌 */
 /*****************************/
 
 * {
@@ -72,9 +72,10 @@ body {
 }
 
 /*****************************/
-/* REUSABLE COMPONENTS */
+/* 재사용 컴포넌트 */
 /*****************************/
 
+/* 컨테이너, 그리드 */
 .container {
   max-width: 120rem;
   margin: 0 auto;
@@ -99,6 +100,7 @@ body {
   align-items: center;
 }
 
+/* 헤딩(제목) */
 .headingPrimary,
 .headingSecondary,
 .headingTertiary {
@@ -114,7 +116,7 @@ body {
 }
 
 .headingSecondary {
-  font-size: 4.4rem;
+  font-size: 3.6rem;
   line-height: 1.2;
   margin-bottom: 9.6rem;
 }
