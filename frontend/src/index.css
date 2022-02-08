@@ -75,9 +75,15 @@ body {
 /* 재사용 컴포넌트 */
 /*****************************/
 
-/* 컨테이너, 그리드 */
+/* container, grid, flexbox */
 .container {
   max-width: 120rem;
+  margin: 0 auto;
+  padding: 0 3.2rem;
+}
+
+.container-small {
+  max-width: 60rem;
   margin: 0 auto;
   padding: 0 3.2rem;
 }
@@ -97,6 +103,12 @@ body {
 }
 
 .grid-center-v {
+  align-items: center;
+}
+
+.flexbox {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
@@ -153,4 +165,16 @@ body {
 .btn:hover,
 .btn:active {
   background-color: #e62e5c;
+}
+
+.button {
+  display: inline-block;
+  text-decoration: none;
+  letter-spacing: 0.2rem;
+  font-size: 1.8rem;
+  color: #fff;
+  padding: 1rem 1.8rem;
+  background-color: #ff3366;
+  border-radius: 9px;
+  transition: all 0.3s;
 }
