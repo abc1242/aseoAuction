@@ -18,7 +18,7 @@ import {
 import routes from "./routes";
 
 function App() {
-  const [isLogined, setIsLogined] = useState(true);
+  const [isLogined, setIsLogined] = useState(false);
 
   return (
     <Router>
