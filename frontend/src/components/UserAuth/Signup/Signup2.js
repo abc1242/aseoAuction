@@ -3,7 +3,13 @@ import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../images/logo.png";
 
+import { Router } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { Route } from "react-router-dom";
+
 const Signup2 = () => {
+  const history = useHistory();
+
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordCheckRef = useRef();
@@ -36,6 +42,23 @@ const Signup2 = () => {
       password: passwordRef.current.value,
       nickname: nicknameRef.current.value,
     };
+
+    fetch("http://localhost:8080/user/signup", {
+      method: "POST",
+      body: JSON.stringify(userInfo),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (!res.ok) {
+        alert("이미 등록된 이메일입니다.");
+      } else {
+        alert("이메일 인증을 완료하면 로그인 가능합니다.");
+        history.replace("/");
+      }
+    });
+    // .then((res) => res.json())
+    // .then((data) => console.log(data));
   };
 
   return (

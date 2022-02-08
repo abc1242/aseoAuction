@@ -25,6 +25,22 @@ const Login2 = () => {
       email: emailRef.current.value,
       password: passwordRef.current.value,
     };
+
+    fetch("http://localhost:8080/user/login", {
+      method: "POST",
+      body: JSON.stringify(userInfo),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res
+          .json()
+          .then((data) => localStorage.setItem("token", data.accessToken));
+      } else {
+        alert("아이디와 비밀번호를 확인해보세요");
+      }
+    });
   };
 
   return (
