@@ -1,9 +1,7 @@
 import { Route, Switch, Redirect } from "react-router-dom";
-import "./App.css";
 import LandingPage from "./components/LandingPage/LandingPage.js";
-// Login2는 임시
-import Login2 from "./components/UserAuth/Login/Login2";
-import Signup2 from "./components/UserAuth/Signup/Signup2";
+import Login from "./components/UserAuth/Login/Login";
+import Signup from "./components/UserAuth/Signup/Signup";
 
 function App() {
   return (
@@ -15,10 +13,10 @@ function App() {
         <LandingPage />
       </Route>
       <Route path="/login">
-        <Login2 />
+        <Login />
       </Route>
       <Route path="/signup">
-        <Signup2 />
+        <Signup />
       </Route>
     </Switch>
   );
