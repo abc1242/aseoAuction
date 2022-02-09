@@ -83,7 +83,7 @@ public class AuthController {
 		//key : accessToken, value: "logout" ,1 일동안 redis에 저장
 		valueOperations.set(token, "logout", 1, TimeUnit.DAYS);
 //		System.out.println("로그아웃, redis에 추가완료");
-		return new ResponseEntity(HttpStatus.OK);
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "로그아웃 성공"));
 	}
 	
 	

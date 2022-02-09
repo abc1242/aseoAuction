@@ -16,6 +16,7 @@ import com.ssafy.berryfit.api.request.EditRoomReq;
 import com.ssafy.berryfit.api.request.JoinRoomReq;
 import com.ssafy.berryfit.api.request.MakeRoomReq;
 import com.ssafy.berryfit.api.request.SearchRoomReq;
+import com.ssafy.berryfit.api.response.BaseResponseBody;
 import com.ssafy.berryfit.api.service.RoomService;
 
 @RestController
@@ -38,7 +39,7 @@ public class RoomController {
 		System.out.println("경매실 생성");
 		
 		
-		return new ResponseEntity(HttpStatus.OK);
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "경매실 생성 성공"));
 	}
 	
 	//경매실 정보 조회
@@ -56,7 +57,7 @@ public class RoomController {
 		
 		roomService.editRoom(editRoomReq);
 		
-		return new ResponseEntity(HttpStatus.OK);
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "경매실 정보 수정 성공"));
 	}
 	
 	//경매실 검색
@@ -74,7 +75,7 @@ public class RoomController {
 		
 		roomService.closeRoom(closeRoomReq);
 		
-		return new ResponseEntity(HttpStatus.OK);
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "경매실 종료"));
 	}
 	
 	
@@ -86,7 +87,7 @@ public class RoomController {
 		System.out.println("경매실 참가");
 		
 		
-		return new ResponseEntity(HttpStatus.OK);
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "경매실 참가 성공"));
 	}
 
 	
@@ -99,8 +100,7 @@ public class RoomController {
 		roomService.leaveRoom(joinRoomReq);
 		System.out.println("경매실 나가기");
 		
-		
-		return new ResponseEntity(HttpStatus.OK);
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "경매실 나가기 성공"));
 	}
 	
 	
