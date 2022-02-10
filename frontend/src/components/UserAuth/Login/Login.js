@@ -1,15 +1,13 @@
 import classes from "./Login.module.css";
 import logo from "../../../images/logo.png";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-// ContextAPI로 token을 관리하면 새로고침 시 날아감
-// import { useContext } from "react";
-// import { AuthContext } from "../../../store/auth-context";
 import { useHistory } from "react-router-dom";
+import AuthContext from "../../../store/auth-context";
 
 const Login = () => {
   const history = useHistory();
-  // const authContext = useContext(AuthContext);
+  const authCtx = useContext(AuthContext);
   const emailRef = useRef();
   const passwordRef = useRef();
   const [error, setError] = useState();
@@ -42,8 +40,7 @@ const Login = () => {
       .then((res) => {
         if (res.ok) {
           return res.json().then((data) => {
-            // authContext.setToken(data.accessToken);
-            localStorage.setItem("accessToken", data.accessToken);
+            authCtx.login(data.accessToken);
             history.push("/");
           });
         } else {
