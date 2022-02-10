@@ -1,0 +1,26 @@
+.sectionHow {
+  /* padding: 9.6rem 0 12.8rem 0; */
+  padding: 9.6rem 0 12.8rem;
+}
+
+.stepImgBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepImg {
+  width: 35%;
+}
+
+.stepNumber {
+  font-size: 8.6rem;
+  font-weight: 600;
+  color: #ccc;
+  margin-bottom: 2.4rem;
+}
+
+.stepDescription {
+  font-size: 1.4rem;
+  line-height: 1.6;
+}

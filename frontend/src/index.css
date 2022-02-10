@@ -1,13 +1,180 @@
-body {
+/* 
+
+--01 글꼴--
+
+  a. Size(px)
+  10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+  b. Weight
+  Default: 400
+  Medium: 500
+  Semi-bold: 600
+  Bold: 700
+
+  c. Line Heights
+  Default: 1
+  Small: 1.05
+  Medium: 1.2
+  Paragraph Default: 1.6
+  
+  d. letter-spacing
+
+
+--02 색상--
+
+a. primary
+primary: #eb2f64
+primary Light: #ff3366
+primary dark1: #e62e5c
+primary dark2: #ba265d
+primary shade: #ffebf0
+
+b. grey
+grey light 1: #faf9f9
+grey light 2: #f4f2f2
+grey light 3: #f0eeee
+grey light 4: #ccc
+grey light 5: #eee
+grey dark 1: #333
+grey dark 2: #555
+grey dark 3: #777
+grey dark 4: #999
+
+
+--03 Margin, Padding--
+
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+
+*/
+
+/*****************************/
+/* 글로벌 */
+/*****************************/
+
+* {
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  /* font-size: 10px; */
+  /* percentage of user's browser font-size setting */
+  /* common technique */
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  line-height: 1;
+  font-weight: 400;
+  color: #777;
+}
+
+/*****************************/
+/* 재사용 컴포넌트 */
+/*****************************/
+
+/* container, grid, flexbox */
+.container {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 0 3.2rem;
+}
+
+.container-small {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 0 3.2rem;
+}
+
+.grid {
+  display: grid;
+  row-gap: 9.6rem;
+  column-gap: 6.4rem;
+}
+
+.grid--2--cols {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--3--cols {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-center-v {
+  align-items: center;
+}
+
+.flexbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 헤딩(제목) */
+.headingPrimary,
+.headingSecondary,
+.headingTertiary {
+  font-weight: 700;
+  color: #333;
+  letter-spacing: -0.5px;
+}
+
+.headingPrimary {
+  font-size: 4.4rem;
+  line-height: 1.2;
+  margin-bottom: 4.8rem;
+}
+
+.headingSecondary {
+  font-size: 3.6rem;
+  line-height: 1.2;
+  margin-bottom: 9.6rem;
+}
+
+.headingTertiary {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 3.2rem;
+}
+
+.subheading {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #eb2f64;
+  text-transform: uppercase;
+  margin-bottom: 1.6rem;
+  letter-spacing: 0.75px;
+}
+
+.btn:link,
+.btn:visited {
+  display: inline-block;
+  text-decoration: none;
+  letter-spacing: 0.2rem;
+  font-size: 1.8rem;
+  color: #fff;
+  padding: 1rem 1.8rem;
+  background-color: #ff3366;
+  border-radius: 9px;
+  transition: all 0.3s;
+}
+
+.btn:hover,
+.btn:active {
+  background-color: #e62e5c;
+}
+
+.button {
+  display: inline-block;
+  text-decoration: none;
+  letter-spacing: 0.2rem;
+  font-size: 1.8rem;
+  color: #fff;
+  padding: 1rem 1.8rem;
+  background-color: #ff3366;
+  border-radius: 9px;
+  transition: all 0.3s;
 }
