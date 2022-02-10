@@ -1,9 +1,13 @@
 import classes from "./Login.module.css";
 import logo from "../../../images/logo.png";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../store/auth-context";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
+  const history = useHistory();
+  const authContext = useContext(AuthContext);
   const emailRef = useRef();
   const passwordRef = useRef();
   const [error, setError] = useState();
@@ -34,9 +38,10 @@ const Login = () => {
       },
     }).then((res) => {
       if (res.ok) {
-        return res
-          .json()
-          .then((data) => localStorage.setItem("token", data.accessToken));
+        return res.json().then((data) => {
+          authContext.setToken(data.accessToken);
+          history.push("/");
+        });
       } else {
         alert("아이디와 비밀번호를 확인해보세요");
       }
