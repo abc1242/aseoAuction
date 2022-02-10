@@ -1,0 +1,80 @@
+.authBox {
+  flex-direction: column;
+  row-gap: 3.2rem;
+}
+
+.imgBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4.8rem;
+}
+
+.logoImg {
+  width: 60%;
+}
+
+.formBox {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 2.4rem;
+}
+
+.control {
+  width: 100%;
+}
+
+.input {
+  font-size: 1.6rem;
+  width: 100%;
+  padding: 1.2rem 1rem;
+  outline: none;
+  border: 1px solid #333;
+  border-radius: 3px;
+}
+
+.input:focus {
+  border: 1px solid #eb2f64;
+}
+
+.button {
+  width: 100%;
+  background-color: #eb2f64;
+  border: none;
+  border-radius: 3px;
+  font-size: 1.8rem;
+  color: #fff;
+  padding: 1rem 1rem;
+  margin-top: 0.5rem;
+  transition: all 0.3s;
+}
+
+.button:hover {
+  background-color: #cf2953;
+}
+
+.helperBox {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 0rem;
+  justify-items: center;
+}
+
+.helperContent {
+  text-decoration: none;
+  color: #333;
+  font-size: 1.4rem;
+}
+
+.alignLeft {
+  justify-self: start;
+}
+
+.alertMessage {
+  /* visibility: hidden; */
+  color: red;
+  font-size: 1.4rem;
+}
