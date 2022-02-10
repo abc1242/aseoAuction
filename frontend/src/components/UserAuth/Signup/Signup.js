@@ -46,16 +46,16 @@ const Signup = () => {
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      if (!res.ok) {
-        alert("이미 등록된 이메일입니다.");
-      } else {
-        alert("이메일 인증을 완료하면 로그인 가능합니다.");
-        history.replace("/");
-      }
-    });
-    // .then((res) => res.json())
-    // .then((data) => console.log(data));
+    })
+      .then((res) => {
+        if (!res.ok) {
+          alert("이미 등록된 이메일입니다.");
+        } else {
+          alert("이메일 인증을 완료하면 로그인 가능합니다.");
+          history.replace("/");
+        }
+      })
+      .catch(alert("server error"));
   };
 
   return (
