@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.ssafy.berryfit.api.request.EmailReq;
 import com.ssafy.berryfit.api.request.SignUpReq;
+import com.ssafy.berryfit.api.response.BaseResponseBody;
 import com.ssafy.berryfit.api.service.UserService;
 
 @CrossOrigin(origins = "http://localhost:3000") //해당 리액트 포트 번호
@@ -42,7 +43,7 @@ public class UserController {
    
         userService.signup(signUpReq);
         
-		return new ResponseEntity(HttpStatus.OK);
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "회원가입 성공"));
 	}
 //
 	@GetMapping("/signup/confirm")
@@ -58,12 +59,12 @@ public class UserController {
 		return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("/delete")
 	public  ResponseEntity delete(@RequestBody EmailReq email) {
 		System.out.println("회원탈퇴: ");
 		userService.deleteUser(email);
 
-		return new ResponseEntity(HttpStatus.OK);
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "회원탈퇴 성공"));
 	}
 
 	
@@ -74,11 +75,11 @@ public class UserController {
 		 return ResponseEntity.ok(userService.getUserByEmail(email));
 	}
 	
-	@PutMapping("/mypage")
+	@PutMapping("/editmypage")
 	public ResponseEntity getmypage(@RequestBody SignUpReq signUpReq) {
 		userService.updateUser(signUpReq);
 		
-		return new ResponseEntity(HttpStatus.OK);
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "마이페이지 수정 성공"));
 	}
 
 
