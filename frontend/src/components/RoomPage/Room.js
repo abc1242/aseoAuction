@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './Room.css';
 import UserVideoComponent from './UserVideoComponent';
 
@@ -15,16 +17,30 @@ class Room extends Component {
         this.state = {
             mySessionId: 'SessionA',
             myUserName: 'Participant' + Math.floor(Math.random() * 100),
+            myTitle: 'product title',
+            myStartTime: 'time',
+            myStartPrice : 0,
+            myProductInfo: 'productinfo',
+            myProductImg: undefined,
             session: undefined,
             mainStreamManager: undefined,
             publisher: undefined,
             subscribers: [],
+
+            audiostate: true,
+            videostate: true,
         };
 
         this.joinSession = this.joinSession.bind(this);
         this.leaveSession = this.leaveSession.bind(this);
+
+        this.handleChangeStartTime = this.handleChangeStartTime.bind(this);
+        this.handleChangeTitle = this.handleChangeTitle.bind(this);
         this.handleChangeSessionId = this.handleChangeSessionId.bind(this);
         this.handleChangeUserName = this.handleChangeUserName.bind(this);
+        this.handleChangeStartPrice = this.handleChangeStartPrice.bind(this);
+        this.handleChangeProductInfo = this.handleChangeProductInfo.bind(this);
+
         this.handleMainVideoStream = this.handleMainVideoStream.bind(this);
         this.onbeforeunload = this.onbeforeunload.bind(this);
     }
@@ -50,6 +66,36 @@ class Room extends Component {
     handleChangeUserName(e) {
         this.setState({
             myUserName: e.target.value,
+        });
+    }
+
+    handleChangeTitle(e) {
+        this.setState({
+            myTitle: e.target.value,
+        });
+    }
+
+    handleChangeStartTime(e) {
+        this.setState({
+            myStartTime: e.target.value,
+        });
+    }
+
+    handleChangeStartPrice(e) {
+        this.setState({
+            myStartPrice: e.target.value,
+        });
+    }
+
+    handleChangeProductInfo(e) {
+        this.setState({
+            myProductInfo: e.target.value,
+        });
+    }
+
+    handleChangeProductImg(e) {
+        this.setState({
+            myProductImg: e.target.value,            
         });
     }
 
@@ -150,7 +196,8 @@ class Room extends Component {
                             // Set the main video in the page to display our webcam and store our Publisher
                             this.setState({
                                 mainStreamManager: publisher,
-                                publisher: publisher,
+                                // publisher: publisher,
+                                publisher,
                             });
                         })
                         .catch((error) => {
@@ -178,6 +225,11 @@ class Room extends Component {
             subscribers: [],
             mySessionId: 'SessionA',
             myUserName: 'Participant' + Math.floor(Math.random() * 100),
+            myTitle: 'product title',
+            myStartTime: 'time',
+            myStartPrice: 0,
+            myProductInfo: 'productinfo',
+            myProductImg: undefined,
             mainStreamManager: undefined,
             publisher: undefined
         });
@@ -186,6 +238,14 @@ class Room extends Component {
     render() {
         const mySessionId = this.state.mySessionId;
         const myUserName = this.state.myUserName;
+
+        const myStartTime = this.state.myStartTime;
+        const myTitle = this.state.myTitle;
+        const myStartPrice = this.state.myStartPrice;
+        const myProductInfo = this.state.myProductInfo;
+        const myProductImg = this.state.myProductImg;
+        // const myProductImg = new FormData();
+        
 
         return (
             <div className="container">
@@ -226,6 +286,8 @@ class Room extends Component {
                                         className="form-control"
                                         type="text"
                                         id="title"
+                                        value={myTitle}
+                                        onChange={this.handleChangeTitle}
                                         required
                                     />
                                 </p>
@@ -236,6 +298,8 @@ class Room extends Component {
                                         className="form-control"
                                         type="text"
                                         id="startTime"
+                                        value={myStartTime}
+                                        onChange={this.handleChangeStartTime}
                                         required
                                     />
                                 </p>
@@ -246,6 +310,8 @@ class Room extends Component {
                                         className="form-control"
                                         type="text"
                                         id="startPrice"
+                                        value={myStartPrice}
+                                        onChange={this.handleChangeStartPrice}
                                         required
                                     />
                                 </p>
@@ -256,7 +322,21 @@ class Room extends Component {
                                         className="form-control"
                                         type="text"
                                         id="productInfo"
+                                        value={myProductInfo}
+                                        onChange={this.handleChangeProductInfo}
                                         required
+                                    />
+                                </p>
+
+                                <p>
+                                    <label> 물품 사진: </label>
+                                    <input
+                                        className="form-control"
+                                        type="file"
+                                        id="productImg"
+                                        accept='image/*'
+                                        value={myProductImg}
+                                        onChange={this.handleChangeProductImg}
                                     />
                                 </p>
 
@@ -264,8 +344,9 @@ class Room extends Component {
                                 <p className="text-center">
                                     <input className="btn btn-lg btn-success" name="commit" type="submit" value="경매실 생성" />
                                 
-                                
-                                    <input className="btn btn-lg btn-danger" name="commit" type="button" value="경매실 취소" />
+                                    <Link to="/">
+                                        <input className="btn btn-lg btn-danger" name="commit" type="button" value="경매실 취소" to="/"/>
+                                    </Link>                                    
                                 </p>
                             </form>
                         </div>
@@ -274,31 +355,97 @@ class Room extends Component {
 
                 {this.state.session !== undefined ? (
                     <div id="session">
+
                         <div id="session-header">
                             <h1 id="session-title">{myUserName}님 안녕하세요, 여기는 {mySessionId}입니다.</h1>
-                            <input
-                                className="btn btn-large btn-danger"
-                                type="button"
-                                id="buttonLeaveSession"
-                                onClick={this.leaveSession}
-                                value="나가기"
-                            />
+                            <h1>제목은 {myTitle}입니다.</h1>
+                            <h1>경매 시작 시간은 {myStartTime}입니다.</h1>
+                            <h1>물품정보는 {myProductInfo}입니다.</h1>
+                            <h1>시작가격은 {myStartPrice}입니다.</h1>
+                            <h1>물품사진은 {myProductImg}입니다.</h1>
+
+                            {/* <img src={myProductImg}> </img>
+                            <file>{myProductImg}</file> */}
+
+                            {this.state.videostate ? (
+                                <button
+                                    className="btn btn-large btn-danger"
+                                    onClick={() => {
+                                        this.state.publisher.publishVideo(!this.state.videostate);
+                                        this.setState({ videostate: !this.state.videostate });
+                                    }}
+                                >
+                                    비디오 끄기
+                                </button>                    
+                            ) : (
+                                <button
+                                    className="btn btn-large btn-success"
+                                    onClick={() => {
+                                        this.state.publisher.publishVideo(!this.state.videostate);
+                                        this.setState({ videostate: !this.state.videostate });
+                                    }}
+                                >
+                                    비디오 켜기
+                                </button>
+                            )}
+
+                            {this.state.audiostate ? (
+                                <button
+                                    className="btn btn-large btn-danger"
+                                    onClick={() => {
+                                        this.state.publisher.publishAudio(!this.state.audiostate);
+                                        this.setState({ audiostate: !this.state.audiostate });
+                                    }}
+                                >
+                                    마이크 끄기
+                                </button>
+                            ) : (
+                                <button
+                                    className="btn btn-large btn-success"
+                                    onClick={() => {
+                                        this.state.publisher.publishAudio(!this.state.audiostate);
+                                        this.setState({ audiostate: !this.state.audiostate });
+                                    }}
+                                >
+                                    마이크 켜기
+                                </button>
+                            )}
+
+                            <Link to="/">
+                                <input
+                                    className="btn btn-large btn-danger"
+                                    type="button"
+                                    id="buttonLeaveSession"
+                                    onClick={this.leaveSession}
+                                    value="나가기"
+                                />
+                            </Link>
                         </div>
 
-                        {this.state.mainStreamManager !== undefined ? (
+                        <hr />
+
+                        {/* {this.state.mainStreamManager !== undefined ? (
                             <div id="main-video" className="col-md-6">
+                                
+                                <hr />
+
+                                <h1>호스트</h1>
                                 <UserVideoComponent streamManager={this.state.mainStreamManager} />
+                                
                             </div>
-                        ) : null}
+                        ) : null} */}
+
                         <div id="video-container" className="col-md-6">
                             {this.state.publisher !== undefined ? (
                                 <div className="stream-container col-md-6 col-xs-6" onClick={() => this.handleMainVideoStream(this.state.publisher)}>
+                                {/* <div className="stream-container col-md-6 col-xs-6"> */}
                                     <UserVideoComponent
                                         streamManager={this.state.publisher} />
                                 </div>
                             ) : null}
                             {this.state.subscribers.map((sub, i) => (
                                 <div key={i} className="stream-container col-md-6 col-xs-6" onClick={() => this.handleMainVideoStream(sub)}>
+                                {/* <div key={i} className="stream-container col-md-6 col-xs-6"> */}
                                     <UserVideoComponent streamManager={sub} />
                                 </div>
                             ))}
@@ -336,7 +483,8 @@ class Room extends Component {
                     },
                 })
                 .then((response) => {
-                    console.log('CREATE SESION', response);
+                    console.log('CREATE SESION','세션을 만들 때', response);
+                    console.log(OPENVIDU_SERVER_URL + '/openvidu/api/sessions')
                     resolve(response.data.id);
                 })
                 .catch((response) => {
@@ -377,7 +525,8 @@ class Room extends Component {
                     },
                 })
                 .then((response) => {
-                    console.log('TOKEN', response);
+                    console.log('TOKEN','토큰입니다', response);
+                    console.log(OPENVIDU_SERVER_URL + "/openvidu/api/sessions/" + sessionId + "/connection")
                     resolve(response.data.token);
                 })
                 .catch((error) => reject(error));
