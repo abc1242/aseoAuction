@@ -55,7 +55,10 @@ const Signup = () => {
           history.replace("/");
         }
       })
-      .catch(alert("server error"));
+      // 네트워크 장애 or CORS 에러, 404 not found 500 internal server error는 처리하지 않음
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

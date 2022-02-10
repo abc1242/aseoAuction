@@ -47,10 +47,12 @@ const Login = () => {
             history.push("/");
           });
         } else {
-          alert("아이디와 비밀번호를 확인해보세요");
+          res.json().then((err) => {
+            alert(err.message);
+          });
         }
       })
-      .catch(alert("server error"));
+      .catch(console.log);
   };
 
   return (
