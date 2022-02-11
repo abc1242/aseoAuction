@@ -4,7 +4,9 @@ import HomePage from "./components/HomePage/HomePage.js";
 import LandingPage from "./components/LandingPage/LandingPage.js";
 import Login from "./components/UserAuth/Login/Login";
 import Signup from "./components/UserAuth/Signup/Signup";
+import Room from "./components/RoomPage/Room";
 import { AuthContext } from "./store/auth-context.js";
+import HomeGroupMeeting from "./components/HomePage/HomeGroupMeeting.js";
 
 function App() {
   const [token, setToken] = useState(null);

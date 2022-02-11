@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Room.css';
+import Messages from './Messages';
+
 import UserVideoComponent from './UserVideoComponent';
 
 const OPENVIDU_SERVER_URL = 'https://' + window.location.hostname + ':4443';
@@ -29,6 +31,10 @@ class Room extends Component {
 
             audiostate: true,
             videostate: true,
+
+            messages: [],
+            chaton: false,
+            message: '',
         };
 
         this.joinSession = this.joinSession.bind(this);
@@ -43,6 +49,14 @@ class Room extends Component {
 
         this.handleMainVideoStream = this.handleMainVideoStream.bind(this);
         this.onbeforeunload = this.onbeforeunload.bind(this);
+
+
+        //chat
+        this.chattoggle = this.chattoggle.bind(this);
+        this.messageContainer = createRef(null);
+        this.sendmessageByClick = this.sendmessageByClick.bind(this);
+        this.sendmessageByEnter = this.sendmessageByEnter.bind(this);
+        this.handleChatMessageChange = this.handleChatMessageChange.bind(this);
     }
 
     componentDidMount() {
@@ -98,6 +112,63 @@ class Room extends Component {
             myProductImg: e.target.value,            
         });
     }
+
+    // chat
+    handleChatMessageChange(e) {
+        this.setState({
+          message: e.target.value,
+        });
+      }
+
+    sendmessageByClick() {
+        this.setState({
+          messages: [
+            ...this.state.messages,
+            {
+              userName: this.state.myUserName,
+              text: this.state.message,
+              chatClass: 'messages__item--operator',
+            },
+          ],
+        });
+        const mySession = this.state.session;
+    
+        mySession.signal({
+          data: `${this.state.myUserName},${this.state.message}`,
+          to: [],
+          type: 'chat',
+        });
+    
+        this.setState({
+          message: '',
+        });
+      }
+    
+      sendmessageByEnter(e) {
+        if (e.key === 'Enter') {
+          this.setState({
+            messages: [
+              ...this.state.messages,
+              {
+                userName: this.state.myUserName,
+                text: this.state.message,
+                chatClass: 'messages__item--operator',
+              },
+            ],
+          });
+          const mySession = this.state.session;
+    
+          mySession.signal({
+            data: `${this.state.myUserName},${this.state.message}`,
+            to: [],
+            type: 'chat',
+          });
+    
+          this.setState({
+            message: '',
+          });
+        }
+      }
 
     handleMainVideoStream(stream) {
         if (this.state.mainStreamManager !== stream) {
@@ -155,6 +226,24 @@ class Room extends Component {
                     this.deleteSubscriber(event.stream.streamManager);
                 });
 
+                //chat
+                mySession.on('signal:chat', (event) => {
+                    let chatdata = event.data.split(',');
+                    if (chatdata[0] !== this.state.myUserName) {
+                      this.setState({
+                        messages: [
+                          ...this.state.messages,
+                          {
+                            userName: chatdata[0],
+                            text: chatdata[1],
+                            chatClass: 'messages__item--visitor',
+                          },
+                        ],
+                      });
+                    }
+                  });
+
+
                 // On every asynchronous exception...
                 mySession.on('exception', (exception) => {
                     console.warn(exception);
@@ -208,6 +297,10 @@ class Room extends Component {
         );
     }
 
+    chattoggle() {
+        this.setState({ chaton: !this.state.chaton });
+      }
+    
     leaveSession() {
 
         // --- 7) Leave the session by calling 'disconnect' method over the Session object ---
@@ -245,6 +338,10 @@ class Room extends Component {
         const myProductInfo = this.state.myProductInfo;
         const myProductImg = this.state.myProductImg;
         // const myProductImg = new FormData();
+
+        //chat
+        const messages = this.state.messages;
+
         
 
         return (
@@ -346,7 +443,7 @@ class Room extends Component {
                                 
                                     <Link to="/">
                                         <input className="btn btn-lg btn-danger" name="commit" type="button" value="경매실 취소" to="/"/>
-                                    </Link>                                    
+                                    </Link>
                                 </p>
                             </form>
                         </div>
@@ -449,6 +546,41 @@ class Room extends Component {
                                     <UserVideoComponent streamManager={sub} />
                                 </div>
                             ))}
+                        </div>
+
+                        {/* chat */}
+                        <div className="chatbox">
+                            {this.state.chaton ? (
+                                <div className="chat chatbox__support chatbox--active">
+                                    <div className="chat chatbox__header" />
+                                        <div className="chatbox__messages" ref="chatoutput">
+                                            {/* {this.displayElements} */}
+                                            <Messages messages={messages} />
+                                        <div />
+                                    </div>
+                                    <div className="chat chatbox__footer">
+                                        <input
+                                            id="chat_message"
+                                            type="text"
+                                            placeholder="Write a message..."
+                                            onChange={this.handleChatMessageChange}
+                                            onKeyPress={this.sendmessageByEnter}
+                                            value={this.state.message}
+                                        />
+                                        <p
+                                            className="chat chatbox__send--footer"
+                                            onClick={this.sendmessageByClick}
+                                        >
+                                            Send
+                                        </p>
+                                    </div>
+                                </div>
+                            ) : null}
+                            <div className="chatbox__button" ref={this.chatButton}>
+                                <button onClick={this.chattoggle}>
+                                    채팅 버튼
+                                </button>
+                            </div>
                         </div>
                     </div>
                 ) : null}
