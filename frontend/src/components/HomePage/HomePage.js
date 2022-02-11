@@ -1,12 +1,16 @@
 import React from "react";
-import Navbar from "./Navbar";
+import classes from "./HomePage.module.css";
+import Header from "./Header";
 
 const HomePage = () => {
   return (
-    <>
-      <h1>HOME</h1>
-      <Navbar />
-    </>
+    <div>
+      <Header />
+      <div className={classes.content}>
+        <nav className={classes.sideBar}>Navigation</nav>
+        <main className={classes.auctions}>Auctions</main>
+      </div>
+    </div>
   );
 };
 

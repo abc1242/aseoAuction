@@ -1,0 +1,15 @@
+/* Layout */
+
+.content {
+  display: flex;
+}
+
+.sideBar {
+  background-color: var(--color-grey-dark-1);
+  flex: 0 0 20%;
+}
+
+.auctions {
+  background-color: var(--color-grey-light-1);
+  flex: 1;
+}

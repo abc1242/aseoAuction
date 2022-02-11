@@ -1,0 +1,112 @@
+.header {
+  height: 6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+}
+
+/* Logo */
+
+.logo {
+  height: 3rem;
+  margin-left: 3rem;
+}
+
+/* SearchBar */
+
+.search {
+  flex: 0 0 35%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchInput {
+  font-family: inherit;
+  font-size: 1.2rem;
+  background-color: var(--color-grey-light-1);
+  border: none;
+  color: inherit;
+  padding: 0.8rem 1.5rem;
+  border-radius: 100px;
+  width: 90%;
+  margin-right: -3rem;
+  transition: all 0.4s;
+}
+
+.searchInput:focus {
+  outline: 0.5px solid var(--color-primary-light-2);
+  width: 100%;
+  background-color: var(--color-grey-light-2);
+}
+
+.searchInput::-webkit-input-placeholder {
+  color: var(--color-grey-light-4);
+}
+
+.searchButton {
+  border: none;
+  background-color: transparent;
+}
+
+.searchButton:focus {
+  outline: none;
+  background-color: transparent;
+}
+
+.searchIcon {
+  height: 2.5rem;
+  width: 2.5rem;
+  fill: var(--color-grey-light-4);
+  transition: all 0.2s;
+}
+
+.searchButton:hover .searchIcon {
+  fill: var(--color-primary-light-2);
+}
+
+/* User */
+
+.userIconBox {
+  position: relative;
+}
+
+.userIcon {
+  fill: var(--color-grey-dark-1);
+  width: 3rem;
+  margin-right: 5rem;
+  transition: all 0.3s;
+}
+
+.userIcon:hover {
+  fill: var(--color-primary-light-1);
+}
+
+.userDropDown {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  row-gap: 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 5%;
+  padding: 1rem 1.5rem;
+  background-color: #fff;
+  width: 12rem;
+  transform: translate(-35%);
+}
+
+.userIconBox:hover .userDropDown {
+  display: flex;
+}
+
+.userDropDownMenu {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+.userDropDownIcon {
+  fill: var(--color-grey-dark-1);
+  width: 1.4rem;
+}
