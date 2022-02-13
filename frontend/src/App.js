@@ -6,6 +6,7 @@ import LandingPage from "./components/LandingPage/LandingPage.js";
 import Login from "./components/UserAuth/Login/Login";
 import Signup from "./components/UserAuth/Signup/Signup";
 import AuthContext from "./store/auth-context";
+import MyPageRequest from "./components/MyPage/MyPageRequest.js";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -20,6 +21,9 @@ function App() {
       </Route>
       <Route path="/signup">
         {authCtx.isLoggedIn ? <Redirect to="/" /> : <Signup />}
+      </Route>
+      <Route path="/profile/request/:userEmail">
+        <MyPageRequest />
       </Route>
     </Switch>
   );

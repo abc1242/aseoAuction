@@ -27,7 +27,9 @@ const Header = () => {
         <div className={classes.userDropDown}>
           <menu className={classes.userDropDownMenu}>
             <EditIcon className={classes.userDropDownIcon} />
-            <span className={classes.userDropDownText}>회원 정보</span>
+            <span onClick={() => {}} className={classes.userDropDownText}>
+              회원 정보
+            </span>
           </menu>
           <menu
             onClick={() => {

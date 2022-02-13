@@ -1,16 +1,15 @@
 /* Layout */
 
-.content {
+.homepage {
   display: flex;
 }
 
-.sideBar {
+.navigation {
   background-color: var(--color-grey-dark-1);
   flex: 0 0 10%;
 }
 
-.auctions {
-  background-color: var(--color-grey-light-3);
+.content {
   flex: 1;
   height: 100rem;
 }
