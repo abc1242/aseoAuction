@@ -7,12 +7,10 @@ import { ReactComponent as LogoutIcon } from "../../images/SVG/log-out.svg";
 import { ReactComponent as EditIcon } from "../../images/SVG/pencil.svg";
 import { useContext } from "react";
 import AuthContext from "../../store/auth-context";
-import ContentContext from "../../store/content-context";
 import { useHistory } from "react-router-dom";
 
 const Header = () => {
   const authContext = useContext(AuthContext);
-  const contentContext = useContext(ContentContext);
   const history = useHistory();
 
   return (
@@ -29,7 +27,7 @@ const Header = () => {
         <div className={classes.userDropDown}>
           <menu
             onClick={() => {
-              contentContext.changeContent("requestProfile");
+              history.push("/profile");
             }}
             className={classes.userDropDownMenu}
           >
