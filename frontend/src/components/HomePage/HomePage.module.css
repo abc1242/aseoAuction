@@ -6,10 +6,11 @@
 
 .sideBar {
   background-color: var(--color-grey-dark-1);
-  flex: 0 0 20%;
+  flex: 0 0 10%;
 }
 
 .auctions {
-  background-color: var(--color-grey-light-1);
+  background-color: var(--color-grey-light-3);
   flex: 1;
+  height: 100rem;
 }

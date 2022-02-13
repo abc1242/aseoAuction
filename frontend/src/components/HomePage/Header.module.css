@@ -1,5 +1,5 @@
 .header {
-  height: 6rem;
+  height: 8rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,8 +9,8 @@
 /* Logo */
 
 .logo {
-  height: 3rem;
-  margin-left: 3rem;
+  height: 4rem;
+  margin-left: 4rem;
 }
 
 /* SearchBar */
@@ -73,13 +73,13 @@
 }
 
 .userIcon {
-  fill: var(--color-grey-dark-1);
+  fill: var(--color-grey-dark-2);
   width: 3rem;
   margin-right: 5rem;
   transition: all 0.3s;
 }
 
-.userIcon:hover {
+.userIconBox:hover .userIcon {
   fill: var(--color-primary-light-1);
 }
 

@@ -13,7 +13,8 @@ function App() {
   return (
     <Switch>
       <Route path="/" exact>
-        {authCtx.isLoggedIn ? <HomePage /> : <LandingPage />}
+        {/* {authCtx.isLoggedIn ? <HomePage /> : <LandingPage />} */}
+        <HomePage />
       </Route>
       <Route path="/login">
         {authCtx.isLoggedIn ? <Redirect to="/" /> : <Login />}
