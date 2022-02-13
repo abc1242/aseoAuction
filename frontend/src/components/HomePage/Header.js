@@ -7,10 +7,12 @@ import { ReactComponent as LogoutIcon } from "../../images/SVG/log-out.svg";
 import { ReactComponent as EditIcon } from "../../images/SVG/pencil.svg";
 import { useContext } from "react";
 import AuthContext from "../../store/auth-context";
+import ContentContext from "../../store/content-context";
 import { useHistory } from "react-router-dom";
 
 const Header = () => {
   const authContext = useContext(AuthContext);
+  const contentContext = useContext(ContentContext);
   const history = useHistory();
 
   return (
@@ -25,7 +27,12 @@ const Header = () => {
       <div className={classes.userIconBox}>
         <UserIcon className={classes.userIcon} />
         <div className={classes.userDropDown}>
-          <menu className={classes.userDropDownMenu}>
+          <menu
+            onClick={() => {
+              contentContext.changeContent("requestProfile");
+            }}
+            className={classes.userDropDownMenu}
+          >
             <EditIcon className={classes.userDropDownIcon} />
             <span onClick={() => {}} className={classes.userDropDownText}>
               회원 정보

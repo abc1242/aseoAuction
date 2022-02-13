@@ -39,7 +39,13 @@
   outline: 1px solid var(--color-primary-light-2);
   color: var(--color-grey-dark-1);
   border-radius: 3rem;
-  padding: 1.2rem 1rem;
+  padding: 1.2rem 1.6rem;
+}
+
+.alertMessage {
+  color: red;
+  font-size: 1.4rem;
+  align-self: center;
 }
 
 .button {

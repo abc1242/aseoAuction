@@ -1,21 +1,27 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 const ContentContext = createContext({
   content: null,
-  changeContent: () => {}
+  changeContent: () => {},
 });
 
 export const ContentContextProvider = (props) => {
+  const [content, setContent] = useState("home");
 
-  const initialContent = 'Home'
-  const [content, setContent] = useState(initialContent)
+  const contentChangeHandler = (content) => {
+    setContent(content);
+  };
 
-  const contentChangeHandler = () => {
-    setContent('something')
-  }
+  const contextValue = {
+    content: content,
+    changeContent: contentChangeHandler,
+  };
 
+  return (
+    <ContentContext.Provider value={contextValue}>
+      {props.children}
+    </ContentContext.Provider>
+  );
+};
 
-  return <ContentContext.Provider value={} >
-    {props.children}
-  </ContentContext.Provider>
-}
+export default ContentContext;
