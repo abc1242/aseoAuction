@@ -15,7 +15,9 @@ const Header = () => {
 
   return (
     <header className={classes.header}>
-      <img className={classes.logo} src={logo} alt="logo" />
+      <a href="/">
+        <img className={classes.logo} src={logo} alt="logo" />
+      </a>
       <form action="#" className={classes.search}>
         <input type="text" className={classes.searchInput} placeholder="검색" />
         <button className={classes.searchButton}>

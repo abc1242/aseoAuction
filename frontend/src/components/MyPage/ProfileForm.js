@@ -1,12 +1,16 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import classes from "./ProfileForm.module.css";
+import AuthContext from "../../store/auth-context";
+import { useHistory } from "react-router-dom";
 
-const ProfileForm = () => {
+const ProfileForm = (props) => {
   const emailRef = useRef();
   const nicknameRef = useRef();
   const passwordRef = useRef();
   const passwordCheckRef = useRef();
   const [error, setError] = useState(null);
+  const authContext = useContext(AuthContext);
+  const history = useHistory();
 
   const putAccountHandler = (event) => {
     event.preventDefault();
@@ -35,21 +39,52 @@ const ProfileForm = () => {
       nickname: nicknameRef.current.value,
     };
 
+    console.log(userInfo);
+
     fetch("http://localhost:8080/user/editmypage", {
       method: "PUT",
       body: JSON.stringify(userInfo),
       headers: {
         "Content-type": "application/json",
+        Authorization: authContext.token,
       },
-    }).then((response) => {
-      if (response.ok) {
-        alert("회원정보가 수정되었습니다.");
-      } else {
-        alert("이미 등록된 이메일입니다.");
-      }
-    });
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json().then((data) => {
+            alert(data.message);
+          });
+        } else {
+          return response.json().then((err) => {
+            alert(err.message);
+          });
+        }
+      })
+      .catch(alert("서버 오류"));
   };
-  const resignAccountHandler = () => {};
+
+  const resignAccountHandler = (event) => {
+    event.preventDefault();
+
+    fetch("http://localhost:8080/user/delete", {
+      method: "DELETE",
+      body: JSON.stringify({
+        email: authContext.email,
+      }),
+      headers: {
+        "Content-type": "application/json",
+        Authorization: authContext.token,
+      },
+    })
+      // 성공, 실패 모두 파싱
+      .then((response) => response.json())
+      .then((data) => {
+        authContext.logout();
+        alert(data.message);
+        history.push("/");
+      })
+      .catch(alert("서버 오류"));
+  };
 
   return (
     <div className={classes.container}>
@@ -57,7 +92,12 @@ const ProfileForm = () => {
       <form className={classes.form} action="">
         <div className={classes.control}>
           <label className={classes.label}>이메일</label>
-          <input className={classes.input} ref={emailRef} />
+          <input
+            disabled
+            className={classes.input}
+            ref={emailRef}
+            value={props.userData.email}
+          />
         </div>
         <div className={classes.control}>
           <label className={classes.label}>닉네임</label>

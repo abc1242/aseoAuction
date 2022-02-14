@@ -10,36 +10,42 @@ const ProfileRequest = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    // 백엔드랑 상의해야 되는 부분 (jwt Authorization)
-    // 2단계 유저 확인: jwt + 패스워드
-    // 이메일도 필요한지?
-
     const userInfo = {
+      email: authContext.email,
       password: passwordRef.current.value,
     };
 
-    // 임시 코드
     props.userAuthorizationHandler(true);
 
-    // fetch("http://localhost:8080/user/", {
-    //   method: "GET",
-    //   body: JSON.stringify(userInfo),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: authContext.token,
-    //   },
-    // })
-    //   .then((response) => {
-    //     if (response.ok) {
-    //       // success
-    //       props.userAuthorizationHandler(true);
-    //     } else {
-    //       // fail
-    //       setError("패스워드가 일치하지 않습니다.");
-    //       props.userAuthorizationHandler(false);
-    //     }
-    //   })
-    //   .catch(alert("서버 에러"));
+    fetch("http://localhost:8080/user/mypage", {
+      method: "POST",
+      body: JSON.stringify(userInfo),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: authContext.token,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json().then((data) => {
+            const userData = {
+              email: data.email,
+              nickname: data.nickname,
+            };
+            props.userDataHandler(userData);
+            props.userAuthorizationHandler(true);
+          });
+        } else {
+          response.json().then((err) => {
+            alert(err.message);
+          });
+          props.userAuthorizationHandler(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("서버 오류");
+      });
   };
   return (
     <div className={classes.container}>

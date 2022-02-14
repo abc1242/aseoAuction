@@ -5,17 +5,28 @@ import ProfileForm from "./ProfileForm";
 
 const Profile = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
+  const [userData, setUserData] = useState({
+    email: "test@gmail.com",
+    nickname: "testnickname",
+  });
 
   const userAuthorizationHandler = (result) => {
     setIsAuthorized(result);
   };
 
+  const userDataHandler = (userData) => {
+    setUserData(userData);
+  };
+
   return (
     <>
       {isAuthorized ? (
-        <ProfileForm />
+        <ProfileForm userData={userData} />
       ) : (
-        <ProfileRequest userAuthorizationHandler={userAuthorizationHandler} />
+        <ProfileRequest
+          userDataHandler={userDataHandler}
+          userAuthorizationHandler={userAuthorizationHandler}
+        />
       )}
     </>
   );

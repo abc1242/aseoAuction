@@ -40,16 +40,19 @@ const Login = () => {
       .then((res) => {
         if (res.ok) {
           return res.json().then((data) => {
-            authCtx.login(data.accessToken);
+            authCtx.login({ token: data.accessToken, email: userInfo.email });
             history.push("/");
           });
         } else {
           res.json().then((err) => {
-            alert(err.message);
+            alert("이메일과 비밀번호를 다시 확인해주세요");
           });
         }
       })
-      .catch(console.log);
+      .catch((err) => {
+        console.log(err);
+        alert("서버 오류");
+      });
   };
 
   return (
