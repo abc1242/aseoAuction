@@ -75,7 +75,7 @@ public class UserController {
 	}
 
 	
-	@GetMapping("/mypage")
+	@PutMapping("/mypage")
 	public ResponseEntity getmypage(@RequestBody UserLoginPostReq loginreq) {
 		System.out.println("마이페이지호출");
 		//req 정보
