@@ -46,19 +46,14 @@ const Signup = () => {
       headers: {
         "Content-Type": "application/json",
       },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          alert("이미 등록된 이메일입니다.");
-        } else {
-          alert("이메일 인증을 완료하면 로그인 가능합니다.");
-          history.replace("/");
-        }
-      })
-      // 네트워크 장애 or CORS 에러, 404 not found 500 internal server error는 처리하지 않음
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => {
+      if (!res.ok) {
+        alert("이미 등록된 이메일입니다.");
+      } else {
+        alert("이메일 인증을 완료하면 로그인 가능합니다.");
+        history.replace("/");
+      }
+    });
   };
 
   return (

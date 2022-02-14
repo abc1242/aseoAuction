@@ -1,0 +1,124 @@
+.header {
+  height: 8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid #777;
+}
+
+/* Logo */
+
+.logo {
+  height: 4rem;
+  margin-left: 4rem;
+}
+
+/* SearchBar */
+
+.search {
+  flex: 0 0 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchInput {
+  font-family: inherit;
+  font-size: 1.8rem;
+  background-color: var(--color-grey-light-2);
+  border: none;
+  color: var(--color-grey-dark-1);
+  padding: 0.8rem 1.5rem;
+  border-radius: 3rem;
+  width: 90%;
+  margin-right: -5rem;
+  transition: all 0.4s;
+}
+
+.searchInput:focus {
+  outline: 0.3px solid var(--color-primary);
+  width: 100%;
+  background-color: var(--color-grey-light-2);
+}
+
+.searchInput::-webkit-input-placeholder {
+  color: var(--color-grey-light-4);
+}
+
+.searchButton {
+  border: none;
+  background-color: transparent;
+}
+
+.searchButton:focus {
+  outline: none;
+  background-color: transparent;
+}
+
+.searchIcon {
+  height: 3rem;
+  width: 3rem;
+  fill: var(--color-grey-light-4);
+  transition: all 0.2s;
+}
+
+.searchButton:hover .searchIcon {
+  fill: var(--color-primary);
+}
+
+/* User */
+
+.userIconBox {
+  position: relative;
+}
+
+.userIcon {
+  fill: var(--color-grey-dark-2);
+  width: 3rem;
+  margin-right: 5rem;
+  transition: all 0.3s;
+}
+
+.userIconBox:hover .userIcon {
+  fill: var(--color-primary-light-1);
+}
+
+.userDropDown {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  row-gap: 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 5%;
+  padding: 1rem 1.5rem;
+  background-color: #fff;
+  width: 12rem;
+  transform: translate(-50%, 0%);
+}
+
+.userIconBox:hover .userDropDown {
+  display: flex;
+}
+
+.userDropDownMenu {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  color: var(--color-grey-dark-1);
+}
+
+.userDropDownMenu:hover {
+  color: var(--color-primary-light-2);
+  font-weight: 600;
+}
+
+.userDropDownIcon {
+  fill: var(--color-grey-dark-1);
+  width: 1.4rem;
+}
+
+.userDropDownText {
+  font-size: 1.6rem;
+  color: currentColor;
+}

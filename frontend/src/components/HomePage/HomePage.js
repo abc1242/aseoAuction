@@ -1,14 +1,25 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../../store/auth-context";
+import React from "react";
+import classes from "./HomePage.module.css";
+import Header from "./Header";
+import Navigation from "./Navigation";
+import Profile from "../MyPage/Profile";
+import { Route } from "react-router-dom";
 
 const HomePage = () => {
-  const ctx = useContext(AuthContext);
-
   return (
-    <div>
-      <h1>{ctx.userEmail}</h1>
-      <h2>{ctx.token}</h2>
-    </div>
+    <>
+      <Header />
+      <div className={classes.homepage}>
+        <div className={classes.navigation}>
+          <Navigation />
+        </div>
+        <main className={classes.content}>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+        </main>
+      </div>
+    </>
   );
 };
 

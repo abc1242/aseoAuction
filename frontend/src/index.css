@@ -25,7 +25,6 @@
 a. primary
 primary: #eb2f64
 primary Light: #ff3366
-primary dark1: #e62e5c
 primary dark2: #ba265d
 primary shade: #ffebf0
 
@@ -34,7 +33,6 @@ grey light 1: #faf9f9
 grey light 2: #f4f2f2
 grey light 3: #f0eeee
 grey light 4: #ccc
-grey light 5: #eee
 grey dark 1: #333
 grey dark 2: #555
 grey dark 3: #777
@@ -51,24 +49,41 @@ grey dark 4: #999
 /* 글로벌 */
 /*****************************/
 
-* {
+:root {
+  --color-primary: #eb2f64;
+  --color-primary-light-1: #ef5983;
+  --color-primary-light-2: #f382a2;
+  --color-primary-light-3: #f7acc1;
+  --color-primary-dark: #ba265d;
+  --color-primary-shade: #ffebf0;
+  --color-grey-light-1: #faf9f9;
+  --color-grey-light-2: #f4f2f2;
+  --color-grey-light-3: #f0eeee;
+  --color-grey-light-4: #ccc;
+  --color-grey-dark-1: #333;
+  --color-grey-dark-2: #555;
+  --color-grey-dark-3: #777;
+  --color-grey-dark-4: #999;
+}
+
+*,
+*::after,
+*::before {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 
 html {
-  /* font-size: 10px; */
-  /* percentage of user's browser font-size setting */
-  /* common technique */
   font-size: 62.5%;
+  box-sizing: border-box;
 }
 
 body {
   font-family: "Noto Sans KR", sans-serif;
   line-height: 1;
   font-weight: 400;
-  color: #777;
+  color: var(--color-grey-dark-3);
 }
 
 /*****************************/

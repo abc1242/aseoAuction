@@ -1,0 +1,87 @@
+.container {
+  margin: 10rem auto 0;
+  max-width: 60rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 4rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  width: 70%;
+}
+
+.control {
+  display: flex;
+  column-gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  font-size: 2rem;
+}
+
+.input {
+  flex-basis: 60%;
+  outline: none;
+  border: 1px solid #777;
+  border-radius: 1rem;
+  padding: 0.8rem 1rem;
+  font-size: 1.6rem;
+}
+
+.guideText {
+  align-self: center;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.submitButton {
+  width: 100%;
+  background-color: #eb2f64;
+  border: none;
+  border-radius: 3rem;
+  font-size: 1.8rem;
+  color: #fff;
+  padding: 1rem 1rem;
+  margin-top: 2rem;
+  transition: all 0.3s;
+}
+
+.submitButton:hover {
+  background-color: #cf2953;
+}
+
+.alertMessage {
+  color: red;
+  font-size: 1.4rem;
+  align-self: center;
+  margin-top: 1rem;
+}
+
+.resignButton {
+  width: 100%;
+  background-color: #777;
+  border: none;
+  border-radius: 3rem;
+  font-size: 1.8rem;
+  color: #fff;
+  padding: 1rem 1rem;
+  margin-top: 1rem;
+  transition: all 0.3s;
+}
+
+.resignButton:hover {
+  background-color: #555;
+}
