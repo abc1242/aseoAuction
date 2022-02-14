@@ -68,6 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	        .antMatchers("/user/signup/**").permitAll()
     	        .antMatchers("/user/findpassword").permitAll()
     	        .antMatchers("/password").permitAll()
+    	        .antMatchers("/room/**").permitAll()
     	        .anyRequest().authenticated()		//나머지는 다 인증필요함
                 .and().cors();
     }
