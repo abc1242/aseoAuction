@@ -1,0 +1,15 @@
+/* Layout */
+
+.homepage {
+  display: flex;
+}
+
+.navigation {
+  background-color: var(--color-grey-dark-1);
+  flex: 0 0 10%;
+}
+
+.content {
+  flex: 1;
+  height: 100rem;
+}
