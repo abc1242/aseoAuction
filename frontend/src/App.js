@@ -8,6 +8,10 @@ import Room from "./components/RoomPage/Room";
 import { AuthContext } from "./store/auth-context.js";
 import HomeGroupMeeting from "./components/HomePage/HomeGroupMeeting.js";
 
+
+
+
+
 function App() {
   const [token, setToken] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
@@ -26,7 +30,8 @@ function App() {
       <Switch>
         <Route path="/" exact>
           {/* {token ? <HomePage /> : <Redirect to="/landingpage" />} */}
-          <LandingPage />
+          {/* <LandingPage /> */}
+          <HomeGroupMeeting />
         </Route>
         <Route path="/landingpage">
           <LandingPage />
