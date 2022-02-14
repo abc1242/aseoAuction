@@ -106,6 +106,14 @@ public class UserController {
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "마이페이지 수정 성공"));
 	}
 
-
-
+	
+	@GetMapping("/findpassword")
+	public ResponseEntity getmypage(@RequestBody EmailReq emailreq) throws MessagingException {
+		String email = emailreq.getEmail();
+		userService.findPassword(email);
+		
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "비밀번호 찾기 성공"));
+	}
+	
+	
 }

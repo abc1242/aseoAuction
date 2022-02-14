@@ -72,7 +72,7 @@ public class RoomController {
 	//경매실 정보 조회
 	@GetMapping("/inform")
 	public ResponseEntity informRoom(@RequestBody SearchRoomReq searchRoomReq) {
-		
+		//"roomTitle" : "팝니다"
 		Room room = roomService.informRoom(searchRoomReq);
 
 		
