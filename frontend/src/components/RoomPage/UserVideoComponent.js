@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import OpenViduVideoComponent from './OvVideo';
-import './UserVideo.css';
+// import './UserVideo.css';
+import styles from "./UserVideo.module.css";
 
 export default class UserVideoComponent extends Component {
 
@@ -13,9 +14,12 @@ export default class UserVideoComponent extends Component {
         return (
             <div>
                 {this.props.streamManager !== undefined ? (
-                    <div className="streamcomponent">
+                    // <div className="streamcomponent">
+                    <div className={styles.streamcomponent}>
                         <OpenViduVideoComponent streamManager={this.props.streamManager} />
-                        <div><p>{this.getNicknameTag()}님</p></div>
+                        <div className={styles.nametag}>
+                            <h1>{this.getNicknameTag()}님</h1>
+                        </div>
                     </div>
                 ) : null}
             </div>

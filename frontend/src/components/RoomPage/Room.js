@@ -1,9 +1,13 @@
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
-import React, { Component, createRef } from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useState, Component, createRef } from 'react';
+import { Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import './Room.css';
+
+// import './Room.css';
+import styles from "./Room.module.css";
+import logo from "../../images/logo.png";
+
 import Messages from './Messages';
 
 import UserVideoComponent from './UserVideoComponent';
@@ -23,7 +27,10 @@ class Room extends Component {
             myStartTime: 'time',
             myStartPrice : 0,
             myProductInfo: 'productinfo',
-            myProductImg: undefined,
+
+            myProductImg: null,
+            isUploaded: false,
+
             session: undefined,
             mainStreamManager: undefined,
             publisher: undefined,
@@ -33,7 +40,7 @@ class Room extends Component {
             videostate: true,
 
             messages: [],
-            chaton: false,
+            chaton: true,
             message: '',
         };
 
@@ -50,6 +57,8 @@ class Room extends Component {
         this.handleMainVideoStream = this.handleMainVideoStream.bind(this);
         this.onbeforeunload = this.onbeforeunload.bind(this);
 
+        //image
+        this.handleChangeProductImg = this.handleChangeProductImg.bind(this);
 
         //chat
         this.chattoggle = this.chattoggle.bind(this);
@@ -107,10 +116,17 @@ class Room extends Component {
         });
     }
 
+    // image
     handleChangeProductImg(e) {
         this.setState({
             myProductImg: e.target.value,            
+            // myProductImg: e.target.files[0],
         });
+    }
+
+    handlePost() {
+        const formData = new FormData();
+        formData.append('file', this.state.selectedFile);
     }
 
     // chat
@@ -322,7 +338,7 @@ class Room extends Component {
             myStartTime: 'time',
             myStartPrice: 0,
             myProductInfo: 'productinfo',
-            myProductImg: undefined,
+            myProductImg: null,
             mainStreamManager: undefined,
             publisher: undefined
         });
@@ -336,6 +352,7 @@ class Room extends Component {
         const myTitle = this.state.myTitle;
         const myStartPrice = this.state.myStartPrice;
         const myProductInfo = this.state.myProductInfo;
+
         const myProductImg = this.state.myProductImg;
         // const myProductImg = new FormData();
 
@@ -344,8 +361,10 @@ class Room extends Component {
 
         
 
+        
+
         return (
-            <div className="container">
+            <div className={styles.roomBox}>
                 {this.state.session === undefined ? (
                     <div id="join">
                         {/* <div id="img-div">
@@ -353,11 +372,12 @@ class Room extends Component {
                         </div> */}
                         <div id="join-dialog" className="jumbotron vertical-center">
                             <h1> 경매실 </h1>
-                            <form className="form-group" onSubmit={this.joinSession}>
+                            <img src={logo}></img>
+                            <form className={styles.formBox} onSubmit={this.joinSession}>
                                 <p>
                                     <label>참여자: </label>
                                     <input
-                                        className="form-control"
+                                        className={styles.input}
                                         type="text"
                                         id="userName"
                                         value={myUserName}
@@ -368,7 +388,7 @@ class Room extends Component {
                                 <p>
                                     <label> 세션: </label>
                                     <input
-                                        className="form-control"
+                                        className={styles.input}
                                         type="text"
                                         id="sessionId"
                                         value={mySessionId}
@@ -380,7 +400,7 @@ class Room extends Component {
                                 <p>
                                     <label> 제목: </label>
                                     <input
-                                        className="form-control"
+                                        className={styles.input}
                                         type="text"
                                         id="title"
                                         value={myTitle}
@@ -392,7 +412,7 @@ class Room extends Component {
                                 <p>
                                     <label> 경매시작 시간: </label>
                                     <input
-                                        className="form-control"
+                                        className={styles.input}
                                         type="text"
                                         id="startTime"
                                         value={myStartTime}
@@ -404,7 +424,7 @@ class Room extends Component {
                                 <p>
                                     <label> 시작 가격: </label>
                                     <input
-                                        className="form-control"
+                                        className={styles.input}
                                         type="text"
                                         id="startPrice"
                                         value={myStartPrice}
@@ -416,7 +436,7 @@ class Room extends Component {
                                 <p>
                                     <label> 물품 정보: </label>
                                     <input
-                                        className="form-control"
+                                        className={styles.input}
                                         type="text"
                                         id="productInfo"
                                         value={myProductInfo}
@@ -431,18 +451,23 @@ class Room extends Component {
                                         className="form-control"
                                         type="file"
                                         id="productImg"
-                                        accept='image/*'
+                                        accept='.jpg, .png, .bmp, .jpeg'
                                         value={myProductImg}
-                                        onChange={this.handleChangeProductImg}
+                                        onChange={this.handleChangeProductImg}                                        
                                     />
+                                    {/* <button type='button' onClick={this.handlePost}>버튼</button> */}
+                                    
+                                    
+
+                                    
                                 </p>
-
-
+                                <p>{myProductImg}</p>
+                                <img src={this.state.myProductImg}></img>
                                 <p className="text-center">
-                                    <input className="btn btn-lg btn-success" name="commit" type="submit" value="경매실 생성" />
+                                    <input className={styles.button} name="commit" type="submit" value="경매실 입장" />
                                 
                                     <Link to="/">
-                                        <input className="btn btn-lg btn-danger" name="commit" type="button" value="경매실 취소" to="/"/>
+                                        <input className={styles.button} name="commit" type="button" value="나가기" to="/" />
                                     </Link>
                                 </p>
                             </form>
@@ -459,10 +484,12 @@ class Room extends Component {
                             <h1>경매 시작 시간은 {myStartTime}입니다.</h1>
                             <h1>물품정보는 {myProductInfo}입니다.</h1>
                             <h1>시작가격은 {myStartPrice}입니다.</h1>
-                            <h1>물품사진은 {myProductImg}입니다.</h1>
+                            <h1>물품사진은 {this.state.myProductImg}입니다.</h1>
+                            <hr />
 
-                            {/* <img src={myProductImg}> </img>
-                            <file>{myProductImg}</file> */}
+                            <img src={this.state.myProductImg}></img>
+                            <file>{myProductImg}</file>
+
 
                             {this.state.videostate ? (
                                 <button
@@ -510,42 +537,13 @@ class Room extends Component {
 
                             <Link to="/">
                                 <input
-                                    className="btn btn-large btn-danger"
+                                    className={styles.button}
                                     type="button"
                                     id="buttonLeaveSession"
                                     onClick={this.leaveSession}
                                     value="나가기"
                                 />
                             </Link>
-                        </div>
-
-                        <hr />
-
-                        {/* {this.state.mainStreamManager !== undefined ? (
-                            <div id="main-video" className="col-md-6">
-                                
-                                <hr />
-
-                                <h1>호스트</h1>
-                                <UserVideoComponent streamManager={this.state.mainStreamManager} />
-                                
-                            </div>
-                        ) : null} */}
-
-                        <div id="video-container" className="col-md-6">
-                            {this.state.publisher !== undefined ? (
-                                <div className="stream-container col-md-6 col-xs-6" onClick={() => this.handleMainVideoStream(this.state.publisher)}>
-                                {/* <div className="stream-container col-md-6 col-xs-6"> */}
-                                    <UserVideoComponent
-                                        streamManager={this.state.publisher} />
-                                </div>
-                            ) : null}
-                            {this.state.subscribers.map((sub, i) => (
-                                <div key={i} className="stream-container col-md-6 col-xs-6" onClick={() => this.handleMainVideoStream(sub)}>
-                                {/* <div key={i} className="stream-container col-md-6 col-xs-6"> */}
-                                    <UserVideoComponent streamManager={sub} />
-                                </div>
-                            ))}
                         </div>
 
                         {/* chat */}
@@ -571,17 +569,41 @@ class Room extends Component {
                                             className="chat chatbox__send--footer"
                                             onClick={this.sendmessageByClick}
                                         >
-                                            Send
+                                            보내기
                                         </p>
                                     </div>
                                 </div>
                             ) : null}
                             <div className="chatbox__button" ref={this.chatButton}>
-                                <button onClick={this.chattoggle}>
+                                {/* <button onClick={this.chattoggle}>
                                     채팅 버튼
-                                </button>
+                                </button> */}
                             </div>
                         </div>
+                        <hr />
+
+                        {this.state.mainStreamManager !== undefined ? (
+                            <div id="main-video" className="col-md-6">
+                                <h1>호스트</h1>
+                                <UserVideoComponent streamManager={this.state.mainStreamManager} />                                
+                            </div>
+                        ) : null}
+
+                        <div id="video-container" className="col-md-6">
+                            {this.state.publisher !== undefined ? (
+                                <div className={styles.streamcontainer} onClick={() => this.handleMainVideoStream(this.state.publisher)}>
+                                {/* <div className="stream-container col-md-6 col-xs-6"> */}
+                                    <UserVideoComponent
+                                        streamManager={this.state.publisher} />
+                                </div>
+                            ) : null}
+                            {this.state.subscribers.map((sub, i) => (
+                                <div key={i} className={styles.streamcontainer} onClick={() => this.handleMainVideoStream(sub)}>
+                                {/* <div key={i} className="stream-container col-md-6 col-xs-6"> */}
+                                    <UserVideoComponent streamManager={sub} />
+                                </div>
+                            ))}
+                        </div>                        
                     </div>
                 ) : null}
             </div>
