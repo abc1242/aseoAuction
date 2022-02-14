@@ -1,24 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
+import { useContext } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage.js";
 import LandingPage from "./components/LandingPage/LandingPage.js";
 import Login from "./components/UserAuth/Login/Login";
 import Signup from "./components/UserAuth/Signup/Signup";
-import Room from "./components/RoomPage/Room";
-import { AuthContext } from "./store/auth-context.js";
-import HomeGroupMeeting from "./components/HomePage/HomeGroupMeeting.js";
+import AuthContext from "./store/auth-context";
+import { ContentContextProvider } from "./store/content-context.js";
 
 
 
 
 
 function App() {
-  const [token, setToken] = useState(null);
-  const [userEmail, setUserEmail] = useState(null);
-
-  console.log(token);
+  const authCtx = useContext(AuthContext);
 
   return (
+<<<<<<< HEAD
     <AuthContext.Provider
       value={{
         token: token,
@@ -44,6 +42,21 @@ function App() {
         </Route>
       </Switch>
     </AuthContext.Provider>
+=======
+    <Switch>
+      <Route path="/login">
+        {authCtx.isLoggedIn ? <Redirect to="/" /> : <Login />}
+      </Route>
+      <Route path="/signup">
+        {authCtx.isLoggedIn ? <Redirect to="/" /> : <Signup />}
+      </Route>
+      <Route path="/">
+        <ContentContextProvider>
+          {authCtx.isLoggedIn ? <HomePage /> : <LandingPage />}
+        </ContentContextProvider>
+      </Route>
+    </Switch>
+>>>>>>> fb228d175a01203886cb3a932b044251fb2e228e
   );
 }
 

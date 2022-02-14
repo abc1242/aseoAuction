@@ -13,12 +13,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.ssafy.berryfit.api.request.EmailReq;
 import com.ssafy.berryfit.api.request.SignUpReq;
+import com.ssafy.berryfit.api.request.UserLoginPostReq;
 import com.ssafy.berryfit.api.response.BaseResponseBody;
+import com.ssafy.berryfit.api.response.UserLoginPostRes;
 import com.ssafy.berryfit.api.service.UserService;
+import com.ssafy.berryfit.db.entity.User;
 
 @CrossOrigin(origins = "http://localhost:3000") //해당 리액트 포트 번호
 @RestController
@@ -34,6 +38,9 @@ public class UserController {
 	        this.userService = userService;
 	      
 	    }
+	 
+	 @Autowired
+		PasswordEncoder passwordEncoder;
 	 
 	 
 	//유저 컨트롤러 
@@ -69,10 +76,27 @@ public class UserController {
 
 	
 	@GetMapping("/mypage")
-	public ResponseEntity getmypage(@RequestBody EmailReq emailreq) {
+	public ResponseEntity getmypage(@RequestBody UserLoginPostReq loginreq) {
 		System.out.println("마이페이지호출");
-			String email = emailreq.getEmail();
-		 return ResponseEntity.ok(userService.getUserByEmail(email));
+		//req 정보
+		String email = loginreq.getEmail();
+		String password = loginreq.getPassword();
+		
+		User realUser = userService.getUserByEmail(email);
+		//req와 db 비교하기
+		
+		System.out.println(password);
+		System.out.println(realUser.getPassword());
+		
+		if(passwordEncoder.matches(password, realUser.getPassword())) { 
+			//비밀번호가 일치할경우
+			 return ResponseEntity.ok(realUser);
+			
+		}else {
+			return ResponseEntity.status(401).body(UserLoginPostRes.of(401, "비밀번호가 틀렸습니다.", null));
+		}
+		
+		
 	}
 	
 	@PutMapping("/editmypage")
