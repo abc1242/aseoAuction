@@ -63,6 +63,13 @@
   background-color: #cf2953;
 }
 
+.alertMessage {
+  color: red;
+  font-size: 1.4rem;
+  align-self: center;
+  margin-top: 1rem;
+}
+
 .resignButton {
   width: 100%;
   background-color: #777;

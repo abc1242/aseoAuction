@@ -8,7 +8,9 @@ const ProfileForm = () => {
   const passwordCheckRef = useRef();
   const [error, setError] = useState(null);
 
-  const putAccountHandler = () => {
+  const putAccountHandler = (event) => {
+    event.preventDefault();
+
     // validation check
     if (!emailRef.current.value.includes("@")) {
       setError("이메일을 정확히 입력해 주세요");
@@ -26,6 +28,26 @@ const ProfileForm = () => {
       setError("비밀번호 재입력이 잘못되었습니다");
       return;
     }
+
+    const userInfo = {
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+      nickname: nicknameRef.current.value,
+    };
+
+    fetch("http://localhost:8080/user/editmypage", {
+      method: "PUT",
+      body: JSON.stringify(userInfo),
+      headers: {
+        "Content-type": "application/json",
+      },
+    }).then((response) => {
+      if (response.ok) {
+        alert("회원정보가 수정되었습니다.");
+      } else {
+        alert("이미 등록된 이메일입니다.");
+      }
+    });
   };
   const resignAccountHandler = () => {};
 
@@ -56,6 +78,7 @@ const ProfileForm = () => {
             ref={passwordCheckRef}
           />
         </div>
+        <div className={classes.alertMessage}>{error}</div>
         <button onClick={putAccountHandler} className={classes.submitButton}>
           확인
         </button>
