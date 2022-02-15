@@ -45,7 +45,7 @@ const Login = () => {
           });
         } else {
           res.json().then((err) => {
-            alert("이메일과 비밀번호를 다시 확인해주세요");
+            alert(err.message);
           });
         }
       })

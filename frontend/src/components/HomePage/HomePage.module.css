@@ -13,3 +13,11 @@
   flex: 1;
   height: 100rem;
 }
+
+.grid {
+  padding: 3rem 8rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 3rem;
+  column-gap: 3rem;
+}

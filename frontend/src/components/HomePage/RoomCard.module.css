@@ -1,0 +1,67 @@
+.card {
+  display: flex;
+  align-items: center;
+  margin-top: 3rem;
+  margin-left: 3rem;
+  column-gap: 1.6rem;
+  width: 50rem;
+  height: 15rem;
+}
+
+.img {
+  height: 15em;
+  width: 15rem;
+}
+
+.descriptionBox {
+  padding: 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  align-items: start;
+  align-self: stretch;
+}
+
+.title {
+  font-size: 1.6rem;
+  color: var(--color-grey-dark-1);
+  font-weight: 500;
+}
+
+.statusLive {
+  padding: 0.3rem 0.8rem;
+  border-radius: 3px;
+  border: none;
+  color: #fff;
+  background-color: red;
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.statusNumber {
+  margin-left: 2rem;
+  color: var(--color-grey-dark-1);
+  font-size: 1.6rem;
+}
+
+.priceSection {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+.max {
+  font-size: 1.6rem;
+  color: var(--color-grey-dark-1);
+}
+
+.price {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-grey-dark-1);
+}
+
+.time {
+  font-size: 1.4rem;
+}

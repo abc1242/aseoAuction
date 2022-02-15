@@ -24,7 +24,7 @@ import com.ssafy.berryfit.api.response.UserLoginPostRes;
 import com.ssafy.berryfit.api.service.UserService;
 import com.ssafy.berryfit.db.entity.User;
 
-@CrossOrigin(origins = "http://localhost:3000") //해당 리액트 포트 번호
+@CrossOrigin(origins = "*", allowedHeaders = "*") //해당 리액트 포트 번호
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -75,7 +75,7 @@ public class UserController {
 	}
 
 	
-	@GetMapping("/mypage")
+	@PostMapping("/mypage")
 	public ResponseEntity getmypage(@RequestBody UserLoginPostReq loginreq) {
 		System.out.println("마이페이지호출");
 		//req 정보
