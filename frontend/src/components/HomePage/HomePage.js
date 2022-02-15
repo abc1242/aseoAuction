@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-// import React, { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import classes from "./HomePage.module.css";
 import Header from "./Header";
 import Navigation from "./Navigation";
@@ -7,15 +6,15 @@ import Profile from "../MyPage/Profile";
 import { Route, Switch } from "react-router-dom";
 import RoomCard from "./RoomCard";
 import { useEffect } from "react";
-//import AuthContext from "../../store/auth-context";
+import AuthContext from "../../store/auth-context";
 
 const HomePage = () => {
-//  const authContext = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
   const [rooms, setRooms] = useState([]);
-//  const [loading, setLoading] = useState(false);
-//  const [currentPage, setCurrentPage] = useState(1);
-//  const [postsPerPage, setPostsPerPage] = useState(12);
-//  const [searchWord, setSearchWord] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(12);
+  const [searchWord, setSearchWord] = useState("");
 
   // 임시 코드
   const getData = () => {
