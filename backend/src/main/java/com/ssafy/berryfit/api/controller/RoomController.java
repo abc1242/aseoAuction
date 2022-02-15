@@ -52,7 +52,7 @@ public class RoomController {
 				 {
 
 			
-			roomService.makeRoom(new MakeRoomReq(roomTitle,product,roomTitle,startPrice,
+			roomService.makeRoom(new MakeRoomReq(roomTitle,product,seller,startPrice,
 					img.getContentType(), img.getOriginalFilename(), img.getBytes() ));
 			System.out.println("경매실 생성");
 			
@@ -78,6 +78,9 @@ public class RoomController {
 		
 		RoomRes room = roomService.informRoom(searchRoomReq);
 
+		if(room ==null) {
+			return ResponseEntity.status(500).body(BaseResponseBody.of(500, "경매실이 없습니다."));
+		}
 		
 		return new ResponseEntity(room,HttpStatus.OK);
 

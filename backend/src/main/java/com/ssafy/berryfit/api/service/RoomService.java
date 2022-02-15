@@ -47,7 +47,7 @@ public class RoomService {
 				.data(makeRoomReq.getData())
 				.buyer("")
 				.endPrice(0)
-				.roomStatus("진행중")
+				.roomStatus(true)
 				.build();
 		roomRepository.save(room);
 		//경매사 참가
@@ -74,9 +74,11 @@ public class RoomService {
 		
 		
 		Room room = roomRepository.findRoomByRoomTitle(text);
+		
+		if(room == null) {return null;}
 		String img = serverAddress+"/room/informImg/"+room.getRoomTitle();
 		
-		RoomRes roomres = new RoomRes(room.getRoomId(), room.getRoomTitle(), room.getProduct(), room.getStartPrice(),img, room.getBuyer(), room.getEndPrice(), room.getRoomStatus(), room.getCreatedAt());
+		RoomRes roomres = new RoomRes(room.getRoomId(), room.getRoomTitle(), room.getProduct(), room.getStartPrice(),img, room.getBuyer(), room.getEndPrice(), room.isRoomStatus(), room.getCreatedAt());
 		
 		
 		
@@ -131,7 +133,7 @@ public class RoomService {
 		
 		closeRoom.setBuyer(closeRoomReq.getBuyer());
 		closeRoom.setEndPrice(closeRoomReq.getEndPrice());
-		closeRoom.setRoomStatus("경매종료");
+		closeRoom.setRoomStatus(false);
 		
 		System.out.println(text +" : 경매종료중");
 		

@@ -18,6 +18,6 @@ public class RoomRes {
 	private String imgUrl;
 	private String buyer;
 	private int endPrice;
-	private String roomStatus;
+	private boolean roomStatus;
 	private Timestamp createdAt;
 }

@@ -62,7 +62,7 @@ public class Room {
 
    
     @Column(name = "room_status", length = 10)
-    private String roomStatus;
+    private boolean roomStatus;
 
 
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
