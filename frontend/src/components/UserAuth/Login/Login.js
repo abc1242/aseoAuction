@@ -11,17 +11,21 @@ const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
     // validation
     if (emailRef.current.value.trim().length === 0) {
       setError("이메일을 입력하세요");
+      setIsLoading(false);
       return;
     }
     if (passwordRef.current.value.trim().length === 0) {
       setError("비밀번호를 입력하세요");
+      setIsLoading(false);
       return;
     }
 
@@ -38,6 +42,7 @@ const Login = () => {
       },
     })
       .then((res) => {
+        setIsLoading(false);
         if (res.ok) {
           return res.json().then((data) => {
             authCtx.login({ token: data.accessToken, email: userInfo.email });
@@ -56,7 +61,7 @@ const Login = () => {
   };
 
   return (
-    <div className={`container-small`}>
+    <div disabled={isLoading} className={`container-small`}>
       <section className={`${classes.authBox} flexbox`}>
         <Link to="/">
           <div className={` ${classes.imgBox}`}>
@@ -80,12 +85,20 @@ const Login = () => {
             />
           </div>
           <div className={classes.alertMessage}>{error}</div>
-          <button onClick={onSubmitHandler} className={classes.button}>
-            로그인
+          <button
+            onClick={onSubmitHandler}
+            className={`${classes.button} ${
+              isLoading && classes.disabledButton
+            }`}
+          >
+            {isLoading ? "로딩중" : "로그인"}
           </button>
         </form>
         <div className={classes.helperBox}>
-          <Link className={`${classes.helperContent} ${classes.alignLeft}`}>
+          <Link
+            to="/password"
+            className={`${classes.helperContent} ${classes.alignLeft}`}
+          >
             비밀번호 찾기
           </Link>
           <div className={`${classes.helperContent}`}>|</div>

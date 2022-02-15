@@ -8,18 +8,33 @@ import { ReactComponent as EditIcon } from "../../images/SVG/pencil.svg";
 import { useContext } from "react";
 import AuthContext from "../../store/auth-context";
 import { useHistory } from "react-router-dom";
+import ContentContext from "../../store/content-context";
+import { useRef } from "react";
 
 const Header = () => {
   const authContext = useContext(AuthContext);
+  const contentContext = useContext(ContentContext);
   const history = useHistory();
+  const searchRef = useRef("");
+
+  const searchSubmitHandler = (event) => {
+    event.preventDefault();
+    contentContext.changeSearch(searchRef.current.value);
+    contentContext.changeContent("");
+  };
 
   return (
     <header className={classes.header}>
       <a href="/">
         <img className={classes.logo} src={logo} alt="logo" />
       </a>
-      <form action="#" className={classes.search}>
-        <input type="text" className={classes.searchInput} placeholder="검색" />
+      <form onSubmit={searchSubmitHandler} className={classes.search}>
+        <input
+          type="text"
+          className={classes.searchInput}
+          ref={searchRef}
+          placeholder="검색"
+        />
         <button className={classes.searchButton}>
           <MagnifyingGlassIcon className={classes.searchIcon} />
         </button>

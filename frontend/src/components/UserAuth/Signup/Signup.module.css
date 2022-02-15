@@ -56,6 +56,14 @@
   background-color: #cf2953;
 }
 
+.disabledButton {
+  background-color: #555;
+}
+
+.disabledButton:hover {
+  background-color: #555;
+}
+
 .helperBox {
   display: grid;
   grid-template-columns: 1fr;
