@@ -20,4 +20,7 @@ public interface RoomRepository extends JpaRepository<Room, String>{
 	//검색
 	List<Room> findRoomByRoomTitleContaining(String roomTitle);
 
+	
+	//카테고리
+	List<Room> findRoomByCategory(String category);
 }

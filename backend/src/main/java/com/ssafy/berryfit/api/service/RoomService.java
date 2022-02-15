@@ -1,5 +1,6 @@
 package com.ssafy.berryfit.api.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -13,6 +14,7 @@ import com.ssafy.berryfit.api.request.CloseRoomReq;
 import com.ssafy.berryfit.api.request.EditRoomReq;
 import com.ssafy.berryfit.api.request.JoinRoomReq;
 import com.ssafy.berryfit.api.request.MakeRoomReq;
+import com.ssafy.berryfit.api.request.SearchCategory;
 import com.ssafy.berryfit.api.request.SearchRoomReq;
 import com.ssafy.berryfit.api.response.RoomRes;
 import com.ssafy.berryfit.db.entity.Entry;
@@ -42,6 +44,7 @@ public class RoomService {
 				.product(makeRoomReq.getProduct())
 				.seller(makeRoomReq.getSeller())
 				.startPrice(makeRoomReq.getStartPrice())
+				.category(makeRoomReq.getCategory())
 				.mimetype(makeRoomReq.getMimetype())
 				.original_name(makeRoomReq.getOriginal_name())
 				.data(makeRoomReq.getData())
@@ -78,7 +81,7 @@ public class RoomService {
 		if(room == null) {return null;}
 		String img = serverAddress+"/room/informImg/"+room.getRoomTitle();
 		
-		RoomRes roomres = new RoomRes(room.getRoomId(), room.getRoomTitle(), room.getProduct(), room.getStartPrice(),img, room.getBuyer(), room.getEndPrice(), room.isRoomStatus(), room.getCreatedAt());
+		RoomRes roomres = new RoomRes(room.getRoomId(), room.getRoomTitle(), room.getProduct(), room.getStartPrice(), room.getSeller(), room.getCategory(),img,room.getBuyer(), room.getEndPrice(), room.isRoomStatus(), room.getCreatedAt());
 		
 		
 		
@@ -86,6 +89,24 @@ public class RoomService {
 		System.out.println(text +" : 정보조회중");
 		roomRepository.findRoomByRoomTitle(text);
 		return roomres;
+	}
+	
+	@Transactional
+	public List<RoomRes>  categoryRoom(final SearchCategory searchCategory){
+		String category = searchCategory.getCategory();
+		
+		List<Room> roomlist = roomRepository.findRoomByCategory(category);
+		
+		List<RoomRes> roomreslist = new ArrayList<RoomRes>();
+		
+		//room을 roomlist로 바꾸기
+		for (Room room : roomlist) {
+			String img = serverAddress+"/room/informImg/"+room.getRoomTitle();
+			roomreslist.add(new RoomRes(room.getRoomId(), room.getRoomTitle(), room.getProduct(), room.getStartPrice(), room.getSeller(), room.getCategory(),img,room.getBuyer(), room.getEndPrice(), room.isRoomStatus(), room.getCreatedAt()));
+			
+		}
+		System.out.println(" : 카테고리조회중");
+		return roomreslist;
 	}
 	
 	@Transactional
@@ -116,13 +137,20 @@ public class RoomService {
 	
 	//경매실 검색
 	@Transactional
-	public List<Room> searchRoom(final SearchRoomReq searchRoomReq){
+	public List<RoomRes>  searchRoom(final SearchRoomReq searchRoomReq){
 		
 		String text = searchRoomReq.getRoomTitle();
-		
+		List<Room> roomlist = roomRepository.findRoomByRoomTitleContaining(text);
+		List<RoomRes> roomreslist = new ArrayList<RoomRes>();
+		//room을 roomlist로 바꾸기
+				for (Room room : roomlist) {
+					String img = serverAddress+"/room/informImg/"+room.getRoomTitle();
+					roomreslist.add(new RoomRes(room.getRoomId(), room.getRoomTitle(), room.getProduct(), room.getStartPrice(), room.getSeller(),room.getCategory(),img, room.getBuyer(), room.getEndPrice(), room.isRoomStatus(), room.getCreatedAt()));
+					
+				}
 		
 		System.out.println(text +" : 검색중");
-		return roomRepository.findRoomByRoomTitleContaining(text);
+		return roomreslist;
 	}
 	
 	//경매실 종료

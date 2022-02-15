@@ -44,6 +44,9 @@ public class Room {
     @Column(name = "start_price")
     private Integer startPrice;
     
+    @Column(name = "category", length = 50)
+    private String category;
+    
     //img
     @Column(name = "mimetype")
     private String mimetype;

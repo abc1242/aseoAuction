@@ -1,6 +1,7 @@
 package com.ssafy.berryfit.api.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -22,6 +23,7 @@ import com.ssafy.berryfit.api.request.CloseRoomReq;
 import com.ssafy.berryfit.api.request.EditRoomReq;
 import com.ssafy.berryfit.api.request.JoinRoomReq;
 import com.ssafy.berryfit.api.request.MakeRoomReq;
+import com.ssafy.berryfit.api.request.SearchCategory;
 import com.ssafy.berryfit.api.request.SearchRoomReq;
 import com.ssafy.berryfit.api.response.BaseResponseBody;
 import com.ssafy.berryfit.api.response.RoomRes;
@@ -48,11 +50,12 @@ public class RoomController {
 				@RequestParam("product") String product,
 				@RequestParam("seller") String seller,
 				@RequestParam("startPrice") int startPrice,
+				@RequestParam("category") String category,
 				@RequestParam("img") MultipartFile img) throws IOException
 				 {
 
 			
-			roomService.makeRoom(new MakeRoomReq(roomTitle,product,seller,startPrice,
+			roomService.makeRoom(new MakeRoomReq(roomTitle,product,seller,startPrice,category,
 					img.getContentType(), img.getOriginalFilename(), img.getBytes() ));
 			System.out.println("경매실 생성");
 			
@@ -72,17 +75,31 @@ public class RoomController {
 //	}
 	
 	//경매실 정보 조회
-	@GetMapping("/inform")
-	public ResponseEntity informRoom(@RequestBody SearchRoomReq searchRoomReq) {
+	@GetMapping("/inform/{roomTitle}")
+	public ResponseEntity informRoom(@PathVariable(name = "roomTitle") String roomTitle) {
 		//"roomTitle" : "팝니다"
+		SearchRoomReq searchRoomReq = new SearchRoomReq();
+		searchRoomReq.setRoomTitle(roomTitle);
 		
-		RoomRes room = roomService.informRoom(searchRoomReq);
+		RoomRes roomres = roomService.informRoom(searchRoomReq);
 
-		if(room ==null) {
+		if(roomres ==null) {
 			return ResponseEntity.status(500).body(BaseResponseBody.of(500, "경매실이 없습니다."));
 		}
 		
-		return new ResponseEntity(room,HttpStatus.OK);
+		return new ResponseEntity(roomres,HttpStatus.OK);
+
+	}
+	
+	//카테고리로조회
+	@GetMapping("/category/{category}")
+	public ResponseEntity categoryRoom(@PathVariable(name = "category") String category) {
+		SearchCategory searchCategory = new SearchCategory();
+		searchCategory.setCategory(category);
+		List<RoomRes>  roomreslist = roomService.categoryRoom(searchCategory);
+
+		
+		return new ResponseEntity(roomreslist,HttpStatus.OK);
 
 	}
 	
@@ -115,12 +132,14 @@ public class RoomController {
 	}
 	
 	//경매실 검색
-	@GetMapping("/search")
-	public ResponseEntity searchRoom(@RequestBody SearchRoomReq searchRoomReq) {
-		
-		
-		return new ResponseEntity(roomService.searchRoom(searchRoomReq),HttpStatus.OK);
-	}
+	//경매실 검색
+		@GetMapping("/search")
+		public ResponseEntity searchRoom(@RequestBody SearchRoomReq searchRoomReq) {
+			
+			
+			return new ResponseEntity(roomService.searchRoom(searchRoomReq),HttpStatus.OK);
+		}
+
 	
 	
 	//경매실 종료

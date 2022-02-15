@@ -12,9 +12,12 @@ import lombok.Setter;
 public class RoomRes {
 
 	private int roomId;
-	private String rooTitle;
+	private String roomTitle;
 	private String product;
 	private int startPrice;
+	private String seller;
+	
+	private String category;
 	private String imgUrl;
 	private String buyer;
 	private int endPrice;
