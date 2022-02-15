@@ -1,7 +1,7 @@
 .sideNav {
   display: flex;
   flex-direction: column;
-  padding: 2.5rem 0;
+  padding: 2.5rem 1rem;
   row-gap: 2rem;
 }
 
@@ -56,7 +56,7 @@
   .sideNav {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    padding: 0;
+    padding: 0.5rem 0.5rem;
     row-gap: 0;
   }
   .sideNavLink {
@@ -80,6 +80,5 @@
 
   .sideNavText {
     font-size: 1rem;
-    color: currentColor;
   }
 }

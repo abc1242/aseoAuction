@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={`${styles.layout} container grid grid--3--cols`}>
         <div className={styles.footerSection}>
-          <img class={styles.footerLogo} src={logo} alt="logo" />
+          <img className={styles.footerLogo} src={logo} alt="logo" />
         </div>
         <div className={styles.footerSection}>
           <p className={styles.footerHeading}>Dev Team</p>
