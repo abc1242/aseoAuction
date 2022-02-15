@@ -54,7 +54,11 @@ const RoomCard = (props) => {
               LIVE
             </button>
           )}
-          {props.roomInfo.roomStatus === 0 && <button>종료</button>}
+          {props.roomInfo.roomStatus === 0 && (
+            <button disabled className={classes.statusDead}>
+              종료
+            </button>
+          )}
 
           <span className={classes.statusNumber}>
             {props.roomInfo.participants.length}명 시청중
