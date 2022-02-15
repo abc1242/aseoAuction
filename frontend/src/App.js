@@ -8,6 +8,10 @@ import Signup from "./components/UserAuth/Signup/Signup";
 import AuthContext from "./store/auth-context";
 import { ContentContextProvider } from "./store/content-context.js";
 
+
+
+
+
 function App() {
   const authCtx = useContext(AuthContext);
 

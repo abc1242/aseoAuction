@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 const Username = styled.p`
   color: #42387a;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 600;
   padding: 5px 0 10px 0;
+  text-align: left; 
 `;
 
 const MessageContainer = styled.div`
@@ -13,7 +14,7 @@ const MessageContainer = styled.div`
 `;
 
 const Text = styled.p`
-  font-size: 1rem;
+  font-size: 2rem;
 `;
 
 class Message extends Component {
