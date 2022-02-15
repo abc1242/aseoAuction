@@ -73,21 +73,26 @@ public class RoomService {
 	@Transactional
 	public RoomRes informRoom(final SearchRoomReq searchRoomReq){
 		
-		String text = searchRoomReq.getRoomTitle();
+		String roomTitle = searchRoomReq.getRoomTitle();
 		
 		
-		Room room = roomRepository.findRoomByRoomTitle(text);
+		Room room = roomRepository.findRoomByRoomTitle(roomTitle);
 		
 		if(room == null) {return null;}
 		String img = serverAddress+"/room/informImg/"+room.getRoomTitle();
+		List<Entry> entryList = entryRepository.findByRoomTitle(roomTitle);
+		List<String> participantList = new ArrayList<String>();
+		for (Entry entry : entryList) {
+			
+			participantList.add(entry.getNickname());
+		}
 		
-		RoomRes roomres = new RoomRes(room.getRoomId(), room.getRoomTitle(), room.getProduct(), room.getStartPrice(), room.getSeller(), room.getCategory(),img,room.getBuyer(), room.getEndPrice(), room.isRoomStatus(), room.getCreatedAt());
+		RoomRes roomres = new RoomRes(room.getRoomId(), room.getRoomTitle(), room.getProduct(), room.getStartPrice(), room.getSeller(), room.getCategory(),img,participantList,room.getBuyer(), room.getEndPrice(), room.isRoomStatus(), room.getCreatedAt());
 		
 		
 		
 		
-		System.out.println(text +" : 정보조회중");
-		roomRepository.findRoomByRoomTitle(text);
+		System.out.println(roomTitle +" : 정보조회중");
 		return roomres;
 	}
 	
@@ -102,7 +107,14 @@ public class RoomService {
 		//room을 roomlist로 바꾸기
 		for (Room room : roomlist) {
 			String img = serverAddress+"/room/informImg/"+room.getRoomTitle();
-			roomreslist.add(new RoomRes(room.getRoomId(), room.getRoomTitle(), room.getProduct(), room.getStartPrice(), room.getSeller(), room.getCategory(),img,room.getBuyer(), room.getEndPrice(), room.isRoomStatus(), room.getCreatedAt()));
+			List<Entry> entryList = entryRepository.findByRoomTitle(room.getRoomTitle());
+			List<String> participantList = new ArrayList<String>();
+			for (Entry entry : entryList) {
+				
+				participantList.add(entry.getNickname());
+			}
+			
+			roomreslist.add(new RoomRes(room.getRoomId(), room.getRoomTitle(), room.getProduct(), room.getStartPrice(), room.getSeller(), room.getCategory(),img,participantList,room.getBuyer(), room.getEndPrice(), room.isRoomStatus(), room.getCreatedAt()));
 			
 		}
 		System.out.println(" : 카테고리조회중");
@@ -145,7 +157,14 @@ public class RoomService {
 		//room을 roomlist로 바꾸기
 				for (Room room : roomlist) {
 					String img = serverAddress+"/room/informImg/"+room.getRoomTitle();
-					roomreslist.add(new RoomRes(room.getRoomId(), room.getRoomTitle(), room.getProduct(), room.getStartPrice(), room.getSeller(),room.getCategory(),img, room.getBuyer(), room.getEndPrice(), room.isRoomStatus(), room.getCreatedAt()));
+					List<Entry> entryList = entryRepository.findByRoomTitle(room.getRoomTitle());
+					List<String> participantList = new ArrayList<String>();
+					for (Entry entry : entryList) {
+						
+						participantList.add(entry.getNickname());
+					}
+					
+					roomreslist.add(new RoomRes(room.getRoomId(), room.getRoomTitle(), room.getProduct(), room.getStartPrice(), room.getSeller(),room.getCategory(),img,participantList, room.getBuyer(), room.getEndPrice(), room.isRoomStatus(), room.getCreatedAt()));
 					
 				}
 		

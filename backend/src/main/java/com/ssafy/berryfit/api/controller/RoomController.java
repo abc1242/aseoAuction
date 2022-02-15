@@ -91,6 +91,7 @@ public class RoomController {
 
 	}
 	
+	
 	//카테고리로조회
 	@GetMapping("/category/{category}")
 	public ResponseEntity categoryRoom(@PathVariable(name = "category") String category) {
@@ -132,13 +133,28 @@ public class RoomController {
 	}
 	
 	//경매실 검색
-	//경매실 검색
-		@GetMapping("/search")
-		public ResponseEntity searchRoom(@RequestBody SearchRoomReq searchRoomReq) {
-			
-			
-			return new ResponseEntity(roomService.searchRoom(searchRoomReq),HttpStatus.OK);
-		}
+	@GetMapping("/search/{roomTitle}")
+	public ResponseEntity searchRoom(@PathVariable(name = "roomTitle") String roomTitle) {
+		SearchRoomReq searchRoomReq = new SearchRoomReq();
+		searchRoomReq.setRoomTitle(roomTitle);
+		
+		return new ResponseEntity(roomService.searchRoom(searchRoomReq),HttpStatus.OK);
+	}
+	@GetMapping("/search/")
+	public ResponseEntity searchRoom2() {
+		SearchRoomReq searchRoomReq = new SearchRoomReq();
+		searchRoomReq.setRoomTitle("");
+		System.out.println("전체검색");
+		return new ResponseEntity(roomService.searchRoom(searchRoomReq),HttpStatus.OK);
+	}
+	
+//	//경매실 검색
+//		@GetMapping("/search")
+//		public ResponseEntity searchRoom(@RequestBody SearchRoomReq searchRoomReq) {
+//			
+//			
+//			return new ResponseEntity(roomService.searchRoom(searchRoomReq),HttpStatus.OK);
+//		}
 
 	
 	
