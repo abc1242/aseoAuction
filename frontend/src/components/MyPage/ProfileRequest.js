@@ -5,7 +5,8 @@ import AuthContext from "../../store/auth-context";
 const ProfileRequest = (props) => {
   const passwordRef = useRef();
   const authContext = useContext(AuthContext);
-  const [error, setError] = useState();
+  const [error] = useState();
+//  const [error, setError] = useState();
 
   const submitHandler = (event) => {
     event.preventDefault();

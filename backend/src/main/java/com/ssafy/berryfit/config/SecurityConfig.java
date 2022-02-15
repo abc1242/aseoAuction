@@ -66,6 +66,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/user/login").permitAll()				//인증이 필요한 URL과 필요하지 않은 URL에 대하여 설정
     	        .antMatchers("/user/signup/**").permitAll()
+    	        .antMatchers("/user/findpassword").permitAll()
+    	        .antMatchers("/password").permitAll()
+    	        .antMatchers("/room/**").permitAll()
     	        .anyRequest().authenticated()		//나머지는 다 인증필요함
                 .and().cors();
     }

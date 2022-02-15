@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import com.ssafy.berryfit.api.request.EditRoomReq;
 import com.ssafy.berryfit.api.request.JoinRoomReq;
 import com.ssafy.berryfit.api.request.MakeRoomReq;
 import com.ssafy.berryfit.api.request.SearchRoomReq;
+import com.ssafy.berryfit.api.response.RoomRes;
 import com.ssafy.berryfit.db.entity.Entry;
 import com.ssafy.berryfit.db.entity.Room;
 import com.ssafy.berryfit.db.repository.EntryRepository;
@@ -28,7 +30,8 @@ public class RoomService {
         this.roomRepository = roomRepository;
         this.entryRepository = entryRepository;
     }
-	
+	 @Value("${custom.host}")
+	    private String serverAddress;
 	//경매실 생성
 	@Transactional
 	public Entry makeRoom(final MakeRoomReq makeRoomReq) {
@@ -65,13 +68,33 @@ public class RoomService {
 	//경매실 정보 조회
 	
 	@Transactional
-	public Room informRoom(final SearchRoomReq searchRoomReq){
+	public RoomRes informRoom(final SearchRoomReq searchRoomReq){
 		
 		String text = searchRoomReq.getRoomTitle();
 		
+		
+		Room room = roomRepository.findRoomByRoomTitle(text);
+		String img = serverAddress+"/room/informImg/"+room.getRoomTitle();
+		
+		RoomRes roomres = new RoomRes(room.getRoomId(), room.getRoomTitle(), room.getProduct(), room.getStartPrice(),img, room.getBuyer(), room.getEndPrice(), room.getRoomStatus(), room.getCreatedAt());
+		
+		
+		
+		
 		System.out.println(text +" : 정보조회중");
+		roomRepository.findRoomByRoomTitle(text);
+		return roomres;
+	}
+	
+	@Transactional
+	public Room informRoomImg(final SearchRoomReq searchRoomReq){
+		
+		String text = searchRoomReq.getRoomTitle();
+		
+		System.out.println(text +" : 이미지조회중");
 		return roomRepository.findRoomByRoomTitle(text);
 	}
+
 	
 	//경매실 정보 수정
 	@Transactional

@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,10 +24,12 @@ import com.ssafy.berryfit.api.request.JoinRoomReq;
 import com.ssafy.berryfit.api.request.MakeRoomReq;
 import com.ssafy.berryfit.api.request.SearchRoomReq;
 import com.ssafy.berryfit.api.response.BaseResponseBody;
+import com.ssafy.berryfit.api.response.RoomRes;
 import com.ssafy.berryfit.api.service.RoomService;
 import com.ssafy.berryfit.db.entity.Room;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000") //해당 리액트 포트 번호
 @RequestMapping("/room")
 public class RoomController {
 
@@ -70,8 +74,9 @@ public class RoomController {
 	//경매실 정보 조회
 	@GetMapping("/inform")
 	public ResponseEntity informRoom(@RequestBody SearchRoomReq searchRoomReq) {
+		//"roomTitle" : "팝니다"
 		
-		Room room = roomService.informRoom(searchRoomReq);
+		RoomRes room = roomService.informRoom(searchRoomReq);
 
 		
 		return new ResponseEntity(room,HttpStatus.OK);
@@ -79,10 +84,13 @@ public class RoomController {
 	}
 	
 	//경매실 정보 이미지 조회
-		@GetMapping("/informImg")
-		public ResponseEntity informImgRoom(@RequestBody SearchRoomReq searchRoomReq) {
+		@GetMapping("/informImg/{roomTitle}")
+		public ResponseEntity informImgRoom(@PathVariable(name = "roomTitle") String roomTitle) {
 			
-			Room room = roomService.informRoom(searchRoomReq);
+			SearchRoomReq searchRoomReq = new SearchRoomReq();
+			searchRoomReq.setRoomTitle(roomTitle);
+			
+			Room room = roomService.informRoomImg(searchRoomReq);
 			
 			HttpHeaders headers = new HttpHeaders();
 	        headers.add("Content-Type", room.getMimetype());
