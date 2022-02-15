@@ -122,3 +122,43 @@
   font-size: 1.6rem;
   color: currentColor;
 }
+
+@media (max-width: 1100px) {
+  .header {
+    height: 6rem;
+  }
+  .logo {
+    margin-left: 2rem;
+    height: 3rem;
+  }
+  .search {
+    flex: 0 0 40%;
+  }
+  .searchInput {
+    font-size: 1.4rem;
+    padding: 0.4rem 1rem;
+    margin-right: -3rem;
+  }
+  .searchIcon {
+    height: 2rem;
+    width: 2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .logo {
+    height: 2.5rem;
+  }
+  .userIcon {
+    margin-right: 3rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .logo {
+    height: 2rem;
+  }
+  .userIcon {
+    margin-right: 1rem;
+  }
+}

@@ -44,8 +44,15 @@ const RoomCard = (props) => {
       <div className={classes.descriptionBox}>
         <p className={classes.title}>{props.roomInfo.roomTitle}</p>
         <section className={classes.priceSection}>
-          <span className={classes.max}>최대</span>
-          <p className={classes.price}>{props.roomInfo.startPrice}</p>
+          <span className={classes.max}>
+            {props.roomInfo.roomStatus === true ? "최대" : "최종"}
+          </span>
+          <p className={classes.price}>
+            {props.roomInfo.roomStatus === true
+              ? props.roomInfo.startPrice
+              : props.roomInfo.endPrice}
+            원
+          </p>
         </section>
 
         <section>

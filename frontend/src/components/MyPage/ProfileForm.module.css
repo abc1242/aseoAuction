@@ -85,3 +85,9 @@
 .resignButton:hover {
   background-color: #555;
 }
+
+@media (max-width: 500px) {
+  html {
+    font-size: 40%;
+  }
+}
