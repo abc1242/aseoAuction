@@ -71,16 +71,15 @@ public class RoomService {
 	//경매실 정보 조회
 	
 	@Transactional
-	public RoomRes informRoom(final SearchRoomReq searchRoomReq){
+	public RoomRes informRoom(final int roomId){
+	
 		
-		String roomTitle = searchRoomReq.getRoomTitle();
 		
-		
-		Room room = roomRepository.findRoomByRoomTitle(roomTitle);
+		Room room = roomRepository.findRoomByRoomId(roomId);
 		
 		if(room == null) {return null;}
-		String img = serverAddress+"/room/informImg/"+room.getRoomTitle();
-		List<Entry> entryList = entryRepository.findByRoomTitle(roomTitle);
+		String img = serverAddress+"/room/informImg/"+room.getRoomId();
+		List<Entry> entryList = entryRepository.findByRoomTitle(room.getRoomTitle());
 		List<String> participantList = new ArrayList<String>();
 		for (Entry entry : entryList) {
 			
@@ -92,7 +91,7 @@ public class RoomService {
 		
 		
 		
-		System.out.println(roomTitle +" : 정보조회중");
+		//System.out.println(roomTitle +" : 정보조회중");
 		return roomres;
 	}
 	
@@ -106,7 +105,7 @@ public class RoomService {
 		
 		//room을 roomlist로 바꾸기
 		for (Room room : roomlist) {
-			String img = serverAddress+"/room/informImg/"+room.getRoomTitle();
+			String img = serverAddress+"/room/informImg/"+room.getRoomId();
 			List<Entry> entryList = entryRepository.findByRoomTitle(room.getRoomTitle());
 			List<String> participantList = new ArrayList<String>();
 			for (Entry entry : entryList) {
@@ -122,12 +121,12 @@ public class RoomService {
 	}
 	
 	@Transactional
-	public Room informRoomImg(final SearchRoomReq searchRoomReq){
+	public Room informRoomImg(final int roomId){
 		
-		String text = searchRoomReq.getRoomTitle();
+//		String text = searchRoomReq.getRoomTitle();
 		
-		System.out.println(text +" : 이미지조회중");
-		return roomRepository.findRoomByRoomTitle(text);
+//		System.out.println(text +" : 이미지조회중");
+		return roomRepository.findRoomByRoomId(roomId);
 	}
 
 	
@@ -156,7 +155,7 @@ public class RoomService {
 		List<RoomRes> roomreslist = new ArrayList<RoomRes>();
 		//room을 roomlist로 바꾸기
 				for (Room room : roomlist) {
-					String img = serverAddress+"/room/informImg/"+room.getRoomTitle();
+					String img = serverAddress+"/room/informImg/"+room.getRoomId();
 					List<Entry> entryList = entryRepository.findByRoomTitle(room.getRoomTitle());
 					List<String> participantList = new ArrayList<String>();
 					for (Entry entry : entryList) {
