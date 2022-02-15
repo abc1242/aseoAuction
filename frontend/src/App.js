@@ -16,33 +16,6 @@ function App() {
   const authCtx = useContext(AuthContext);
 
   return (
-<<<<<<< HEAD
-    <AuthContext.Provider
-      value={{
-        token: token,
-        userEmail: userEmail,
-        setToken: setToken,
-        setUserEmail: setUserEmail,
-      }}
-    >
-      <Switch>
-        <Route path="/" exact>
-          {/* {token ? <HomePage /> : <Redirect to="/landingpage" />} */}
-          {/* <LandingPage /> */}
-          <HomeGroupMeeting />
-        </Route>
-        <Route path="/landingpage">
-          <LandingPage />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/signup">
-          <Signup />
-        </Route>
-      </Switch>
-    </AuthContext.Provider>
-=======
     <Switch>
       <Route path="/login">
         {authCtx.isLoggedIn ? <Redirect to="/" /> : <Login />}
@@ -56,7 +29,6 @@ function App() {
         </ContentContextProvider>
       </Route>
     </Switch>
->>>>>>> fb228d175a01203886cb3a932b044251fb2e228e
   );
 }
 

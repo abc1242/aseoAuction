@@ -1,12 +1,16 @@
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
-import React, { useState, Component, createRef } from 'react';
-import { Row, Col, Button } from 'react-bootstrap';
+import React, { Component, createRef } from 'react';
+// import { Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-// import './Room.css';
-import styles from "./Room.module.css";
+import './Room.css';
+// import styles from "./Room.module.css";
 import logo from "../../images/logo.png";
+import micOn from "../../images/Room/micon.png";
+import micOff from "../../images/Room/micoff.png";
+import camOn from "../../images/Room/camon.png";
+import camOff from "../../images/Room/camoff.png";
 
 import Messages from './Messages';
 
@@ -364,20 +368,19 @@ class Room extends Component {
         
 
         return (
-            <div className={styles.roomBox}>
+            <div className='Room'>
                 {this.state.session === undefined ? (
                     <div id="join">
                         {/* <div id="img-div">
                             <img src="resources/images/openvidu_grey_bg_transp_cropped.png" alt="OpenVidu logo" />
                         </div> */}
                         <div id="join-dialog" className="jumbotron vertical-center">
-                            <h1> 경매실 </h1>
-                            <img src={logo}></img>
-                            <form className={styles.formBox} onSubmit={this.joinSession}>
+                            <img className='grid--2--cols' src={logo}></img>
+                            <form className="form-group grid--2--cols" onSubmit={this.joinSession}>
                                 <p>
                                     <label>참여자: </label>
                                     <input
-                                        className={styles.input}
+                                        className="form-input"
                                         type="text"
                                         id="userName"
                                         value={myUserName}
@@ -388,7 +391,7 @@ class Room extends Component {
                                 <p>
                                     <label> 세션: </label>
                                     <input
-                                        className={styles.input}
+                                        className="form-input"
                                         type="text"
                                         id="sessionId"
                                         value={mySessionId}
@@ -400,7 +403,7 @@ class Room extends Component {
                                 <p>
                                     <label> 제목: </label>
                                     <input
-                                        className={styles.input}
+                                        className="form-input"
                                         type="text"
                                         id="title"
                                         value={myTitle}
@@ -412,7 +415,7 @@ class Room extends Component {
                                 <p>
                                     <label> 경매시작 시간: </label>
                                     <input
-                                        className={styles.input}
+                                        className="form-input"
                                         type="text"
                                         id="startTime"
                                         value={myStartTime}
@@ -424,7 +427,7 @@ class Room extends Component {
                                 <p>
                                     <label> 시작 가격: </label>
                                     <input
-                                        className={styles.input}
+                                        className="form-input"
                                         type="text"
                                         id="startPrice"
                                         value={myStartPrice}
@@ -436,7 +439,7 @@ class Room extends Component {
                                 <p>
                                     <label> 물품 정보: </label>
                                     <input
-                                        className={styles.input}
+                                        className="form-input"
                                         type="text"
                                         id="productInfo"
                                         value={myProductInfo}
@@ -448,7 +451,7 @@ class Room extends Component {
                                 <p>
                                     <label> 물품 사진: </label>
                                     <input
-                                        className="form-control"
+                                        className="form-input"
                                         type="file"
                                         id="productImg"
                                         accept='.jpg, .png, .bmp, .jpeg'
@@ -464,10 +467,10 @@ class Room extends Component {
                                 <p>{myProductImg}</p>
                                 <img src={this.state.myProductImg}></img>
                                 <p className="text-center">
-                                    <input className={styles.button} name="commit" type="submit" value="경매실 입장" />
+                                    <input className="btnRoom btn-lg btn-success" name="commit" type="submit" value="경매실 입장" />
                                 
                                     <Link to="/">
-                                        <input className={styles.button} name="commit" type="button" value="나가기" to="/" />
+                                        <input className="btnRoom btn-lg btn-danger" name="commit" type="button" value="나가기" to="/" />
                                     </Link>
                                 </p>
                             </form>
@@ -477,133 +480,166 @@ class Room extends Component {
 
                 {this.state.session !== undefined ? (
                     <div id="session">
-
                         <div id="session-header">
-                            <h1 id="session-title">{myUserName}님 안녕하세요, 여기는 {mySessionId}입니다.</h1>
-                            <h1>제목은 {myTitle}입니다.</h1>
-                            <h1>경매 시작 시간은 {myStartTime}입니다.</h1>
-                            <h1>물품정보는 {myProductInfo}입니다.</h1>
-                            <h1>시작가격은 {myStartPrice}입니다.</h1>
-                            <h1>물품사진은 {this.state.myProductImg}입니다.</h1>
-                            <hr />
+                            
 
-                            <img src={this.state.myProductImg}></img>
-                            <file>{myProductImg}</file>
+                            
 
-
-                            {this.state.videostate ? (
-                                <button
-                                    className="btn btn-large btn-danger"
-                                    onClick={() => {
-                                        this.state.publisher.publishVideo(!this.state.videostate);
-                                        this.setState({ videostate: !this.state.videostate });
-                                    }}
-                                >
-                                    비디오 끄기
-                                </button>                    
-                            ) : (
-                                <button
-                                    className="btn btn-large btn-success"
-                                    onClick={() => {
-                                        this.state.publisher.publishVideo(!this.state.videostate);
-                                        this.setState({ videostate: !this.state.videostate });
-                                    }}
-                                >
-                                    비디오 켜기
-                                </button>
-                            )}
-
-                            {this.state.audiostate ? (
-                                <button
-                                    className="btn btn-large btn-danger"
-                                    onClick={() => {
-                                        this.state.publisher.publishAudio(!this.state.audiostate);
-                                        this.setState({ audiostate: !this.state.audiostate });
-                                    }}
-                                >
-                                    마이크 끄기
-                                </button>
-                            ) : (
-                                <button
-                                    className="btn btn-large btn-success"
-                                    onClick={() => {
-                                        this.state.publisher.publishAudio(!this.state.audiostate);
-                                        this.setState({ audiostate: !this.state.audiostate });
-                                    }}
-                                >
-                                    마이크 켜기
-                                </button>
-                            )}
-
-                            <Link to="/">
-                                <input
-                                    className={styles.button}
-                                    type="button"
-                                    id="buttonLeaveSession"
-                                    onClick={this.leaveSession}
-                                    value="나가기"
-                                />
-                            </Link>
+                            
                         </div>
-
-                        {/* chat */}
-                        <div className="chatbox">
-                            {this.state.chaton ? (
-                                <div className="chat chatbox__support chatbox--active">
-                                    <div className="chat chatbox__header" />
-                                        <div className="chatbox__messages" ref="chatoutput">
-                                            {/* {this.displayElements} */}
-                                            <Messages messages={messages} />
-                                        <div />
-                                    </div>
-                                    <div className="chat chatbox__footer">
-                                        <input
-                                            id="chat_message"
-                                            type="text"
-                                            placeholder="Write a message..."
-                                            onChange={this.handleChatMessageChange}
-                                            onKeyPress={this.sendmessageByEnter}
-                                            value={this.state.message}
-                                        />
-                                        <p
-                                            className="chat chatbox__send--footer"
-                                            onClick={this.sendmessageByClick}
-                                        >
-                                            보내기
-                                        </p>
-                                    </div>
-                                </div>
-                            ) : null}
-                            <div className="chatbox__button" ref={this.chatButton}>
-                                {/* <button onClick={this.chattoggle}>
-                                    채팅 버튼
-                                </button> */}
-                            </div>
-                        </div>
-                        <hr />
-
-                        {this.state.mainStreamManager !== undefined ? (
+                        
+                        
+                                    
+                        {/* {this.state.mainStreamManager !== undefined ? (
                             <div id="main-video" className="col-md-6">
                                 <h1>호스트</h1>
-                                <UserVideoComponent streamManager={this.state.mainStreamManager} />                                
+                                <div className='main-stream-container'>
+                                    <UserVideoComponent streamManager={this.state.mainStreamManager} />                                
+                                </div>
                             </div>
-                        ) : null}
+                        ) : null} */}
 
-                        <div id="video-container" className="col-md-6">
+                        <div id="video-container" className="videoBack">
                             {this.state.publisher !== undefined ? (
-                                <div className={styles.streamcontainer} onClick={() => this.handleMainVideoStream(this.state.publisher)}>
+                                <div className="stream-container" onClick={() => this.handleMainVideoStream(this.state.publisher)}>
                                 {/* <div className="stream-container col-md-6 col-xs-6"> */}
                                     <UserVideoComponent
                                         streamManager={this.state.publisher} />
                                 </div>
                             ) : null}
                             {this.state.subscribers.map((sub, i) => (
-                                <div key={i} className={styles.streamcontainer} onClick={() => this.handleMainVideoStream(sub)}>
+                                <div key={i} className="stream-container" onClick={() => this.handleMainVideoStream(sub)}>
                                 {/* <div key={i} className="stream-container col-md-6 col-xs-6"> */}
                                     <UserVideoComponent streamManager={sub} />
                                 </div>
                             ))}
-                        </div>                        
+                        </div> 
+
+                        <div className='container grid grid--2--cols'>
+                            <div className='productInfo'>
+                                <h1 id="session-title">{myUserName}님 안녕하세요, 여기는 {mySessionId}입니다.</h1>
+                                <h1>제목은 {myTitle}입니다.</h1>
+                                <h1>경매 시작 시간은 {myStartTime}입니다.</h1>
+                                <h1>물품정보는 {myProductInfo}입니다.</h1>
+                                <h1>시작가격은 {myStartPrice}입니다.</h1>
+                                <h1>물품사진은 {this.state.myProductImg}입니다.</h1>
+
+                                <img src={this.state.myProductImg}></img>
+                                <file>{myProductImg}</file>
+
+                                
+                            </div>
+                            {/* chat */}
+                            <div className="chatbox">
+                                <h1>채팅하기</h1>
+                                {this.state.chaton ? (
+                                    <div className="chat chatbox__support chatbox--active">
+                                        <div className="chat chatbox__header" />
+                                            <div className="chatbox__messages" ref="chatoutput">
+                                                {/* {this.displayElements} */}
+                                                <Messages messages={messages} />
+                                            <div />
+                                        </div>
+                                        <div className="chat chatbox__footer">
+                                            
+                                            <input
+                                                id="chat_message"
+                                                type="text"
+                                                className='form-input'
+                                                placeholder="전송할 메세지를 입력하세요"
+                                                onChange={this.handleChatMessageChange}
+                                                onKeyPress={this.sendmessageByEnter}
+                                                value={this.state.message}
+                                            />
+                                            <button
+                                                className="chat chatbox__send--footer btnRoom"
+                                                onClick={this.sendmessageByClick}
+                                            >
+                                                보내기
+                                            </button>
+                                        </div>
+                                    </div>
+                                ) : null}
+                                <div className="chatbox__button" ref={this.chatButton}>
+                                    {/* <button onClick={this.chattoggle}>
+                                        채팅 버튼
+                                    </button> */}
+                                </div>
+
+                                
+                            </div> 
+                            </div>
+                        <div className='roomFooter'>
+                            <div className='roomControl grid--3--cols'>
+                                {this.state.videostate ? (
+                                    <div className='controlPosition'>
+                                        <img
+                                            src={camOff}
+                                            onClick={() => {
+                                                this.state.publisher.publishVideo(!this.state.videostate);
+                                                this.setState({ videostate: !this.state.videostate });
+                                            }}
+                                        />
+                                        <span>
+                                            <h1>비디오 끄기</h1>
+                                        </span>
+                                    </div>
+                                ) : (
+                                    <div className='controlPosition'>
+                                        <img
+                                            src={camOn}
+                                            onClick={() => {
+                                                this.state.publisher.publishVideo(!this.state.videostate);
+                                                this.setState({ videostate: !this.state.videostate });
+                                            }}                                            
+                                        />
+                                        <span>
+                                            <h1>비디오 켜기</h1>
+                                        </span>
+                                    </div>
+                                )}
+
+                                {this.state.audiostate ? (
+                                    <div className='controlPosition'>
+                                        <img
+                                            src={micOff}                                    
+                                            onClick={() => {
+                                                this.state.publisher.publishAudio(!this.state.audiostate);
+                                                this.setState({ audiostate: !this.state.audiostate });
+                                            }}
+                                        />
+                                        <span>
+                                            <h1>마이크 끄기</h1>
+                                        </span>
+                                    </div>
+
+                                ) : (
+                                    <div className='controlPosition'>
+                                        <img
+                                            src={micOn}
+                                            onClick={() => {
+                                                this.state.publisher.publishAudio(!this.state.audiostate);
+                                                this.setState({ audiostate: !this.state.audiostate });
+                                            }}
+                                        />
+                                        <span>
+                                            <h1>마이크 켜기</h1>
+                                        </span>
+                                    </div>
+                                )}
+
+                                <Link to="/">
+                                    <input
+                                        className="btn-home"
+                                        type="button"
+                                        id="buttonLeaveSession"
+                                        onClick={this.leaveSession}
+                                        value="나가기"
+                                    />
+                                </Link>
+                            </div>
+                        </div>
+
                     </div>
                 ) : null}
             </div>
