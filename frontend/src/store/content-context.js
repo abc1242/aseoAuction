@@ -1,12 +1,12 @@
 import { createContext, useState } from "react";
 
 const ContentContext = createContext({
-  content: null,
+  content: "",
   changeContent: () => {},
 });
 
 export const ContentContextProvider = (props) => {
-  const [content, setContent] = useState("home");
+  const [content, setContent] = useState("");
 
   const contentChangeHandler = (content) => {
     setContent(content);

@@ -12,6 +12,7 @@ const Navigation = () => {
   };
 
   const menuList = [
+    { name: "", spriteId: "#icon-home" },
     { name: "도서음반", spriteId: "#icon-queue_music" },
     { name: "가전제품", spriteId: "#icon-computer" },
     { name: "가구", spriteId: "#icon-hotel" },

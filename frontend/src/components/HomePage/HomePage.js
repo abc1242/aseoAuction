@@ -7,9 +7,11 @@ import { Route, Switch } from "react-router-dom";
 import RoomCard from "./RoomCard";
 import { useEffect } from "react";
 import AuthContext from "../../store/auth-context";
+import ContentContext from "../../store/content-context";
 
 const HomePage = () => {
   const authContext = useContext(AuthContext);
+  const contentContext = useContext(ContentContext);
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -57,9 +59,17 @@ const HomePage = () => {
             </Route>
             <Route path="/">
               <div className={classes.grid}>
-                {rooms.map((roomInfo) => {
+                {/* {rooms.map((roomInfo) => {
                   return <RoomCard roomInfo={roomInfo} />;
-                })}
+                })} */}
+                {contentContext.content
+                  ? rooms
+                      .filter(
+                        (roomInfo) =>
+                          roomInfo.category === contentContext.content
+                      )
+                      .map((roomInfo) => <RoomCard roomInfo={roomInfo} />)
+                  : rooms.map((roomInfo) => <RoomCard roomInfo={roomInfo} />)}
               </div>
             </Route>
           </Switch>
