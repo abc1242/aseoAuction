@@ -12,7 +12,9 @@ const SectionHow = () => {
         </h2>
       </div>
 
-      <div className={`container grid grid--2--cols grid-center-v`}>
+      <div
+        className={`${styles.grid} container grid grid--2--cols grid-center-v`}
+      >
         <div className={styles.stepImgBox}>
           <img
             className={styles.stepImg}
