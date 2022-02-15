@@ -11,6 +11,7 @@ const NavigationItem = (props) => {
       onClick={() => {
         props.menuSelectHandler(props.menuName);
         contentContext.changeContent(props.menuName);
+        contentContext.changeSearch("");
       }}
       className={classes.sideNavItem}
     >
