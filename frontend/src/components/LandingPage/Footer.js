@@ -5,7 +5,7 @@ import styles from "./Footer.module.css";
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <div className={`container grid grid--3--cols`}>
+      <div className={`${styles.layout} container grid grid--3--cols`}>
         <div className={styles.footerSection}>
           <img class={styles.footerLogo} src={logo} alt="logo" />
         </div>

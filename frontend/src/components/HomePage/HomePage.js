@@ -7,8 +7,10 @@ import { Route, Switch } from "react-router-dom";
 import RoomCard from "./RoomCard";
 import { useEffect } from "react";
 import ContentContext from "../../store/content-context";
+import AuthContext from "../../store/auth-context";
 
 const HomePage = () => {
+  const authContext = useContext(AuthContext);
   const contentContext = useContext(ContentContext);
   const [rooms, setRooms] = useState([]);
 
@@ -44,16 +46,21 @@ const HomePage = () => {
         setFilteredRooms(data);
       });
   };
-  // 실제 서버와 통신할 때 써야하는 코드
-  // fetch("http://localhost:8080/room/search/" + searchWord, {
-  //   method: "GET",
-  //   headers: {
-  //     Authorization: authContext.token,
-  //   },
-  // })
-  //   .then((response) => response.json())
-  //   .then((data) => setRooms(data));
 
+  // // 실제 서버와 통신할 때 써야하는 코드
+  // const getData = () => {
+  //   fetch("http://localhost:8080/room/search/", {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: authContext.token,
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setRooms(data);
+  //     });
+  // };
   useEffect(() => {
     getData();
   }, []);
