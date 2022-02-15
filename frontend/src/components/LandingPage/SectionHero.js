@@ -15,15 +15,13 @@ const SectionHero = () => {
             몇시간, 몇일 동안 거래 상대방과 가격 흥정하는 데 지치셨나요? 이젠
             10분간의 경매를 통해 중고거래를 신속하게 끝내보세요!
           </p>
-          <Link to="/signup" className="btn">
+          <Link to="/signup" className={`btn ${styles.heroBtn}`}>
             회원가입
           </Link>
         </div>
 
-        <div className={styles.heroImgBox}>
-          {/* 나중에 이미지 교체해야 함 */}
-          <img className={styles.heroImg} src={bidImg} alt="온라인 경매"></img>
-        </div>
+        {/* 나중에 이미지 교체해야 함 */}
+        <img className={styles.heroImg} src={bidImg} alt="온라인 경매"></img>
       </div>
     </section>
   );
