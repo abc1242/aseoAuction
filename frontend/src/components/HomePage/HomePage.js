@@ -7,6 +7,7 @@ import { Route, Switch } from "react-router-dom";
 import RoomCard from "./RoomCard";
 import { useEffect } from "react";
 import ContentContext from "../../store/content-context";
+import Createboard from "./CreateBoard";
 
 const HomePage = () => {
   const contentContext = useContext(ContentContext);
@@ -86,6 +87,7 @@ const HomePage = () => {
                 {filteredRooms.map((roomInfo) => (
                   <RoomCard roomInfo={roomInfo} />
                 ))}
+                <Createboard/>
               </div>
             </Route>
           </Switch>

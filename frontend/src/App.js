@@ -25,7 +25,7 @@ function App() {
       </Route>
       <Route path="/">
         <ContentContextProvider>
-          {authCtx.isLoggedIn ? <HomePage /> : <LandingPage />}
+          {authCtx.isLoggedIn ? <LandingPage /> : <HomePage />}
         </ContentContextProvider>
       </Route>
     </Switch>
