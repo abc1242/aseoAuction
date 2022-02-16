@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import './Room.css';
 // import styles from "./Room.module.css";
-import logo from "../../images/logo.png";
+// import logo from "../../images/logo.png";
 import micOn from "../../images/Room/micon.png";
 import micOff from "../../images/Room/micoff.png";
 import camOn from "../../images/Room/camon.png";
@@ -15,6 +15,10 @@ import camOff from "../../images/Room/camoff.png";
 import Messages from './Messages';
 
 import UserVideoComponent from './UserVideoComponent';
+import Timer from './Timer';
+import Clock from './Clock';
+import SetTimer from './SetTimer';
+// import Input from './Input';
 
 const OPENVIDU_SERVER_URL = 'https://' + window.location.hostname + ':4443';
 const OPENVIDU_SERVER_SECRET = 'MY_SECRET';
@@ -27,11 +31,11 @@ class Room extends Component {
         this.state = {
             mySessionId: 'SessionA',
             myUserName: 'Participant' + Math.floor(Math.random() * 100),
+
             myTitle: 'product title',
             myStartTime: 'time',
             myStartPrice : 0,
             myProductInfo: 'productinfo',
-
             myProductImg: null,
             isUploaded: false,
 
@@ -46,6 +50,9 @@ class Room extends Component {
             messages: [],
             chaton: true,
             message: '',
+
+            ishost: false,
+            timer: false,
         };
 
         this.joinSession = this.joinSession.bind(this);
@@ -70,6 +77,9 @@ class Room extends Component {
         this.sendmessageByClick = this.sendmessageByClick.bind(this);
         this.sendmessageByEnter = this.sendmessageByEnter.bind(this);
         this.handleChatMessageChange = this.handleChatMessageChange.bind(this);
+
+        //timer
+        this.handleTimerClick = this.handleTimerClick.bind(this);
     }
 
     componentDidMount() {
@@ -133,7 +143,20 @@ class Room extends Component {
         formData.append('file', this.state.selectedFile);
     }
 
+    // timer
+    handleTimerClick(e) {
+        this.setState({
+            timer: true,
+        });
+    }
+
     // chat
+    componentDidUpdate(previousProps, previousState) {
+        if (this.refs.chatoutput != null) {
+          this.refs.chatoutput.scrollTop = this.refs.chatoutput.scrollHeight;
+        }
+      }
+
     handleChatMessageChange(e) {
         this.setState({
           message: e.target.value,
@@ -244,6 +267,7 @@ class Room extends Component {
 
                     // Remove the stream from 'subscribers' array
                     this.deleteSubscriber(event.stream.streamManager);
+
                 });
 
                 //chat
@@ -363,6 +387,21 @@ class Room extends Component {
         //chat
         const messages = this.state.messages;
 
+        //timer
+        const renderTime = ({ remainingTime }) => {
+            if (remainingTime === 0) {
+              return <div className="timer">Too lale...</div>;
+            }
+      
+            return (
+              <div className="timer">
+                <div className="text">Remaining</div>
+                <div className="value">{remainingTime}</div>
+                <div className="text">seconds</div>
+              </div>
+            );
+          };
+
         
 
         
@@ -375,7 +414,7 @@ class Room extends Component {
                             <img src="resources/images/openvidu_grey_bg_transp_cropped.png" alt="OpenVidu logo" />
                         </div> */}
                         <div id="join-dialog" className="jumbotron vertical-center">
-                            <img className='grid--2--cols' src={logo}></img>
+                            {/* <img className='grid--2--cols' src={logo} alt="로고"></img> */}
                             <form className="form-group grid--2--cols" onSubmit={this.joinSession}>
                                 <p>
                                     <label>참여자: </label>
@@ -459,13 +498,9 @@ class Room extends Component {
                                         onChange={this.handleChangeProductImg}                                        
                                     />
                                     {/* <button type='button' onClick={this.handlePost}>버튼</button> */}
-                                    
-                                    
-
-                                    
                                 </p>
                                 <p>{myProductImg}</p>
-                                <img src={this.state.myProductImg}></img>
+                                <img src={this.state.myProductImg} alt="상품 이미지"></img>
                                 <p className="text-center">
                                     <input className="btnRoom btn-lg btn-success" name="commit" type="submit" value="경매실 입장" />
                                 
@@ -480,25 +515,6 @@ class Room extends Component {
 
                 {this.state.session !== undefined ? (
                     <div id="session">
-                        <div id="session-header">
-                            
-
-                            
-
-                            
-                        </div>
-                        
-                        
-                                    
-                        {/* {this.state.mainStreamManager !== undefined ? (
-                            <div id="main-video" className="col-md-6">
-                                <h1>호스트</h1>
-                                <div className='main-stream-container'>
-                                    <UserVideoComponent streamManager={this.state.mainStreamManager} />                                
-                                </div>
-                            </div>
-                        ) : null} */}
-
                         <div id="video-container" className="videoBack">
                             {this.state.publisher !== undefined ? (
                                 <div className="stream-container" onClick={() => this.handleMainVideoStream(this.state.publisher)}>
@@ -524,14 +540,36 @@ class Room extends Component {
                                 <h1>시작가격은 {myStartPrice}입니다.</h1>
                                 <h1>물품사진은 {this.state.myProductImg}입니다.</h1>
 
-                                <img src={this.state.myProductImg}></img>
+                                <img src={this.state.myProductImg} alt="상품이미지"></img>
                                 <file>{myProductImg}</file>
+                                <hr />
 
+                                <Clock />
+                                {/* <Timer /> */}
+                                <SetTimer />
+
+                                <hr />
+
+                                <button
+                                    className='btn-home'
+                                    // onClick={this.handleTimerClick}
+                                >
+                                    타이머/경매 시작
+                                </button>
+
+                                {this.state.mainStreamManager !== undefined ? (
+                                    <div id="main-video" className="col-md-6">
+                                        <h1>호스트</h1>
+                                        <div className='main-stream-container'>
+                                            <UserVideoComponent streamManager={this.state.mainStreamManager} />                                
+                                        </div>
+                                    </div>
+                                ) : null}
                                 
                             </div>
                             {/* chat */}
                             <div className="chatbox">
-                                <h1>채팅하기</h1>
+                                <h1 className='chatboxHeader'>채팅하기</h1>
                                 {this.state.chaton ? (
                                     <div className="chat chatbox__support chatbox--active">
                                         <div className="chat chatbox__header" />
@@ -575,26 +613,28 @@ class Room extends Component {
                                     <div className='controlPosition'>
                                         <img
                                             src={camOff}
+                                            alt="카메라 끄기"
                                             onClick={() => {
                                                 this.state.publisher.publishVideo(!this.state.videostate);
                                                 this.setState({ videostate: !this.state.videostate });
                                             }}
                                         />
                                         <span>
-                                            <h1>비디오 끄기</h1>
+                                            <h1>비디오</h1>
                                         </span>
                                     </div>
                                 ) : (
                                     <div className='controlPosition'>
                                         <img
                                             src={camOn}
+                                            alt="카메라켜기"
                                             onClick={() => {
                                                 this.state.publisher.publishVideo(!this.state.videostate);
                                                 this.setState({ videostate: !this.state.videostate });
                                             }}                                            
                                         />
                                         <span>
-                                            <h1>비디오 켜기</h1>
+                                            <h1>비디오</h1>
                                         </span>
                                     </div>
                                 )}
@@ -602,14 +642,15 @@ class Room extends Component {
                                 {this.state.audiostate ? (
                                     <div className='controlPosition'>
                                         <img
-                                            src={micOff}                                    
+                                            src={micOff}   
+                                            alt="마이크 끄기"                                 
                                             onClick={() => {
                                                 this.state.publisher.publishAudio(!this.state.audiostate);
                                                 this.setState({ audiostate: !this.state.audiostate });
                                             }}
                                         />
                                         <span>
-                                            <h1>마이크 끄기</h1>
+                                            <h1>마이크</h1>
                                         </span>
                                     </div>
 
@@ -617,13 +658,14 @@ class Room extends Component {
                                     <div className='controlPosition'>
                                         <img
                                             src={micOn}
+                                            alt="마이크 켜기"
                                             onClick={() => {
                                                 this.state.publisher.publishAudio(!this.state.audiostate);
                                                 this.setState({ audiostate: !this.state.audiostate });
                                             }}
                                         />
                                         <span>
-                                            <h1>마이크 켜기</h1>
+                                            <h1>마이크</h1>
                                         </span>
                                     </div>
                                 )}

@@ -1,5 +1,10 @@
 .Room {
-	flex-direction: column;
+	margin: 10rem auto 0;
+  max-width: 80rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 5rem;
 }
 
 .stream-container {
@@ -10,6 +15,7 @@
 	
 	/* height: 200px;
 	width: 300px; */
+	width: 20%;
   padding-bottom: 30px;	
 	flex-direction: column;
 	display: inline-block;
@@ -19,7 +25,9 @@
 
 .main-stream-container{
 	/* width: calc(100% / 3); */
-  padding-bottom: 30px;
+	flex-direction: column;
+	display: inline-block;
+	margin-left: 15px;
 }
 
 html {
@@ -264,8 +272,9 @@ a:hover .demo-logo {
 	display: inline-block;
 	position: relative;
 	justify-content: center;
-	width: 150px;
-	height: auto;
+	align-items: center;
+	width: 120px;
+	height: 120px;
 	padding: auto;
 }
 
@@ -360,6 +369,12 @@ video {
 	height: auto;
 	justify-content: center;
 	
+}
+
+.chatboxHeader {
+	font-size: 3rem;
+  font-weight: 500;
+  color: #333;
 }
 
 .chatbox__messages {
