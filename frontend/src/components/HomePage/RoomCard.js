@@ -4,31 +4,28 @@ import classes from "./RoomCard.module.css";
 const RoomCard = (props) => {
   const roomCreated = new Date(props.roomInfo.createdAt);
   const currentTime = new Date();
+
   let timeText = null;
 
-  if (currentTime.getFullYear() !== roomCreated.getUTCFullYear()) {
-    const createdYear = roomCreated.getUTCFullYear();
-    const createdMonth = roomCreated.getUTCMonth();
-    const createdDay = roomCreated.getUTCDate();
+  if (currentTime.getFullYear() !== roomCreated.getFullYear()) {
+    const createdYear = roomCreated.getFullYear();
+    const createdMonth = roomCreated.getMonth();
+    const createdDay = roomCreated.getDate();
     timeText = `${createdYear}년 ${createdMonth + 1}월 ${createdDay}일`;
   } else {
     if (
-      currentTime.getDate() === roomCreated.getUTCDate() &&
-      currentTime.getMonth() === roomCreated.getUTCMonth()
+      currentTime.getDate() === roomCreated.getDate() &&
+      currentTime.getMonth() === roomCreated.getMonth()
     ) {
-      if (currentTime.getHours() === roomCreated.getUTCHours()) {
+      if (currentTime.getHours() === roomCreated.getHours()) {
         timeText = `${
-          currentTime.getMinutes() - roomCreated.getUTCMinutes()
+          currentTime.getMinutes() - roomCreated.getMinutes()
         }분 전`;
       } else {
-        timeText = `${
-          currentTime.getHours() - roomCreated.getUTCHours()
-        } 시간전`;
+        timeText = `${currentTime.getHours() - roomCreated.getHours()} 시간전`;
       }
     } else {
-      timeText = `${
-        roomCreated.getUTCMonth() + 1
-      }월 ${roomCreated.getUTCDate()}일`;
+      timeText = `${roomCreated.getMonth() + 1}월 ${roomCreated.getDate()}일`;
     }
   }
 
@@ -67,7 +64,7 @@ const RoomCard = (props) => {
             </button>
           )}
           <span className={classes.statusNumber}>
-            {props.roomInfo.participants.length}명 시청중
+            {props.roomInfo.participantList.length}명 시청중
           </span>
         </section>
 

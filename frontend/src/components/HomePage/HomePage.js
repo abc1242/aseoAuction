@@ -7,7 +7,8 @@ import { Route, Switch } from "react-router-dom";
 import RoomCard from "./RoomCard";
 import { useEffect } from "react";
 import ContentContext from "../../store/content-context";
-import Createboard from "./CreateBoard";
+import AuthContext from "../../store/auth-context";
+import CreateRoom from "../RoomPage/CreateRoom";
 
 const HomePage = () => {
   const authContext = useContext(AuthContext);
@@ -32,38 +33,19 @@ const HomePage = () => {
     );
   }, [rooms, contentContext.search]);
 
-  // 임시 코드
-  const getData = () => {
-    fetch("rooms.json", {
+  useEffect(() => {
+    fetch("http://localhost:8080/room/search/", {
+      method: "GET",
       headers: {
-        "Content-Type": "application.json",
-        Accept: "application/json",
+        Authorization: authContext.token,
       },
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setRooms(data);
-        setFilteredRooms(data);
       });
-  };
-
-  // // 실제 서버와 통신할 때 써야하는 코드
-  // const getData = () => {
-  //   fetch("http://localhost:8080/room/search/", {
-  //     method: "GET",
-  //     headers: {
-  //       Authorization: authContext.token,
-  //     },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setRooms(data);
-  //     });
-  // };
-  useEffect(() => {
-    getData();
-  }, []);
+  }, [authContext.token]);
 
   return (
     <>
@@ -76,6 +58,9 @@ const HomePage = () => {
           <Switch>
             <Route path="/profile">
               <Profile />
+            </Route>
+            <Route path="/rooms/create">
+              <CreateRoom />
             </Route>
             <Route path="/">
               <div className={classes.grid}>
@@ -93,7 +78,6 @@ const HomePage = () => {
                 {filteredRooms.map((roomInfo) => (
                   <RoomCard roomInfo={roomInfo} />
                 ))}
-                <Createboard/>
               </div>
             </Route>
           </Switch>
