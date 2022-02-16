@@ -52,7 +52,7 @@ CREATE TABLE `entry` (
 --user dummy
 insert into user values
 
-(1,'안녕난기성', 'abc1242@naver.com', '$2a$10$UdMaD1h4AR1uSWm2pQ3BH.8XXsuMX8qrBhXBtpOqM6HgVSvcX2kKO', '2022-02-15 11:04:44', 'p9bN6b', '0'),
+(1,'안녕난기성', 'abc1242@naver.com', '$2a$10$UdMaD1h4AR1uSWm2pQ3BH.8XXsuMX8qrBhXBtpOqM6HgVSvcX2kKO', '2022-02-15 11:04:44', 'p9bN6b', '1'),
 (2,'13시간근무중', 'test1@naver.com', '$2a$10$UdMaD1h4AR1uSWm2pQ3BH.8XXsuMX8qrBhXBtpOqM6HgVSvcX2kKO', '2022-02-15 11:04:44', 'p9bN6b', '1'),
 (3,'니가가라하와이', 'test2@naver.com', '$2a$10$UdMaD1h4AR1uSWm2pQ3BH.8XXsuMX8qrBhXBtpOqM6HgVSvcX2kKO', '2022-02-15 11:04:44', 'p9bN6b', '1'),
 (4,'우끼끼', 'test3@naver.com', '$2a$10$UdMaD1h4AR1uSWm2pQ3BH.8XXsuMX8qrBhXBtpOqM6HgVSvcX2kKO', '2022-02-15 11:04:44', 'p9bN6b', '1'),
