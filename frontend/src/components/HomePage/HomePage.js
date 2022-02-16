@@ -10,7 +10,7 @@ import ContentContext from "../../store/content-context";
 import Createboard from "./CreateBoard";
 
 const HomePage = () => {
-  const authContext = useContext(AuthContext);
+//  const authContext = useContext(AuthContext);
   const contentContext = useContext(ContentContext);
   const [rooms, setRooms] = useState([]);
 
