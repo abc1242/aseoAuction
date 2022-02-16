@@ -13,7 +13,7 @@ public class MakeRoomReq {
 	private String	product;
 	private String	seller	;
 	private int		startPrice;
-	
+	private String category;
 	//img
 	 private String mimetype;
 	 private String original_name;

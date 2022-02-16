@@ -13,3 +13,36 @@
   flex: 1;
   height: 100rem;
 }
+
+.grid {
+  padding: 3rem 8rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  row-gap: 3rem;
+
+  padding: 3rem 3rem;
+}
+
+@media (max-width: 1850px) {
+  .navigation {
+    flex: 0 0 15%;
+  }
+  .grid {
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 0rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .homepage {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 820px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

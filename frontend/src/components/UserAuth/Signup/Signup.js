@@ -12,25 +12,38 @@ const Signup = () => {
   const passwordCheckRef = useRef();
   const nicknameRef = useRef();
   const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
+    const regPassword = new RegExp(/^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,16}$/);
+    const regEmail = new RegExp(
+      "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$"
+    );
+    setIsLoading(true);
 
-    // validation
-    if (!emailRef.current.value.includes("@")) {
+    if (!regEmail.test(emailRef.current.value)) {
       setError("이메일을 정확히 입력해 주세요");
+      setIsLoading(false);
       return;
     }
     if (nicknameRef.current.value.trim().length === 0) {
       setError("닉네임을 입력해 주세요");
-      return;
-    }
-    if (passwordRef.current.value.trim().length === 0) {
-      setError("비밀번호를 입력해주세요");
+      setIsLoading(false);
       return;
     }
     if (passwordCheckRef.current.value !== passwordRef.current.value) {
       setError("비밀번호 재입력이 잘못되었습니다");
+      console.log(passwordCheckRef.current.value, passwordRef.current.value);
+      setIsLoading(false);
+      return;
+    }
+    if (!regPassword.test(passwordRef.current.value)) {
+      setError(
+        "패스워드는 대소문자, 숫자, 특수문자를 모두 포함하여 8~16자 이내로 작성되어야 합니다."
+      );
+      setIsLoading(false);
+      console.log(passwordCheckRef.current.value);
       return;
     }
 
@@ -47,6 +60,7 @@ const Signup = () => {
         "Content-Type": "application/json",
       },
     }).then((res) => {
+      setIsLoading(false);
       if (!res.ok) {
         alert("이미 등록된 이메일입니다.");
       } else {
@@ -64,7 +78,7 @@ const Signup = () => {
             <img className={classes.logoImg} src={logo} alt="로고" />
           </div>
         </Link>
-        <form className={classes.formBox}>
+        <form disabled={isLoading} className={classes.formBox}>
           <div className={classes.control}>
             <input
               ref={emailRef}
@@ -96,8 +110,13 @@ const Signup = () => {
             />
           </div>
           <div className={classes.alertMessage}>{error}</div>
-          <button onClick={onSubmitHandler} className={classes.button}>
-            회원가입
+          <button
+            onClick={onSubmitHandler}
+            className={`${classes.button} ${
+              isLoading && classes.disabledButton
+            }`}
+          >
+            {isLoading ? "로딩중" : "회원가입"}
           </button>
         </form>
         <div className={classes.helperBox}>

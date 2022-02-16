@@ -22,3 +22,22 @@
 .footerContent {
   font-size: 1.6rem;
 }
+
+@media (max-width: 900px) {
+  .layout {
+    column-gap: 1rem;
+    padding: 0 1rem;
+  }
+  .footerLogo {
+    width: 70%;
+  }
+}
+
+@media (max-width: 600px) {
+  .footerHeading {
+    font-size: 1.5rem;
+  }
+  .footerContent {
+    font-size: 1.2rem;
+  }
+}

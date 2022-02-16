@@ -16,7 +16,7 @@ const ProfileRequest = (props) => {
       password: passwordRef.current.value,
     };
 
-    props.userAuthorizationHandler(true);
+    console.log(userInfo);
 
     fetch("http://localhost:8080/user/mypage", {
       method: "POST",
@@ -33,6 +33,7 @@ const ProfileRequest = (props) => {
               email: data.email,
               nickname: data.nickname,
             };
+            console.log(userData);
             props.userDataHandler(userData);
             props.userAuthorizationHandler(true);
           });

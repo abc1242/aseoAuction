@@ -7,10 +7,7 @@ import Login from "./components/UserAuth/Login/Login";
 import Signup from "./components/UserAuth/Signup/Signup";
 import AuthContext from "./store/auth-context";
 import { ContentContextProvider } from "./store/content-context.js";
-
-
-
-
+import RequestPassword from "./components/UserAuth/RequestPassword.js";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -22,6 +19,9 @@ function App() {
       </Route>
       <Route path="/signup">
         {authCtx.isLoggedIn ? <Redirect to="/" /> : <Signup />}
+      </Route>
+      <Route path="/password">
+        {authCtx.isLoggedIn ? <Redirect to="/" /> : <RequestPassword />}
       </Route>
       <Route path="/">
         <ContentContextProvider>

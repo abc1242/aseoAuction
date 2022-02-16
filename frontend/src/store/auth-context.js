@@ -24,8 +24,6 @@ export const AuthContextProvider = (props) => {
   };
 
   const logoutHandler = () => {
-    // 로컬에서 token 삭제
-    // redis
     setToken(null);
     localStorage.removeItem("token");
 
@@ -37,7 +35,7 @@ export const AuthContextProvider = (props) => {
       },
     })
       .then((response) => {
-        JSON.parse(response);
+        return response.json();
       })
       .catch((error) => console.log(error));
   };

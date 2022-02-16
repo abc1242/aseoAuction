@@ -100,5 +100,11 @@ public class UserService {
 		
 		userRepository.save(updateUser);
 	}
+	
+	public void findPassword(String email) throws MessagingException {
+		
+		mailService.sendPasswordMail(email);
+		System.out.println("sendPasswordMail 호출");
+	}
 
 }

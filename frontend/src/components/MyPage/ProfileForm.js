@@ -39,8 +39,6 @@ const ProfileForm = (props) => {
       nickname: nicknameRef.current.value,
     };
 
-    console.log(userInfo);
-
     fetch("http://localhost:8080/user/editmypage", {
       method: "PUT",
       body: JSON.stringify(userInfo),
@@ -49,18 +47,12 @@ const ProfileForm = (props) => {
         Authorization: authContext.token,
       },
     })
-      .then((response) => {
-        if (response.ok) {
-          return response.json().then((data) => {
-            alert(data.message);
-          });
-        } else {
-          return response.json().then((err) => {
-            alert(err.message);
-          });
-        }
+      .then((response) => response.json())
+      .then((data) => {
+        alert("회원 정보가 수정되었습니다.");
+        history.push("/");
       })
-      .catch(alert("서버 오류"));
+      .catch((err) => console.log(err));
   };
 
   const resignAccountHandler = (event) => {
@@ -83,7 +75,7 @@ const ProfileForm = (props) => {
         alert(data.message);
         history.push("/");
       })
-      .catch(alert("서버 오류"));
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -96,19 +88,24 @@ const ProfileForm = (props) => {
             disabled
             className={classes.input}
             ref={emailRef}
+            placeholder={props.userData.email}
             value={props.userData.email}
           />
         </div>
         <div className={classes.control}>
           <label className={classes.label}>닉네임</label>
-          <input className={classes.input} ref={nicknameRef} />
+          <input
+            className={classes.input}
+            ref={nicknameRef}
+            placeholder={props.userData.nickname}
+          />
         </div>
         <p className={classes.guideText}>
           현재 비밀번호 혹은 바꿀 비밀번호를 입력하세요.
         </p>
         <div className={classes.control}>
           <label className={classes.label}>비밀번호</label>
-          <input type="password" className={classes.input} ref={passwordRef} />
+          <input type="password" ref={passwordRef} className={classes.input} />
         </div>
         <div className={classes.control}>
           <label className={classes.label}>비밀번호 재입력</label>

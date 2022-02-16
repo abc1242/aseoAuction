@@ -24,7 +24,7 @@ import com.ssafy.berryfit.api.response.UserLoginPostRes;
 import com.ssafy.berryfit.api.service.UserService;
 import com.ssafy.berryfit.db.entity.User;
 
-@CrossOrigin(origins = "http://localhost:3000") //해당 리액트 포트 번호
+@CrossOrigin(origins = "*", allowedHeaders = "*") //해당 리액트 포트 번호
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -106,6 +106,14 @@ public class UserController {
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "마이페이지 수정 성공"));
 	}
 
-
-
+	
+	@GetMapping("/findpassword")
+	public ResponseEntity getmypage(@RequestBody EmailReq emailreq) throws MessagingException {
+		String email = emailreq.getEmail();
+		userService.findPassword(email);
+		
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "비밀번호 찾기 성공"));
+	}
+	
+	
 }
