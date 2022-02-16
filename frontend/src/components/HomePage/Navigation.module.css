@@ -52,6 +52,30 @@
   z-index: 1;
 }
 
+.createLink {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: var(--color-grey-light-2);
+  transition: all 0.5s;
+}
+
+.createLink:hover {
+  color: var(--color-primary);
+}
+
+.createIcon {
+  fill: currentColor;
+  width: 3rem;
+  height: 3rem;
+}
+
+.createText {
+  color: currentColor;
+  font-size: 1.6rem;
+}
+
 @media (max-width: 1200px) {
   .sideNav {
     display: grid;

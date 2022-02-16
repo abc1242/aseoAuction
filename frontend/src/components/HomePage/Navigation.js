@@ -3,11 +3,15 @@ import classes from "./Navigation.module.css";
 // import sprite from "./navigation-icons.svg";
 import { useState } from "react";
 import NavigationItem from "./NavigationItem";
+import sprite from "./navigation-icons.svg";
+import { useHistory } from "react-router-dom";
 
 const Navigation = () => {
+  const history = useHistory();
   const [selectedMenu, setSelectedMenu] = useState(null);
 
   const menuSelectHandler = (menuNum) => {
+    history.push("/");
     setSelectedMenu(menuNum);
   };
 
@@ -34,6 +38,20 @@ const Navigation = () => {
             spriteId={menu.spriteId}
           />
         ))}
+        <li
+          onClick={() => {
+            history.push("/rooms/create/");
+            setSelectedMenu(null);
+          }}
+          className={classes.createLink}
+        >
+          <svg className={classes.createIcon}>
+            <use href={sprite + "#icon-library_add"}></use>
+          </svg>
+          <div className={classes.createBox}>
+            <span className={classes.createText}>경매실 생성</span>
+          </div>
+        </li>
       </ul>
     </nav>
   );

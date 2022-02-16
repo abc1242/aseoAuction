@@ -8,7 +8,6 @@ import Signup from "./components/UserAuth/Signup/Signup";
 import AuthContext from "./store/auth-context";
 import { ContentContextProvider } from "./store/content-context.js";
 import RequestPassword from "./components/UserAuth/RequestPassword.js";
-import Alert from "@mui/material/Alert";
 
 function App() {
   const authCtx = useContext(AuthContext);

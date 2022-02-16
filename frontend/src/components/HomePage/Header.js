@@ -19,6 +19,7 @@ const Header = () => {
 
   const searchSubmitHandler = (event) => {
     event.preventDefault();
+    history.push("/");
     contentContext.changeSearch(searchRef.current.value);
     contentContext.changeContent("");
   };

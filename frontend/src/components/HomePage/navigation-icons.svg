@@ -1,5 +1,8 @@
 <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
+<symbol id="icon-library_add" viewBox="0 0 24 24">
+<path d="M18.984 11.016v-2.016h-3.984v-3.984h-2.016v3.984h-3.984v2.016h3.984v3.984h2.016v-3.984h3.984zM20.016 2.016q0.797 0 1.383 0.586t0.586 1.383v12q0 0.797-0.586 1.406t-1.383 0.609h-12q-0.797 0-1.406-0.609t-0.609-1.406v-12q0-0.797 0.609-1.383t1.406-0.586h12zM3.984 6v14.016h14.016v1.969h-14.016q-0.797 0-1.383-0.586t-0.586-1.383v-14.016h1.969z"></path>
+</symbol>
 <symbol id="icon-queue_music" viewBox="0 0 24 24">
 <path d="M17.016 6h4.969v2.016h-3v9q0 1.219-0.891 2.109t-2.109 0.891-2.109-0.891-0.891-2.109 0.891-2.109 2.109-0.891q0.375 0 1.031 0.188v-8.203zM3 15.984v-1.969h8.016v1.969h-8.016zM15 9.984v2.016h-12v-2.016h12zM15 6v2.016h-12v-2.016h12z"></path>
 </symbol>
