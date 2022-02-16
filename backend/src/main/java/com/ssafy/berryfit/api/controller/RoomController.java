@@ -74,14 +74,12 @@ public class RoomController {
 //		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "경매실 생성 성공"));
 //	}
 	
-	//경매실 정보 조회
-	@GetMapping("/inform/{roomTitle}")
-	public ResponseEntity informRoom(@PathVariable(name = "roomTitle") String roomTitle) {
+	//경매실 상세 정보 조회 
+	@GetMapping("/inform/{roomId}")
+	public ResponseEntity informRoom(@PathVariable(name = "roomId") int roomId) {
 		//"roomTitle" : "팝니다"
-		SearchRoomReq searchRoomReq = new SearchRoomReq();
-		searchRoomReq.setRoomTitle(roomTitle);
 		
-		RoomRes roomres = roomService.informRoom(searchRoomReq);
+		RoomRes roomres = roomService.informRoom(roomId);
 
 		if(roomres ==null) {
 			return ResponseEntity.status(500).body(BaseResponseBody.of(500, "경매실이 없습니다."));
@@ -103,15 +101,15 @@ public class RoomController {
 		return new ResponseEntity(roomreslist,HttpStatus.OK);
 
 	}
-	
+	 
 	//경매실 정보 이미지 조회
-		@GetMapping("/informImg/{roomTitle}")
-		public ResponseEntity informImgRoom(@PathVariable(name = "roomTitle") String roomTitle) {
+		@GetMapping("/informImg/{roomId}")
+		public ResponseEntity informImgRoom(@PathVariable(name = "roomId") int roomId) {
 			
-			SearchRoomReq searchRoomReq = new SearchRoomReq();
-			searchRoomReq.setRoomTitle(roomTitle);
+//			SearchRoomReq searchRoomReq = new SearchRoomReq();
+//			searchRoomReq.setRoomTitle(roomTitle);
 			
-			Room room = roomService.informRoomImg(searchRoomReq);
+			Room room = roomService.informRoomImg(roomId);
 			
 			HttpHeaders headers = new HttpHeaders();
 	        headers.add("Content-Type", room.getMimetype());
@@ -191,12 +189,6 @@ public class RoomController {
 		
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "경매실 나가기 성공"));
 	}
-	
-	
-	
-
-	
-	
 
 	
 }

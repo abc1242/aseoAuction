@@ -37,7 +37,6 @@ export const AuthContextProvider = (props) => {
       .then((response) => {
         return response.json();
       })
-      .then((data) => alert(data.message))
       .catch((error) => console.log(error));
   };
 
