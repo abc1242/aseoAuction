@@ -65,7 +65,7 @@ const HomePage = () => {
               <Profile />
             </Route>
             <Route path="/rooms/create">
-              <CreateRoom />
+              <Room></Room>
             </Route>
             <Route path="/">
               <div className={classes.grid}>
