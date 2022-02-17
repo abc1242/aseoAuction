@@ -68,6 +68,7 @@ const CreateRoom = () => {
         </div>
         <button>업로드</button>
       </form>
+      
     </div>
   );
 };
