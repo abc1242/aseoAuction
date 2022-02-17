@@ -27,8 +27,8 @@ public class Room {
 
     @Id
     @Column(name = "room_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer roomId;
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String roomId;
 
     @Column(name = "room_title", length = 50)
     private String roomTitle;

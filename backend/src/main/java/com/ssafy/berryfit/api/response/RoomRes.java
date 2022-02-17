@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RoomRes {
 
-	private int roomId;
+	private String roomId;
 	private String roomTitle;
 	private String product;
 	private int startPrice;

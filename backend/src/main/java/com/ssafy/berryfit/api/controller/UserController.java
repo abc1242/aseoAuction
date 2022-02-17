@@ -26,7 +26,7 @@ import com.ssafy.berryfit.db.entity.User;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*") //해당 리액트 포트 번호
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 	 private final UserService userService;
 	 
@@ -59,7 +59,7 @@ public class UserController {
 		System.out.println("회원가입 메일 인증");
 		userService.updateAuthStatus(map);
 
-		URI redirectUri = new URI(serverAddress + "/emailconfirmed");
+		URI redirectUri = new URI(serverAddress + "/");
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setLocation(redirectUri);
 
@@ -107,9 +107,10 @@ public class UserController {
 	}
 
 	
-	@GetMapping("/findpassword")
-	public ResponseEntity getmypage(@RequestBody EmailReq emailreq) throws MessagingException {
-		String email = emailreq.getEmail();
+	@GetMapping("/findpw/{email}")
+	public ResponseEntity getmypage(@PathVariable(name = "email") String email) throws MessagingException {
+		
+//		String email = emailreq.getEmail();
 		userService.findPassword(email);
 		
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "비밀번호 찾기 성공"));

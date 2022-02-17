@@ -12,14 +12,14 @@ import com.ssafy.berryfit.db.entity.User;
 public interface EntryRepository extends JpaRepository<Entry, Integer>{
 
 	//나가기
-	Entry findEntryByRoomTitleAndNickname(String roomTitle, String nickname);
+	Entry findEntryByRoomIdAndNickname(String roomId, String nickname);
 	
 	
 	//참여자 목록 조회
-	
-	List<Entry> findByRoomTitle(String roomTitle);
+	 
+	List<Entry> findByRoomId(String roomId);
 	
 	
 	//경매종료 시 전부삭제
-	void deleteAllByRoomTitle(String roomTitle);
+	void deleteAllByRoomId(String roomId);
 }
