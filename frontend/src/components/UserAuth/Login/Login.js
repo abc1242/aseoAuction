@@ -45,7 +45,11 @@ const Login = () => {
         setIsLoading(false);
         if (res.ok) {
           return res.json().then((data) => {
-            authCtx.login({ token: data.accessToken, email: userInfo.email });
+            authCtx.login({
+              token: data.accessToken,
+              email: userInfo.email,
+              nickname: data.message,
+            });
             history.push("/");
           });
         } else {
