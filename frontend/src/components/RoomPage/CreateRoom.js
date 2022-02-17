@@ -1,36 +1,32 @@
 import React, { useContext } from "react";
 import { useRef } from "react";
 import classes from "./CreateRoom.module.css";
-
 import AuthContext from "../../store/auth-context";
+import { useHistory } from "react-router-dom";
+import SessionContext from "../../store/session-context";
 
 const CreateRoom = () => {
-  // const [file, setFile] = useState();
+  const sessionContext = useContext(SessionContext);
+  const history = useHistory();
   const filePickerRef = useRef();
   const authContext = useContext(AuthContext);
   const roomTitleRef = useRef();
-  const seller = "샘플 닉네임";
+  const seller = authContext.nickname;
   const startPriceRef = useRef();
   const categoryRef = useRef();
   const productRef = useRef();
-
-  // function pickedHandler(event) {
-  //   event.preventdefault();
-  //   if (event.target.files && event.target.files.length === 1) {
-  //     setFile(event.target.files[0]);
-  //     console.log(event.target.files[0]);
-  //   }
-  // }
+  const roomId = Math.floor(Math.random().toFixed(6) * 10000000);
 
   const onFileUpload = (event) => {
     event.preventDefault();
     const data = new FormData();
-    data.append("img", filePickerRef.current.files[0]); //ok(mySessionId)
-    data.append("roomTitle", roomTitleRef.current.value); //ok
-    data.append("seller", seller); // ok
-    data.append("startPrice", startPriceRef.current.value); //ok
-    data.append("category", categoryRef.current.value); //ok(드롭다운으로 바꿔야함)
+    data.append("img", filePickerRef.current.files[0]);
+    data.append("roomTitle", roomTitleRef.current.value);
+    data.append("seller", seller);
+    data.append("startPrice", startPriceRef.current.value);
+    data.append("category", categoryRef.current.value);
     data.append("product", productRef.current.value);
+    data.append("roomId", roomId);
 
     fetch("http://localhost:8080/room/open", {
       method: "POST",
@@ -40,26 +36,25 @@ const CreateRoom = () => {
       body: data,
     }).then((response) => {
       console.log(response);
+      sessionContext.createSession(roomId);
     });
   };
-
-  console.log(filePickerRef);
 
   return (
     <div className={classes.container}>
       <form onSubmit={onFileUpload}>
+        <p>{roomId}</p>
         <div>
           <input ref={filePickerRef} accept=".jpg,.png,.jpeg" type="file" />
         </div>
         <div>
           <input placeholder="방 제목" ref={roomTitleRef} />
         </div>
+
         <div>
           <textarea placeholder="설명" ref={productRef} />
         </div>
-        <div>
-          <input placeholder={seller} disabled />
-        </div>
+
         <div>
           <input placeholder="시작 가격" ref={startPriceRef} />
         </div>
@@ -68,7 +63,6 @@ const CreateRoom = () => {
         </div>
         <button>업로드</button>
       </form>
-      
     </div>
   );
 };

@@ -1,25 +1,14 @@
 import axios from "axios";
 import { OpenVidu } from "openvidu-browser";
 import React, { Component, createRef } from "react";
-// import { Row, Col, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-
 import "./Room.css";
-// import styles from "./Room.module.css";
-// import logo from "../../images/logo.png";
 import micOn from "../../images/Room/micon.png";
 import micOff from "../../images/Room/micoff.png";
 import camOn from "../../images/Room/camon.png";
 import camOff from "../../images/Room/camoff.png";
-
 import Messages from "./Messages";
-
 import UserVideoComponent from "./UserVideoComponent";
-import Timer from "./Timer";
-import Clock from "./Clock";
-import SetTimer from "./SetTimer";
-import CreateRoom from "./CreateRoom";
-// import Input from './Input';
 
 const OPENVIDU_SERVER_URL = "https://" + window.location.hostname + ":4443";
 const OPENVIDU_SERVER_SECRET = "MY_SECRET";
@@ -29,8 +18,9 @@ class Room extends Component {
     super(props);
 
     this.state = {
-      mySessionId: "제목",
-      // myUserName: 'Pa' + Math.floor(Math.random() * 100),
+      roomTitle: "",
+      // sessionId는 alphanumeric으로 설정해야한다.
+      mySessionId: "Pa" + Math.floor(Math.random().toFixed(6) * 10000000),
       myUserName: this.props.nickname,
 
       myStartTime: "time",
@@ -61,11 +51,12 @@ class Room extends Component {
 
     this.handleChangeStartTime = this.handleChangeStartTime.bind(this);
     this.handleChangeSessionId = this.handleChangeSessionId.bind(this);
+    this.handleChangeroomTitle = this.handleChangeRoomTitle.bind(this);
+
     this.handleChangeUserName = this.handleChangeUserName.bind(this);
     this.handleChangeStartPrice = this.handleChangeStartPrice.bind(this);
     this.handleChangeProductInfo = this.handleChangeProductInfo.bind(this);
     this.handleChangeCategory = this.handleChangeCategory.bind(this);
-
     this.handleMainVideoStream = this.handleMainVideoStream.bind(this);
     this.onbeforeunload = this.onbeforeunload.bind(this);
 
@@ -102,6 +93,12 @@ class Room extends Component {
 
   onbeforeunload(event) {
     this.leaveSession();
+  }
+
+  handleChangeRoomTitle(e) {
+    this.setState({
+      roomTitle: e.target.value,
+    });
   }
 
   handleChangeSessionId(e) {
@@ -247,11 +244,12 @@ class Room extends Component {
     // DB 반영
     const data = new FormData();
     data.append("img", this.state.myProductImg);
-    data.append("roomTitle", this.state.mySessionId);
+    data.append("roomId", this.state.mySessionId);
     data.append("seller", this.state.myUserName);
     data.append("startPrice", this.state.myStartPrice);
     data.append("category", this.state.category);
     data.append("product", this.state.myProductInfo);
+    data.append("roomTitle", this.state.roomTitle);
 
     fetch("http://localhost:8080/room/open", {
       method: "POST",
@@ -399,7 +397,6 @@ class Room extends Component {
 
   render() {
     const { nickname } = this.props;
-
     const mySessionId = this.state.mySessionId;
     // const myUserName = this.state.myUserName;
     const myUserName = nickname;
@@ -439,12 +436,19 @@ class Room extends Component {
             <div id="join-dialog" className="jumbotron vertical-center">
               {/* <img className='grid--2--cols' src={logo} alt="로고"></img> */}
 
-              <CreateRoom />
-
               <form
                 className="form-group grid--2--cols"
                 onSubmit={this.joinSession}
               >
+                <p>
+                  <label> 제목: </label>
+                  <input
+                    className="form-input"
+                    type="text"
+                    onChange={this.handleChangeRoomTitle}
+                    required
+                  />
+                </p>
                 <p>
                   <label>참여자: </label>
                   <input
@@ -462,7 +466,8 @@ class Room extends Component {
                     className="form-input"
                     type="text"
                     id="sessionId"
-                    value={mySessionId}
+                    disabled
+                    value={this.state.mySessionId}
                     onChange={this.handleChangeSessionId}
                     required
                   />
@@ -584,10 +589,6 @@ class Room extends Component {
                 {/* <h1>닉네임은 {nickname}</h1> */}
 
                 <hr />
-
-                <Clock />
-                {/* <Timer /> */}
-                <SetTimer />
 
                 <hr />
 

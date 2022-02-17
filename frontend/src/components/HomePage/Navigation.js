@@ -40,7 +40,7 @@ const Navigation = () => {
         ))}
         <li
           onClick={() => {
-            history.push("/rooms/create/");
+            history.push("/room/create/");
             setSelectedMenu(null);
           }}
           className={classes.createLink}

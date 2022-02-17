@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import Message from './Message';
+import React, { Component } from "react";
+import styled from "styled-components";
+import Message from "./Message";
 
 const ChatContainer = styled.div``;
 

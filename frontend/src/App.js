@@ -8,12 +8,17 @@ import Signup from "./components/UserAuth/Signup/Signup";
 import AuthContext from "./store/auth-context";
 import { ContentContextProvider } from "./store/content-context.js";
 import RequestPassword from "./components/UserAuth/RequestPassword.js";
+import { SessionContextProvider } from "./store/session-context.js";
+import Room from "./components/RoomPage/Room.js";
 
 function App() {
   const authCtx = useContext(AuthContext);
 
   return (
     <Switch>
+      <Route path="/room">
+        <Room />
+      </Route>
       <Route path="/login">
         {authCtx.isLoggedIn ? <Redirect to="/" /> : <Login />}
       </Route>
@@ -24,9 +29,11 @@ function App() {
         {authCtx.isLoggedIn ? <Redirect to="/" /> : <RequestPassword />}
       </Route>
       <Route path="/">
-        <ContentContextProvider>
-          {authCtx.isLoggedIn ? <HomePage /> : <LandingPage />}
-        </ContentContextProvider>
+        <SessionContextProvider>
+          <ContentContextProvider>
+            {authCtx.isLoggedIn ? <HomePage /> : <LandingPage />}
+          </ContentContextProvider>
+        </SessionContextProvider>
       </Route>
     </Switch>
   );

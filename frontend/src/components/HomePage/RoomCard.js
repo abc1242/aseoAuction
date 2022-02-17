@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import classes from "./RoomCard.module.css";
 
 const RoomCard = (props) => {
@@ -41,9 +42,9 @@ const RoomCard = (props) => {
       <div className={classes.descriptionBox}>
         <p className={classes.title}>{props.roomInfo.roomTitle}</p>
         <section className={classes.priceSection}>
-          <span className={classes.max}>
+          <p className={classes.max}>
             {props.roomInfo.roomStatus === true ? "최대" : "최종"}
-          </span>
+          </p>
           <p className={classes.price}>
             {props.roomInfo.roomStatus === true
               ? props.roomInfo.startPrice

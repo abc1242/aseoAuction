@@ -9,16 +9,14 @@ import { useEffect } from "react";
 import ContentContext from "../../store/content-context";
 import AuthContext from "../../store/auth-context";
 import CreateRoom from "../RoomPage/CreateRoom";
-import Room from "../RoomPage/Room";
+import SessionContext from "../../store/session-context";
 
 const HomePage = () => {
+  const sessionContext = useContext(SessionContext);
   const authContext = useContext(AuthContext);
   const contentContext = useContext(ContentContext);
   const [rooms, setRooms] = useState([]);
-
   const [filteredRooms, setFilteredRooms] = useState([]);
-
-  const nickname = "test";
 
   useEffect(() => {
     if (!contentContext.content) {
@@ -62,8 +60,8 @@ const HomePage = () => {
             <Route path="/profile">
               <Profile />
             </Route>
-            <Route path="/rooms/create">
-              <Room nickname={localStorage.getItem("nickname")} />
+            <Route path="/room/create">
+              <CreateRoom />
             </Route>
             <Route path="/">
               <div className={classes.grid}>
@@ -79,6 +77,7 @@ const HomePage = () => {
                       .map((roomInfo) => <RoomCard roomInfo={roomInfo} />)
                   : rooms.map((roomInfo) => <RoomCard roomInfo={roomInfo} />)} */}
                 {filteredRooms.map((roomInfo) => (
+                  // 링크를 통해서 Room.js 렌더링
                   <RoomCard roomInfo={roomInfo} />
                 ))}
               </div>
