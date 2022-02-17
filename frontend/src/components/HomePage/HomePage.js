@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import ContentContext from "../../store/content-context";
 import AuthContext from "../../store/auth-context";
 import CreateRoom from "../RoomPage/CreateRoom";
+import Room from "../RoomPage/Room";
 
 const HomePage = () => {
   const authContext = useContext(AuthContext);
@@ -60,7 +61,7 @@ const HomePage = () => {
               <Profile />
             </Route>
             <Route path="/rooms/create">
-              <CreateRoom />
+              <Room></Room>
             </Route>
             <Route path="/">
               <div className={classes.grid}>
