@@ -1,55 +1,4 @@
---테이블 생성
-drop database aseoAuction_db;
-create database aseoAuction_db;
-use aseoAuction_db;
-
-CREATE TABLE `user` (
-  `user_id` int NOT NULL AUTO_INCREMENT COMMENT '회원번호',
-  `nickname` varchar(10) NOT NULL COMMENT '닉네임',
-  `email` varchar(50) NOT NULL COMMENT '이메일',
-  `password` varchar(200) NOT NULL COMMENT '비밀번호',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '회원 가입 시간',
- -- `token` varchar(200) DEFAULT NULL COMMENT '소셜 로그인 토큰',
-  `auth_key` varchar(8) NOT NULL COMMENT '인증번호',
-  `auth_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '인증여부',
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3 COMMENT='회원';
-
-
-CREATE TABLE `room` (
-  `room_id` varchar(10) NOT NULL  COMMENT  '경매실 번호',
-  `room_title` varchar(50) NOT NULL COMMENT '경매실 제목' unique,
-  `product` varchar(500) NOT NULL COMMENT '상품 설명',
-  `seller` varchar(50) NOT NULL COMMENT '경매사 닉네임',
-  `start_price` int NOT NULL COMMENT '시작가격',
-  `category` varchar(50) NOT NULL COMMENT '카테고리',
-  
-	`mimetype`      varchar(100)	null,
-	`data`          longblob       null,
-    `original_name` varchar(100)   null,
-  
- 
-  
-  `buyer` varchar(50) NOT NULL DEFAULT 'x' COMMENT '낙찰자 닉네임',
-  `end_price` int NOT NULL DEFAULT 0 COMMENT '낙찰가격',
-  `room_status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '경매 상태(진행중1 , 종료0)',
-  --`room_status` varchar(10) NOT NULL DEFAULT '진행중' COMMENT '경매 상태(진행중 , 종료)',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '경매실 생성 시간',
-  PRIMARY KEY (`room_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='경매실';
-
- 
-CREATE TABLE `entry` (
-  `entry_id` int NOT NULL AUTO_INCREMENT COMMENT '참가자목록 번호',
-  `room_id` varchar(10)      NOT NULL COMMENT '경매실 제목',
-  `nickname` varchar(10) NOT NULL COMMENT '닉네임',
-  `role` tinyint(1) NOT NULL DEFAULT '1' COMMENT '역할', 
-  PRIMARY KEY (`entry_id`),
-  foreign key (`room_id`) references `room` (`room_id`) ON DELETE CASCADE on update cascade
-  
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3 COMMENT='회원';
-
---user dummy
+#user dummy
 insert into user values
 
 (1,'안녕난기성', 'abc1242@naver.com', '$2a$10$UdMaD1h4AR1uSWm2pQ3BH.8XXsuMX8qrBhXBtpOqM6HgVSvcX2kKO', '2022-02-15 11:04:44', 'p9bN6b', '1'),
@@ -68,7 +17,7 @@ insert into user values
 (14,'마이애미', 'test13@naver.com', '$2a$10$UdMaD1h4AR1uSWm2pQ3BH.8XXsuMX8qrBhXBtpOqM6HgVSvcX2kKO', '2022-02-15 11:04:44', 'p9bN6b', '1')
 ;
 
---room dummy
+#room dummy
 
 
 
@@ -89,14 +38,10 @@ insert into room values
 ('pa14','스톤아일랜드 니트 맨투맨 S사이즈 /정품','사진 처럼 상태 좋습니다.','kingofEngland',1000000,'의류잡화','image/jpeg','','14.jpg','',0,true,'2022-02-15 11:04:44'),
 ('pa15','<100> MONCLER 몽클레어 몽클레르 후드자켓 4사이즈','좀 핏하게 나온 편입니다. 참고하세요.','midKing',300000,'의류잡화','image/jpeg','','15.jpg','',0,true,'2022-02-15 11:04:44'),
 ('pa16','여성 팔찌','방탄 포장 안전 배송.','유미언니',56000,'의류잡화','image/jpeg','','16.jpg','',45000,false,'2022-02-15 11:04:44')
-
-
-
---(1,'아이폰13프로 그래파이트 128용량 배터리100% 깨끗한단말기 S급 110만 팝니다','아이폰13프로','13시간근무중',1100000,'가전제품','image/jpeg','','아이폰.jpg','',0,true,'2022-02-15 11:04:44')
 ; 
 
 
-----entry dummy
+#entry dummy
 insert into entry values(1,'pa1','13시간근무중',1);
 insert into entry values(2,'pa1','니가가라하와이',0);
 insert into entry values(3,'pa1','우끼끼',0);

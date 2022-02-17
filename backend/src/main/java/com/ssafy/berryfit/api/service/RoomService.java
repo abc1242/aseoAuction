@@ -39,7 +39,7 @@ public class RoomService {
 	public Entry makeRoom(final MakeRoomReq makeRoomReq) {
 		//경매실생성
 		Room room = Room.builder()
-
+				.roomId(makeRoomReq.getRoomId())
 				.roomTitle(makeRoomReq.getRoomTitle())
 				.product(makeRoomReq.getProduct())
 				.seller(makeRoomReq.getSeller())
@@ -56,7 +56,7 @@ public class RoomService {
 		//경매사 참가
 		Entry entry = Entry.builder()
 				
-				.roomTitle(makeRoomReq.getRoomTitle())
+				.roomId(makeRoomReq.getRoomId())
 				.nickname(makeRoomReq.getSeller())
 				.role(1)
 			
@@ -71,7 +71,7 @@ public class RoomService {
 	//경매실 정보 조회
 	
 	@Transactional
-	public RoomRes informRoom(final int roomId){
+	public RoomRes informRoom(final String roomId){
 	
 		
 		
@@ -79,7 +79,7 @@ public class RoomService {
 		
 		if(room == null) {return null;}
 		String img = serverAddress+"/room/informImg/"+room.getRoomId();
-		List<Entry> entryList = entryRepository.findByRoomTitle(room.getRoomTitle());
+		List<Entry> entryList = entryRepository.findByRoomId(room.getRoomId());
 		List<String> participantList = new ArrayList<String>();
 		for (Entry entry : entryList) {
 			
@@ -106,7 +106,7 @@ public class RoomService {
 		//room을 roomlist로 바꾸기
 		for (Room room : roomlist) {
 			String img = serverAddress+"/room/informImg/"+room.getRoomId();
-			List<Entry> entryList = entryRepository.findByRoomTitle(room.getRoomTitle());
+			List<Entry> entryList = entryRepository.findByRoomId(room.getRoomId());
 			List<String> participantList = new ArrayList<String>();
 			for (Entry entry : entryList) {
 				
@@ -121,7 +121,7 @@ public class RoomService {
 	}
 	
 	@Transactional
-	public Room informRoomImg(final int roomId){
+	public Room informRoomImg(final String roomId){
 		
 //		String text = searchRoomReq.getRoomTitle();
 		
@@ -133,7 +133,7 @@ public class RoomService {
 	//경매실 정보 수정
 	@Transactional
 	public Room editRoom(final EditRoomReq editRoomReq){
-		int roomid = editRoomReq.getRoomId();
+		String roomid = editRoomReq.getRoomId();
 		Room editRoom = roomRepository.findRoomByRoomId(roomid);
 		
 		editRoom.setRoomTitle(editRoomReq.getRoomTitle());
@@ -156,7 +156,7 @@ public class RoomService {
 		//room을 roomlist로 바꾸기
 				for (Room room : roomlist) {
 					String img = serverAddress+"/room/informImg/"+room.getRoomId();
-					List<Entry> entryList = entryRepository.findByRoomTitle(room.getRoomTitle());
+					List<Entry> entryList = entryRepository.findByRoomId(room.getRoomId());
 					List<String> participantList = new ArrayList<String>();
 					for (Entry entry : entryList) {
 						
@@ -174,8 +174,8 @@ public class RoomService {
 	//경매실 종료
 	@Transactional
 	public Room closeRoom(final CloseRoomReq closeRoomReq){
-		String text = closeRoomReq.getRoomTitle();
-		Room closeRoom = roomRepository.findRoomByRoomTitle(text);
+		String text = closeRoomReq.getRoomId();
+		Room closeRoom = roomRepository.findRoomByRoomId(text);
 		
 		closeRoom.setBuyer(closeRoomReq.getBuyer());
 		closeRoom.setEndPrice(closeRoomReq.getEndPrice());
@@ -188,7 +188,7 @@ public class RoomService {
 		
 		
 		
-		entryRepository.deleteAllByRoomTitle(text);
+		entryRepository.deleteAllByRoomId(text);
 		
 		
 		return roomRepository.save(closeRoom);
@@ -201,7 +201,7 @@ public class RoomService {
 		
 		Entry entry = Entry.builder()
 				
-					.roomTitle(joinRoomReq.getRoomTitle())
+					.roomId(joinRoomReq.getRoomId())
 					.nickname(joinRoomReq.getNickname())
 					.role(0)
 				
@@ -213,10 +213,10 @@ public class RoomService {
 	//경매실 나가기
 	@Transactional
 	public void leaveRoom(final JoinRoomReq joinRoomReq) {
-		String roomTitle = joinRoomReq.getRoomTitle();
+		String roomId = joinRoomReq.getRoomId();
 		String nickname = joinRoomReq.getNickname();
 		
-		Entry leaveEntry = entryRepository.findEntryByRoomTitleAndNickname(roomTitle,nickname);
+		Entry leaveEntry = entryRepository.findEntryByRoomIdAndNickname(roomId,nickname);
 		
 		entryRepository.delete(leaveEntry);
 	}

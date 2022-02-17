@@ -9,6 +9,7 @@ import lombok.Setter;
 
 @AllArgsConstructor
 public class MakeRoomReq {
+	private String roomId;
 	private String	roomTitle;
 	private String	product;
 	private String	seller	;
