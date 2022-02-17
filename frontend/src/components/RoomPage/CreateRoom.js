@@ -25,13 +25,12 @@ const CreateRoom = () => {
   const onFileUpload = (event) => {
     event.preventDefault();
     const data = new FormData();
-    data.append("img", filePickerRef.current.files[0]);
-    data.append("roomTitle", roomTitleRef.current.value);
-    data.append("seller", seller);
-    data.append("startPrice", startPriceRef.current.value);
-    data.append("category", categoryRef.current.value);
+    data.append("img", filePickerRef.current.files[0]); //ok(mySessionId)
+    data.append("roomTitle", roomTitleRef.current.value); //ok
+    data.append("seller", seller); // ok
+    data.append("startPrice", startPriceRef.current.value); //ok
+    data.append("category", categoryRef.current.value); //ok(드롭다운으로 바꿔야함)
     data.append("product", productRef.current.value);
-    console.log(filePickerRef.current.files[0]);
 
     fetch("http://localhost:8080/room/open", {
       method: "POST",

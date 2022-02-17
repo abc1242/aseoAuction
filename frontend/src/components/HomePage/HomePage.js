@@ -63,7 +63,7 @@ const HomePage = () => {
               <Profile />
             </Route>
             <Route path="/rooms/create">
-              <Room nickname="test" />
+              <Room nickname={localStorage.getItem("nickname")} />
             </Route>
             <Route path="/">
               <div className={classes.grid}>
