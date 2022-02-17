@@ -66,6 +66,7 @@ const HomePage = () => {
             </Route>
             <Route path="/rooms/create">
               <CreateRoom />
+              <Room nickname='test'/>
             </Route>
             <Route path="/">
               <div className={classes.grid}>
@@ -82,9 +83,7 @@ const HomePage = () => {
                   : rooms.map((roomInfo) => <RoomCard roomInfo={roomInfo} />)} */}
                 {filteredRooms.map((roomInfo) => (
                   <RoomCard roomInfo={roomInfo} />
-                ))}
-
-                <Room nickname='test'/>
+                ))}                
               </div>
             </Route>
           </Switch>
