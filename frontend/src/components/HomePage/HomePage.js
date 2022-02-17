@@ -18,7 +18,7 @@ const HomePage = () => {
 
   const [filteredRooms, setFilteredRooms] = useState([]);
 
-  const nickname = 'test';
+  const nickname = "test";
 
   useEffect(() => {
     if (!contentContext.content) {
@@ -50,8 +50,6 @@ const HomePage = () => {
       });
   }, [authContext.token]);
 
-  
-
   return (
     <>
       <Header />
@@ -65,8 +63,7 @@ const HomePage = () => {
               <Profile />
             </Route>
             <Route path="/rooms/create">
-              <CreateRoom />
-              <Room nickname='test'/>
+              <Room nickname="test" />
             </Route>
             <Route path="/">
               <div className={classes.grid}>
@@ -83,7 +80,7 @@ const HomePage = () => {
                   : rooms.map((roomInfo) => <RoomCard roomInfo={roomInfo} />)} */}
                 {filteredRooms.map((roomInfo) => (
                   <RoomCard roomInfo={roomInfo} />
-                ))}                
+                ))}
               </div>
             </Route>
           </Switch>
