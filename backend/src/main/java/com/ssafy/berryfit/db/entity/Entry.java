@@ -30,9 +30,9 @@ public class Entry {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Integer entryId;
 
-	 	@JoinColumn(name ="room_title")
-	 	@Column(name = "room_title")
-	    private String roomTitle;
+	 	@JoinColumn(name ="room_id")
+	 	@Column(name = "room_id")
+	    private String roomId;
 
 	    @Column(name = "nickname")
 	    private String nickname;

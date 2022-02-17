@@ -46,6 +46,7 @@ public class RoomController {
 	//경매실 생성
 		@PostMapping("/open")
 		public ResponseEntity openRoom(
+				@RequestParam("roomId") String roomId,
 				@RequestParam("roomTitle") String roomTitle,
 				@RequestParam("product") String product,
 				@RequestParam("seller") String seller,
@@ -55,7 +56,7 @@ public class RoomController {
 				 {
 
 			
-			roomService.makeRoom(new MakeRoomReq(roomTitle,product,seller,startPrice,category,
+			roomService.makeRoom(new MakeRoomReq(roomId,roomTitle,product,seller,startPrice,category,
 					img.getContentType(), img.getOriginalFilename(), img.getBytes() ));
 			System.out.println("경매실 생성");
 			
@@ -76,7 +77,7 @@ public class RoomController {
 	
 	//경매실 상세 정보 조회 
 	@GetMapping("/inform/{roomId}")
-	public ResponseEntity informRoom(@PathVariable(name = "roomId") int roomId) {
+	public ResponseEntity informRoom(@PathVariable(name = "roomId") String roomId) {
 		//"roomTitle" : "팝니다"
 		
 		RoomRes roomres = roomService.informRoom(roomId);
@@ -104,7 +105,7 @@ public class RoomController {
 	 
 	//경매실 정보 이미지 조회
 		@GetMapping("/informImg/{roomId}")
-		public ResponseEntity informImgRoom(@PathVariable(name = "roomId") int roomId) {
+		public ResponseEntity informImgRoom(@PathVariable(name = "roomId") String roomId) {
 			
 //			SearchRoomReq searchRoomReq = new SearchRoomReq();
 //			searchRoomReq.setRoomTitle(roomTitle);

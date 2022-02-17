@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class CloseRoomReq {
 
-	private String	roomTitle;
+	private String	roomId;
 	private String	buyer	;
 	private int		endPrice;
 }

@@ -14,7 +14,7 @@ public interface RoomRepository extends JpaRepository<Room, String>{
 	Room findRoomByRoomTitle(String roomTitle);
 	
 	//정보 수정
-	Room findRoomByRoomId(int roomId);
+	Room findRoomByRoomId(String roomId);
 	
 	
 	//검색
