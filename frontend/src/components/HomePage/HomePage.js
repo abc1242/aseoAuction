@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import ContentContext from "../../store/content-context";
 import AuthContext from "../../store/auth-context";
 import CreateRoom from "../RoomPage/CreateRoom";
+import Room from "../RoomPage/Room";
 
 const HomePage = () => {
   const authContext = useContext(AuthContext);
@@ -16,6 +17,8 @@ const HomePage = () => {
   const [rooms, setRooms] = useState([]);
 
   const [filteredRooms, setFilteredRooms] = useState([]);
+
+  const nickname = 'test';
 
   useEffect(() => {
     if (!contentContext.content) {
@@ -46,6 +49,8 @@ const HomePage = () => {
         setRooms(data);
       });
   }, [authContext.token]);
+
+  
 
   return (
     <>
@@ -78,6 +83,8 @@ const HomePage = () => {
                 {filteredRooms.map((roomInfo) => (
                   <RoomCard roomInfo={roomInfo} />
                 ))}
+
+                <Room nickname='test'/>
               </div>
             </Route>
           </Switch>

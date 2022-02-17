@@ -25,9 +25,13 @@
 
 .main-stream-container{
 	/* width: calc(100% / 3); */
+	width: 100%;
+	height: auto;
 	flex-direction: column;
 	display: inline-block;
-	margin-left: 15px;
+	/* margin-left: 20px; */
+	justify-items: center;
+	align-items: center;
 }
 
 html {
@@ -298,6 +302,11 @@ a:hover .demo-logo {
 	border-bottom-right-radius: 4px;
 }
 
+.main-video {
+	justify-content: center;
+	align-items: center;
+}
+
 video {
 	width: 100%;
 	height: auto;
@@ -318,6 +327,8 @@ video {
 
 #main-video video {
 	cursor: initial;
+	align-items: center;
+	justify-content: center;
 }
 
 #session img {

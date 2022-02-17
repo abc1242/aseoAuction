@@ -18,6 +18,7 @@ import UserVideoComponent from './UserVideoComponent';
 import Timer from './Timer';
 import Clock from './Clock';
 import SetTimer from './SetTimer';
+import CreateRoom from './CreateRoom';
 // import Input from './Input';
 
 const OPENVIDU_SERVER_URL = 'https://' + window.location.hostname + ':4443';
@@ -30,7 +31,8 @@ class Room extends Component {
 
         this.state = {
             mySessionId: 'SessionA',
-            myUserName: 'Participant' + Math.floor(Math.random() * 100),
+            // myUserName: 'Pa' + Math.floor(Math.random() * 100),
+            myUserName: undefined,
 
             myTitle: 'product title',
             myStartTime: 'time',
@@ -84,6 +86,15 @@ class Room extends Component {
 
     componentDidMount() {
         window.addEventListener('beforeunload', this.onbeforeunload);
+        setTimeout(() => {
+            const { nickname } = this.props;           
+            
+            this.setState({
+            //   token,
+            //   mySessionId: roomId,
+              myUserName: nickname,
+            });
+          }, 500);
     }
 
     componentWillUnmount() {
@@ -358,7 +369,7 @@ class Room extends Component {
         // Empty all properties...
         this.OV = null;
         this.setState({
-            session: undefined,
+            session: '',
             subscribers: [],
             mySessionId: 'SessionA',
             myUserName: 'Participant' + Math.floor(Math.random() * 100),
@@ -373,8 +384,11 @@ class Room extends Component {
     }
 
     render() {
+        const { nickname } = this.props;
+
         const mySessionId = this.state.mySessionId;
-        const myUserName = this.state.myUserName;
+        // const myUserName = this.state.myUserName;
+        const myUserName = nickname;
 
         const myStartTime = this.state.myStartTime;
         const myTitle = this.state.myTitle;
@@ -408,6 +422,7 @@ class Room extends Component {
 
         return (
             <div className='Room'>
+                
                 {this.state.session === undefined ? (
                     <div id="join">
                         {/* <div id="img-div">
@@ -415,6 +430,10 @@ class Room extends Component {
                         </div> */}
                         <div id="join-dialog" className="jumbotron vertical-center">
                             {/* <img className='grid--2--cols' src={logo} alt="로고"></img> */}
+
+                            <CreateRoom />
+
+
                             <form className="form-group grid--2--cols" onSubmit={this.joinSession}>
                                 <p>
                                     <label>참여자: </label>
@@ -539,6 +558,7 @@ class Room extends Component {
                                 <h1>물품정보는 {myProductInfo}입니다.</h1>
                                 <h1>시작가격은 {myStartPrice}입니다.</h1>
                                 <h1>물품사진은 {this.state.myProductImg}입니다.</h1>
+                                {/* <h1>닉네임은 {nickname}</h1> */}
 
                                 <img src={this.state.myProductImg} alt="상품이미지"></img>
                                 <file>{myProductImg}</file>
@@ -558,7 +578,7 @@ class Room extends Component {
                                 </button>
 
                                 {this.state.mainStreamManager !== undefined ? (
-                                    <div id="main-video" className="col-md-6">
+                                    <div id="main-video" className="main-video">
                                         <h1>호스트</h1>
                                         <div className='main-stream-container'>
                                             <UserVideoComponent streamManager={this.state.mainStreamManager} />                                
