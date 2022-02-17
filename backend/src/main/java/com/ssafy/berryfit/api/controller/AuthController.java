@@ -34,9 +34,9 @@ import io.swagger.annotations.ApiResponse;
  * 인증 관련 API 요청 처리를 위한 컨트롤러 정의.
  */
 @Api(value = "인증 API", tags = {"Auth."})
-@CrossOrigin(origins = "http://localhost:3000") //해당 리액트 포트 번호
+@CrossOrigin(origins = "*", allowedHeaders = "*") //해당 리액트 포트 번호
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class AuthController {
 	@Autowired
 	UserService userService;
@@ -70,7 +70,7 @@ public class AuthController {
 			System.out.println(user.isAuthStatus()+"0d이다");
 			return ResponseEntity.status(401).body(UserLoginPostRes.of(401, "이메일 인증 해주세요", null));
 		}
-		
+		 
 		
 		// 로그인 요청한 유저로부터 입력된 패스워드 와 디비에 저장된 유저의 암호화된 패스워드가 같은지 확인.(유효한 패스워드인지 여부 확인)
 		if(passwordEncoder.matches(password, user.getPassword())) {

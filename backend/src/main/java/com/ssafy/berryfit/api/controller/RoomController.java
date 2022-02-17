@@ -31,8 +31,8 @@ import com.ssafy.berryfit.api.service.RoomService;
 import com.ssafy.berryfit.db.entity.Room;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000") //해당 리액트 포트 번호
-@RequestMapping("/room")
+@CrossOrigin(origins = "*", allowedHeaders = "*") //해당 리액트 포트 번호
+@RequestMapping("/api/room")
 public class RoomController {
 
 	private final RoomService roomService;
