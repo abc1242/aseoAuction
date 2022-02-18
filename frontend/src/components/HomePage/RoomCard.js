@@ -31,7 +31,7 @@ const RoomCard = (props) => {
   }
 
   return (
-    <div className={classes.card}>
+    <Link to="/room/detail" className={classes.card}>
       <section className={classes.imgBox}>
         <img
           className={classes.img}
@@ -71,7 +71,7 @@ const RoomCard = (props) => {
 
         <p className={classes.time}>{timeText}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

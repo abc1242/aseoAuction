@@ -21,11 +21,11 @@ class Room extends Component {
       roomTitle: "",
       // sessionId는 alphanumeric으로 설정해야한다.
       mySessionId: "Pa" + Math.floor(Math.random().toFixed(6) * 10000000),
-      myUserName: this.props.nickname,
+      myUserName: localStorage.getItem("nickname"),
 
-      myStartTime: "time",
+      myStartTime: "",
       myStartPrice: 0,
-      myProductInfo: "productinfo",
+      myProductInfo: "",
       myProductImg: null,
       isUploaded: false,
       category: null,
@@ -51,7 +51,7 @@ class Room extends Component {
 
     this.handleChangeStartTime = this.handleChangeStartTime.bind(this);
     this.handleChangeSessionId = this.handleChangeSessionId.bind(this);
-    this.handleChangeroomTitle = this.handleChangeRoomTitle.bind(this);
+    this.handleChangeRoomTitle = this.handleChangeRoomTitle.bind(this);
 
     this.handleChangeUserName = this.handleChangeUserName.bind(this);
     this.handleChangeStartPrice = this.handleChangeStartPrice.bind(this);
@@ -96,6 +96,7 @@ class Room extends Component {
   }
 
   handleChangeRoomTitle(e) {
+    console.log(e.target.value);
     this.setState({
       roomTitle: e.target.value,
     });
@@ -241,6 +242,7 @@ class Room extends Component {
   }
 
   joinSession() {
+    console.log(this.state.roomTitle);
     // DB 반영
     const data = new FormData();
     data.append("img", this.state.myProductImg);
@@ -251,7 +253,9 @@ class Room extends Component {
     data.append("product", this.state.myProductInfo);
     data.append("roomTitle", this.state.roomTitle);
 
-    fetch("http://localhost:8080/room/open", {
+    console.log(data);
+
+    fetch("/api/room/open", {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -441,7 +445,7 @@ class Room extends Component {
                 onSubmit={this.joinSession}
               >
                 <p>
-                  <label> 제목: </label>
+                  <label> 제목 </label>
                   <input
                     className="form-input"
                     type="text"
@@ -455,9 +459,10 @@ class Room extends Component {
                     className="form-input"
                     type="text"
                     id="userName"
-                    value={myUserName}
+                    value={this.state.myUserName}
                     onChange={this.handleChangeUserName}
                     required
+                    disabled
                   />
                 </p>
                 <p>

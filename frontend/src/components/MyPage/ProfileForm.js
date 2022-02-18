@@ -39,7 +39,7 @@ const ProfileForm = (props) => {
       nickname: nicknameRef.current.value,
     };
 
-    fetch("http://localhost:8080/user/editmypage", {
+    fetch("/api/user/editmypage", {
       method: "PUT",
       body: JSON.stringify(userInfo),
       headers: {

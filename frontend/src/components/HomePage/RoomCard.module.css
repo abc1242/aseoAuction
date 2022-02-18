@@ -1,7 +1,8 @@
 .card {
   display: flex;
   align-items: center;
-
+  list-style: none;
+  text-decoration: none;
   column-gap: 1.2rem;
   width: 50rem;
   height: 15rem;
@@ -77,6 +78,7 @@
 
 .time {
   font-size: 1.2rem;
+  color: #333;
 }
 
 @media (max-width: 1100px) {

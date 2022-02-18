@@ -6,7 +6,7 @@ const ProfileRequest = (props) => {
   const passwordRef = useRef();
   const authContext = useContext(AuthContext);
   const [error] = useState();
-//  const [error, setError] = useState();
+  //  const [error, setError] = useState();
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -18,7 +18,7 @@ const ProfileRequest = (props) => {
 
     console.log(userInfo);
 
-    fetch("http://localhost:8080/user/mypage", {
+    fetch("/api/user/mypage", {
       method: "POST",
       body: JSON.stringify(userInfo),
       headers: {

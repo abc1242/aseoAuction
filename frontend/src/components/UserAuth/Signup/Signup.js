@@ -53,7 +53,7 @@ const Signup = () => {
       nickname: nicknameRef.current.value,
     };
 
-    fetch("http://localhost:8080/user/signup", {
+    fetch("/api/user/signup", {
       method: "POST",
       body: JSON.stringify(userInfo),
       headers: {

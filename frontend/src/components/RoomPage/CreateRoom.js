@@ -28,7 +28,7 @@ const CreateRoom = () => {
     data.append("product", productRef.current.value);
     data.append("roomId", roomId);
 
-    fetch("http://localhost:8080/room/open", {
+    fetch("/api/room/open", {
       method: "POST",
       headers: {
         Authorization: authContext.token,

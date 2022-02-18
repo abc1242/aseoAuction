@@ -16,9 +16,6 @@ function App() {
 
   return (
     <Switch>
-      <Route path="/room">
-        <Room />
-      </Route>
       <Route path="/login">
         {authCtx.isLoggedIn ? <Redirect to="/" /> : <Login />}
       </Route>

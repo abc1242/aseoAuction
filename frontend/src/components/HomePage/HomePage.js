@@ -8,7 +8,7 @@ import RoomCard from "./RoomCard";
 import { useEffect } from "react";
 import ContentContext from "../../store/content-context";
 import AuthContext from "../../store/auth-context";
-import CreateRoom from "../RoomPage/CreateRoom";
+import Room from "../RoomPage/Room";
 import SessionContext from "../../store/session-context";
 
 const HomePage = () => {
@@ -35,7 +35,7 @@ const HomePage = () => {
   }, [rooms, contentContext.search]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/room/search/", {
+    fetch("/api/room/search/", {
       method: "GET",
       headers: {
         Authorization: authContext.token,
@@ -61,7 +61,10 @@ const HomePage = () => {
               <Profile />
             </Route>
             <Route path="/room/create">
-              <CreateRoom />
+              <Room />
+            </Route>
+            <Route path="/room/detail">
+              <Room />
             </Route>
             <Route path="/">
               <div className={classes.grid}>
