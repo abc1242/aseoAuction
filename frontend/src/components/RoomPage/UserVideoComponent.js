@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import OpenViduVideoComponent from "./OvVideo";
 import styled from "styled-components";
 import "./UserVideo.css";
-// import styles from "./UserVideo.module.css";
 
 const StreamComponent = styled.div`
   display: flex;

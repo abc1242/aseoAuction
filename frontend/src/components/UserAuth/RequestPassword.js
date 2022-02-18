@@ -24,7 +24,6 @@ const RequestPassword = () => {
       );
       return;
     }
-    // 서버 요청
   };
 
   return (

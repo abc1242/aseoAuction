@@ -33,7 +33,7 @@ const Login = () => {
       email: emailRef.current.value,
       password: passwordRef.current.value,
     };
-    // http://localhost:8080/user/login
+
     fetch("/api/user/login", {
       method: "POST",
       body: JSON.stringify(userInfo),

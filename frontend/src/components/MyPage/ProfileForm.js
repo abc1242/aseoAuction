@@ -15,7 +15,6 @@ const ProfileForm = (props) => {
   const putAccountHandler = (event) => {
     event.preventDefault();
 
-    // validation check
     if (!emailRef.current.value.includes("@")) {
       setError("이메일을 정확히 입력해 주세요");
       return;
@@ -68,7 +67,6 @@ const ProfileForm = (props) => {
         Authorization: authContext.token,
       },
     })
-      // 성공, 실패 모두 파싱
       .then((response) => response.json())
       .then((data) => {
         authContext.logout();

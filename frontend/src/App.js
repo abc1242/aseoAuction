@@ -9,7 +9,6 @@ import AuthContext from "./store/auth-context";
 import { ContentContextProvider } from "./store/content-context.js";
 import RequestPassword from "./components/UserAuth/RequestPassword.js";
 import { SessionContextProvider } from "./store/session-context.js";
-import Room from "./components/RoomPage/Room.js";
 
 function App() {
   const authCtx = useContext(AuthContext);

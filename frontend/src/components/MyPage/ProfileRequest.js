@@ -6,7 +6,6 @@ const ProfileRequest = (props) => {
   const passwordRef = useRef();
   const authContext = useContext(AuthContext);
   const [error] = useState();
-  //  const [error, setError] = useState();
 
   const submitHandler = (event) => {
     event.preventDefault();

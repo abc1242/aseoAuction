@@ -19,7 +19,6 @@ class Room extends Component {
 
     this.state = {
       roomTitle: "",
-      // sessionId는 alphanumeric으로 설정해야한다.
       mySessionId: "Pa" + Math.floor(Math.random().toFixed(6) * 10000000),
       myUserName: localStorage.getItem("nickname"),
 
@@ -402,33 +401,13 @@ class Room extends Component {
   render() {
     const { nickname } = this.props;
     const mySessionId = this.state.mySessionId;
-    // const myUserName = this.state.myUserName;
     const myUserName = nickname;
 
     const myStartTime = this.state.myStartTime;
     const myStartPrice = this.state.myStartPrice;
     const myProductInfo = this.state.myProductInfo;
 
-    const myProductImg = this.state.myProductImg;
-    // const myProductImg = new FormData();
-
-    //chat
     const messages = this.state.messages;
-
-    //timer
-    const renderTime = ({ remainingTime }) => {
-      if (remainingTime === 0) {
-        return <div className="timer">Too lale...</div>;
-      }
-
-      return (
-        <div className="timer">
-          <div className="text">Remaining</div>
-          <div className="value">{remainingTime}</div>
-          <div className="text">seconds</div>
-        </div>
-      );
-    };
 
     return (
       <div className="Room">

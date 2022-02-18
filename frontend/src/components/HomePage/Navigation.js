@@ -1,6 +1,5 @@
 import React from "react";
 import classes from "./Navigation.module.css";
-// import sprite from "./navigation-icons.svg";
 import { useState } from "react";
 import NavigationItem from "./NavigationItem";
 import sprite from "./navigation-icons.svg";

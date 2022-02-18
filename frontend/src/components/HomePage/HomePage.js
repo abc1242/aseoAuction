@@ -9,10 +9,8 @@ import { useEffect } from "react";
 import ContentContext from "../../store/content-context";
 import AuthContext from "../../store/auth-context";
 import Room from "../RoomPage/Room";
-import SessionContext from "../../store/session-context";
 
 const HomePage = () => {
-  const sessionContext = useContext(SessionContext);
   const authContext = useContext(AuthContext);
   const contentContext = useContext(ContentContext);
   const [rooms, setRooms] = useState([]);
