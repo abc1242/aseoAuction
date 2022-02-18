@@ -1,51 +1,71 @@
-# BERRYFIT!!!
-
-## BERRYFIT 소개 ##
-
-​	BERRYFIT은 식단관리 웹 프로젝트입니다. 핵심 기능은 다음과 같습니다.
-
-* 사용자는 여러가지 레시피를 참고하고, 자신의 식단으로 가져올 수 있습니다.
-* 레시피는 입맛에 맞게 커스텀할 수 있으며, 영양성분또한 조절할 수 있습니다.
-* 사용자가 구성한 식단을 사용자의 체중, 키, 나이, 활동지수를 고려하여 목표에 부합하는지 알려줍니다
-* 다:른 사용자에게 조언을 구하고 코칭을 받을 수 있는 화상회의를 제공합니다.
-* 우리는 'BERRY'라는 화폐를 사용합니다.
-* 레시피를 기여하여 높은 조회수를 기록하거나 식단에 추가하는 사람이 많을때, 혹은 코칭을 했을 때 BERRY 수익이 발생합니다.
-* 코칭을 받으려면 BERRY를 소모해야합니다.
+# 어서 Auction(경매를 통한 중고거래 플랫폼)
 
 
 
-## BERRYFIT 서비스 화면 ##
+## 어서 Auction 소개 ##
+
+- 어서 Auction은 중고거래 웹 프로젝트입니다. 핵심 기능은 다음과 같습니다.
+
+
+
+## Overview
+
+- 몇시간, 몇일 동안 거래 상대방과 가격 흥정하는 데 지치셨나요? 이젠 10분간의 경매를 통해 중고거래를 신속하게 끝내보세요!
+
+
+
+## 어서 Auction 서비스 화면 ##
 
 ### 랜딩 페이지 ###
 
-![홈화면](README.assets/홈화면.PNG)
+![랜딩페이지](README.assets/랜딩페이지.PNG)
 
 ### 로그인 ###
 
-![로그인](README.assets/로그인.PNG)
-
-
+![로그인](README.assets/로그인-16451491943251.PNG)
 
 ### 회원가입(이메일 인증) ###
 
-![회원가입](README.assets/회원가입.PNG)
+![회원가입](README.assets/회원가입-16451492034582.PNG)
 
-### 레시피 페이지 ###
+### 비밀번호 재설정 ###
+
+![비밀번호 찾기](README.assets/비밀번호 찾기.PNG)
+
+
+
+### 홈 페이지 ###
+
+
+
+### 경매실 생성 페이지 ###
+
+
+
+### 경매실 내부 페이지 ###
+
+
+
+### 마이 페이지 ###
+
+
 
 
 
 ## 주요 기능 ##
 
-- 서비스 설명 : 식단을 만들어서 코칭을 받고 건강해지자
+- 서비스 설명 : 경매를 통해 신속하게 끝내는 중고 거래 서비스
 - 주요 기능 :
-  - webRTC를 통한 실시간 화상 코칭 서비스
-  - 레시피를 조회하여 건강한 먹거리 제공
+  - webRTC를 통한 실시간 화상 경매 서비스 (라이브 스트리밍, 실시간 채팅)
+  - 실시간 소통을 통한 거래 물품 신뢰 제공
+  - 속도감 있는 거래
+  - 카테고리의 구분을 통해 상품을 모아 볼 수 있음
 
 
 
 ## 개발 환경 ##
 
-### Frontend ###
+### 💎 Frontend ###
 
 - Visual Studio Code
 - React.js
@@ -53,8 +73,13 @@
 - React-router-dom
 - Axios
 - styled-components
+- JavaScript
+- HTML 5
+- MUI
 
-### Backend ###
+
+
+### 👑 **Backend**  ###
 
 - eclipse
 - spring boot
@@ -62,7 +87,24 @@
 - Spring Security
 - Java 8
 - AWS EC2
-- mysql
+- JWT
+
+
+
+### 💡 DB : MySQL ###
+
+- MySQL 8.0.28
+- Redis 6.2.6
+
+
+
+### 🌳 **운영체제, 서버** ###
+
+- Ubuntu 20.04
+- AWS EC2
+- Jenkins
+- Nginx
+- Docker
 
 
 
@@ -165,6 +207,10 @@ docs: "Readme.md" 제목 수정
 
 
 
+## ER Diagram ##
+
+![erd](README.assets/erd.png)
+
 
 
 ## 카테고리
@@ -178,4 +224,13 @@ docs: "Readme.md" 제목 수정
 | :black_square_button: iOS App | :black_square_button: AR/VR/Metaverse | :black_square_button: Python | :black_square_button: Flask/Django |
 | :black_square_button: Desktop App | :black_square_button: Game | :white_check_mark: Java | :white_check_mark: Spring/Springboot |
 | | :black_square_button: AI | :black_square_button: Kotlin | |
+
+
+
+## 밥은 먹고 다니나 팀을 소개합니다 ##
+
+| 박창건   | 남근호   | 박기성  | 장세영 | 최현석   |
+| -------- | -------- | ------- | ------ | -------- |
+|          |          |         |        |          |
+| Frontend | Frontend | Backend | Infra  | Frontend |
 
