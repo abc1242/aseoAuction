@@ -16,7 +16,9 @@ const HomePage = () => {
   const authContext = useContext(AuthContext);
   const contentContext = useContext(ContentContext);
   const [rooms, setRooms] = useState([]);
+  const [dummy, setDummy] = useState([]);
   const [filteredRooms, setFilteredRooms] = useState([]);
+  const [filteredDummy, setFilteredDummy] = useState([]);
 
   useEffect(() => {
     if (!contentContext.content) {
@@ -29,12 +31,37 @@ const HomePage = () => {
   }, [rooms, contentContext.content]);
 
   useEffect(() => {
+    if (!contentContext.content) {
+      setFilteredDummy(dummy);
+    } else {
+      setFilteredDummy(
+        dummy.filter((dummy) => dummy.category === contentContext.content)
+      );
+    }
+  }, [dummy, contentContext.content]);
+
+  useEffect(() => {
     setFilteredRooms(
       rooms.filter((room) => room.roomTitle.includes(contentContext.search))
     );
   }, [rooms, contentContext.search]);
 
+  const getData = () => {
+    fetch("rooms.json", {
+      headers: {
+        "Content-Type": "application.json",
+        Accept: "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setDummy(data);
+      });
+  };
+
   useEffect(() => {
+    getData();
+
     fetch("/api/room/search/", {
       method: "GET",
       headers: {
@@ -79,6 +106,10 @@ const HomePage = () => {
                       )
                       .map((roomInfo) => <RoomCard roomInfo={roomInfo} />)
                   : rooms.map((roomInfo) => <RoomCard roomInfo={roomInfo} />)} */}
+                {filteredDummy.map((roomInfo) => (
+                  // 링크를 통해서 Room.js 렌더링
+                  <RoomCard roomInfo={roomInfo} />
+                ))}
                 {filteredRooms.map((roomInfo) => (
                   // 링크를 통해서 Room.js 렌더링
                   <RoomCard roomInfo={roomInfo} />
