@@ -105,7 +105,7 @@ public class RoomService {
 		
 		//room을 roomlist로 바꾸기
 		for (Room room : roomlist) {
-			String img = serverAddress+"/room/informImg/"+room.getRoomId();
+			String img = serverAddress+"/api/room/informImg/"+room.getRoomId();
 			List<Entry> entryList = entryRepository.findByRoomId(room.getRoomId());
 			List<String> participantList = new ArrayList<String>();
 			for (Entry entry : entryList) {
@@ -155,7 +155,7 @@ public class RoomService {
 		List<RoomRes> roomreslist = new ArrayList<RoomRes>();
 		//room을 roomlist로 바꾸기
 				for (Room room : roomlist) {
-					String img = serverAddress+"/room/informImg/"+room.getRoomId();
+					String img = serverAddress+"/api/room/informImg/"+room.getRoomId();
 					List<Entry> entryList = entryRepository.findByRoomId(room.getRoomId());
 					List<String> participantList = new ArrayList<String>();
 					for (Entry entry : entryList) {
