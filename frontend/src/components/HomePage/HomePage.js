@@ -46,6 +46,12 @@ const HomePage = () => {
     );
   }, [rooms, contentContext.search]);
 
+  useEffect(() => {
+    setFilteredDummy(
+      dummy.filter((dummy) => dummy.roomTitle.includes(contentContext.search))
+    );
+  }, [dummy, contentContext.search]);
+
   const getData = () => {
     fetch("rooms.json", {
       headers: {
