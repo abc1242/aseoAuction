@@ -78,7 +78,7 @@ public class RoomService {
 		Room room = roomRepository.findRoomByRoomId(roomId);
 		
 		if(room == null) {return null;}
-		String img = serverAddress+"/room/informImg/"+room.getRoomId();
+		String img = serverAddress+"/api/room/informImg/"+room.getRoomId();
 		List<Entry> entryList = entryRepository.findByRoomId(room.getRoomId());
 		List<String> participantList = new ArrayList<String>();
 		for (Entry entry : entryList) {
